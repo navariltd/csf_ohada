@@ -1,5 +1,5 @@
 app_name = "csf_ohada"
-app_title = "Csf Ohada"
+app_title = "Francophone ERPNext Localization"
 app_publisher = "Navari Ltd"
 app_description = "A collection of ERPNext customizations, regional settings, and compliance features designed for businesses operating in Francophone countries"
 app_email = "solutions@navari.co.ke"
@@ -8,7 +8,7 @@ app_license = "agpl-3.0"
 # Apps
 # ------------------
 
-# required_apps = []
+required_apps = ["erpnext"]
 
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
@@ -246,4 +246,3 @@ app_license = "agpl-3.0"
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
-
