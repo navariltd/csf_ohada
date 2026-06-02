@@ -1,0 +1,21 @@
+{
+ "app": "csf_ohada",
+ "bg_color": "gray",
+ "creation": "2026-06-02 09:01:49.664972",
+ "docstatus": 0,
+ "doctype": "Desktop Icon",
+ "hidden": 0,
+ "icon_type": "Link",
+ "idx": 0,
+ "label": "Ohada",
+ "link_to": "Ohada",
+ "link_type": "Workspace Sidebar",
+ "logo_url": "/assets/csf_ohada/images/ohada_logo.png",
+ "modified": "2026-06-02 09:04:36.118478",
+ "modified_by": "Administrator",
+ "name": "Ohada",
+ "owner": "Administrator",
+ "restrict_removal": 0,
+ "roles": [],
+ "standard": 1
+}

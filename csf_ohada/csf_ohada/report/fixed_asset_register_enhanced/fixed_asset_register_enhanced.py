@@ -76,7 +76,7 @@ def get_data(filters):
 		"purchase_receipt",
 		"asset_category",
 		"purchase_date",
-		"gross_purchase_amount",
+		"net_purchase_amount",
 		"location",
 		"available_for_use_date",
 		"purchase_invoice",
@@ -94,7 +94,7 @@ def get_data(filters):
 		depreciation_amount = depreciation_amount_map.get(asset.asset_id) or 0.0
 		revaluation_amount = revaluation_amount_map.get(asset.asset_id, 0.0)
 		asset_value = (
-			asset.gross_purchase_amount
+			asset.net_purchase_amount
 			- asset.opening_accumulated_depreciation
 			- depreciation_amount
 			+ revaluation_amount
@@ -108,7 +108,7 @@ def get_data(filters):
 			"cost_center": asset.cost_center,
 			"vendor_name": pr_supplier_map.get(asset.purchase_receipt)
 			or pi_supplier_map.get(asset.purchase_invoice),
-			"gross_purchase_amount": asset.gross_purchase_amount,
+			"net_purchase_amount": asset.net_purchase_amount,
 			"opening_accumulated_depreciation": asset.opening_accumulated_depreciation,
 			"depreciated_amount": depreciation_amount,
 			"available_for_use_date": asset.available_for_use_date,
@@ -399,7 +399,7 @@ def get_group_by_data(
 	fields = [
 		group_by,
 		"name",
-		"gross_purchase_amount",
+		"net_purchase_amount",
 		"opening_accumulated_depreciation",
 		"calculate_depreciation",
 	]
@@ -414,7 +414,7 @@ def get_group_by_data(
 		a["depreciated_amount"] = depreciation_amount_map.get(a["name"], 0.0)
 		a["revaluation_amount"] = revaluation_amount_map.get(a["name"], 0.0)
 		a["asset_value"] = (
-			a["gross_purchase_amount"]
+			a["net_purchase_amount"]
 			- a["opening_accumulated_depreciation"]
 			- a["depreciated_amount"]
 			+ a["revaluation_amount"]
@@ -428,7 +428,7 @@ def get_group_by_data(
 			data.append(a)
 		else:
 			for field in (
-				"gross_purchase_amount",
+				"net_purchase_amount",
 				"opening_accumulated_depreciation",
 				"depreciated_amount",
 				"asset_value",
@@ -475,8 +475,8 @@ def get_columns(filters):
 				"width": 216,
 			},
 			{
-				"label": _("Gross Purchase Amount"),
-				"fieldname": "gross_purchase_amount",
+				"label": _("Net Purchase Amount"),
+				"fieldname": "net_purchase_amount",
 				"fieldtype": "Currency",
 				"options": "Company:company:default_currency",
 				"width": 250,
@@ -553,8 +553,8 @@ def get_columns(filters):
 			"width": 90,
 		},
 		{
-			"label": _("Gross Purchase Amount"),
-			"fieldname": "gross_purchase_amount",
+			"label": _("Net Purchase Amount"),
+			"fieldname": "net_purchase_amount",
 			"fieldtype": "Currency",
 			"options": "Company:company:default_currency",
 			"width": 100,
