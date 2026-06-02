@@ -1,0 +1,39 @@
+{
+ "app": "csf_ohada",
+ "creation": "2026-06-02 08:57:06.880712",
+ "docstatus": 0,
+ "doctype": "Workspace Sidebar",
+ "header_icon": "money-coins-1",
+ "idx": 0,
+ "items": [
+  {
+   "child": 0,
+   "collapsible": 1,
+   "icon": "sheet",
+   "indent": 1,
+   "keep_closed": 0,
+   "label": "Reports",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Section Break"
+  },
+  {
+   "child": 1,
+   "collapsible": 1,
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Fixed Asset Register Enhanced",
+   "link_to": "Fixed Asset Register Enhanced",
+   "link_type": "Report",
+   "show_arrow": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-06-02 09:05:54.392303",
+ "modified_by": "Administrator",
+ "module": "Csf Ohada",
+ "name": "Ohada",
+ "owner": "Administrator",
+ "standard": 1,
+ "title": "Ohada"
+}
