@@ -1,6 +1,3 @@
-# Copyright (c) 2026, Navari Ltd and contributors
-# For license information, please see license.txt
-
 from itertools import chain
 
 import frappe
@@ -10,7 +7,6 @@ from erpnext.accounts.report.financial_statements import (
 	validate_fiscal_year,
 )
 from erpnext.accounts.utils import get_fiscal_year
-from erpnext.assets.doctype.asset.asset import get_asset_value_after_depreciation
 from frappe import _
 from frappe.query_builder.functions import IfNull, Sum
 from frappe.utils import add_months, cstr, flt, formatdate, getdate, nowdate, today
@@ -54,16 +50,18 @@ def get_data(filters):
 	group_by = frappe.scrub(filters.get("group_by"))
 
 	if group_by in ("asset_category", "location"):
+		depreciation_rate_map = (
+			get_asset_depreciation_rate_map(filters, finance_book) if group_by == "asset_category" else {}
+		)
 		data = get_group_by_data(
 			group_by,
 			conditions,
 			assets_linked_to_fb,
 			depreciation_amount_map,
 			revaluation_amount_map,
+			depreciation_rate_map,
 		)
 		return data
-
-	fixed_asset_account_map = get_fixed_asset_account_map(filters.company)
 
 	fields = [
 		"name as asset_id",
@@ -83,9 +81,6 @@ def get_data(filters):
 		"opening_accumulated_depreciation",
 	]
 	assets_record = frappe.db.get_all("Asset", filters=conditions, fields=fields)
-
-	asset_ids = [asset.asset_id for asset in assets_record]
-	depreciation_rate_map = get_asset_depreciation_rate_map(asset_ids, finance_book)
 
 	for asset in assets_record:
 		if assets_linked_to_fb and asset.calculate_depreciation and asset.asset_id not in assets_linked_to_fb:
@@ -117,36 +112,10 @@ def get_data(filters):
 			"purchase_date": asset.purchase_date,
 			"asset_value": asset_value,
 			"company": asset.company,
-			"fixed_asset_account": fixed_asset_account_map.get(asset.asset_category, None),
-			"rate_of_depreciation": depreciation_rate_map.get(asset.asset_id) or None,
 		}
 		data.append(row)
 
 	return data
-
-
-def get_fixed_asset_account_map(company):
-	accounts = frappe.db.get_all(
-		"Asset Category Account",
-		filters={"company_name": company},
-		fields=["parent as asset_category", "fixed_asset_account"],
-	)
-	return {row.asset_category: row.fixed_asset_account for row in accounts}
-
-
-def get_asset_depreciation_rate_map(asset_ids, finance_book):
-	filters = {"parent": ["in", asset_ids]}
-
-	if finance_book:
-		filters["finance_book"] = finance_book
-
-	records = frappe.db.get_all(
-		"Asset Finance Book",
-		filters=filters,
-		fields=["parent as asset_id", "rate_of_depreciation"],
-	)
-
-	return {row.asset_id: row.rate_of_depreciation for row in records}
 
 
 def get_conditions(filters):
@@ -180,7 +149,7 @@ def get_conditions(filters):
 		]
 
 	if filters.get("only_existing_assets"):
-		conditions["is_existing_asset"] = filters.get("only_existing_assets")
+		conditions["asset_type"] = "Existing Asset"
 	if filters.get("asset_category"):
 		conditions["asset_category"] = filters.get("asset_category")
 	if filters.get("cost_center"):
@@ -246,7 +215,7 @@ def prepare_chart_data(data, filters):
 					"values": [flt(d.get("asset_value"), 2) for d in labels_values_map.values()],
 				},
 				{
-					"name": _("Depreciatied Amount"),
+					"name": _("Depreciated Amount"),
 					"values": [flt(d.get("depreciated_amount"), 2) for d in labels_values_map.values()],
 				},
 			],
@@ -310,7 +279,7 @@ def get_asset_depreciation_amount_map(filters, finance_book):
 	)
 
 	if filters.only_existing_assets:
-		query = query.where(asset.is_existing_asset == 1)
+		query = query.where(asset.asset_type == "Existing Asset")
 	if filters.asset_category:
 		query = query.where(asset.asset_category == filters.asset_category)
 	if filters.cost_center:
@@ -364,7 +333,7 @@ def get_asset_value_adjustment_map(filters, finance_book):
 	)
 
 	if filters.only_existing_assets:
-		query = query.where(asset.is_existing_asset == 1)
+		query = query.where(asset.asset_type == "Existing Asset")
 	if filters.asset_category:
 		query = query.where(asset.asset_category == filters.asset_category)
 	if filters.cost_center:
@@ -389,12 +358,111 @@ def get_asset_value_adjustment_map(filters, finance_book):
 	return dict(asset_adjustment_map)
 
 
+def estimate_depreciation_rate(fb_row, rate_precision=None):
+	"""Return annual % rate from an Asset Finance Book row."""
+	if not fb_row:
+		return None
+
+	if rate_precision is None:
+		rate_precision = frappe.get_single_value("System Settings", "float_precision") or 2
+
+	method = fb_row.get("depreciation_method")
+	stored_rate = flt(fb_row.get("rate_of_depreciation"), rate_precision)
+	years = (
+		flt(fb_row.get("total_number_of_depreciations")) * flt(fb_row.get("frequency_of_depreciation"))
+	) / 12
+
+	if method == "Written Down Value":
+		return stored_rate if stored_rate else None
+
+	if method == "Double Declining Balance":
+		if stored_rate:
+			return stored_rate
+		if not years:
+			return None
+		return flt(200.0 / years, rate_precision)
+
+	if method in ("Straight Line", "Manual"):
+		if not years:
+			return None
+		return flt(100.0 / years, rate_precision)
+
+	return None
+
+
+def get_asset_depreciation_rate_map(filters, finance_book):
+	"""Map asset name -> estimated/stored rate of depreciation for the active finance book."""
+	afb = frappe.qb.DocType("Asset Finance Book")
+
+	query = (
+		frappe.qb.from_(afb)
+		.select(
+			afb.parent,
+			afb.finance_book,
+			afb.depreciation_method,
+			afb.rate_of_depreciation,
+			afb.total_number_of_depreciations,
+			afb.frequency_of_depreciation,
+		)
+		.where(afb.parenttype == "Asset")
+	)
+
+	if filters.include_default_book_assets:
+		company_fb = frappe.get_cached_value("Company", filters.company, "default_finance_book")
+		query = query.where(
+			(afb.finance_book.isin([cstr(filters.finance_book), cstr(company_fb), ""]))
+			| (afb.finance_book.isnull())
+		)
+	else:
+		query = query.where(
+			(afb.finance_book.isin([cstr(finance_book or filters.finance_book), ""]))
+			| (afb.finance_book.isnull())
+		)
+
+	rows = query.run(as_dict=True)
+	rate_map = {}
+	preferred = cstr(finance_book or filters.finance_book)
+	rate_precision = frappe.get_single_value("System Settings", "float_precision") or 2
+
+	def fb_priority(row):
+		fb = cstr(row.finance_book)
+		if preferred and fb == preferred:
+			return 0
+		if fb:
+			return 1
+		return 2
+
+	for row in sorted(rows, key=fb_priority):
+		if row.parent not in rate_map:
+			rate_map[row.parent] = estimate_depreciation_rate(row, rate_precision)
+
+	# Fallback: rate stored on Asset Depreciation Schedule
+	ads = frappe.qb.DocType("Asset Depreciation Schedule")
+	schedule_query = (
+		frappe.qb.from_(ads)
+		.select(ads.asset, ads.finance_book, ads.rate_of_depreciation)
+		.where(ads.docstatus < 2)
+		.where(ads.rate_of_depreciation > 0)
+	)
+	if preferred:
+		schedule_query = schedule_query.where(
+			(ads.finance_book.isin([preferred, ""])) | (ads.finance_book.isnull())
+		)
+
+	for row in schedule_query.run(as_dict=True):
+		if rate_map.get(row.asset) is None:
+			rate_map[row.asset] = flt(row.rate_of_depreciation, rate_precision)
+
+	return rate_map
+
+
 def get_group_by_data(
 	group_by,
 	conditions,
 	assets_linked_to_fb,
 	depreciation_amount_map,
 	revaluation_amount_map,
+	depreciation_rate_map=None,
 ):
 	fields = [
 		group_by,
@@ -404,6 +472,17 @@ def get_group_by_data(
 		"calculate_depreciation",
 	]
 	assets = frappe.db.get_all("Asset", filters=conditions, fields=fields)
+	depreciation_rate_map = depreciation_rate_map or {}
+	split_by_rate = group_by == "asset_category"
+
+	# When a category has a single known rate, reuse it for assets that lack finance-book data
+	category_rates = {}
+	if split_by_rate:
+		for a in assets:
+			rate = depreciation_rate_map.get(a.name)
+			if rate is None:
+				continue
+			category_rates.setdefault(a.asset_category, set()).add(rate)
 
 	data = []
 
@@ -420,10 +499,28 @@ def get_group_by_data(
 			+ a["revaluation_amount"]
 		)
 
+		if split_by_rate:
+			rate = depreciation_rate_map.get(a["name"])
+			if rate is None:
+				known = category_rates.get(a.asset_category) or set()
+				if len(known) == 1:
+					rate = next(iter(known))
+				elif not a.calculate_depreciation:
+					# Non-depreciable assets show 0%
+					rate = 0.0
+			a["rate_of_depreciation"] = rate
+
 		del a["name"]
 		del a["calculate_depreciation"]
 
-		idx = ([i for i, d in enumerate(data) if a[group_by] == d[group_by]] or [None])[0]
+		def matches(d):
+			if a[group_by] != d[group_by]:
+				return False
+			if split_by_rate:
+				return a.get("rate_of_depreciation") == d.get("rate_of_depreciation")
+			return True
+
+		idx = ([i for i, d in enumerate(data) if matches(d)] or [None])[0]
 		if idx is None:
 			data.append(a)
 		else:
@@ -440,76 +537,96 @@ def get_group_by_data(
 
 def get_purchase_receipt_supplier_map():
 	return frappe._dict(
-		frappe.db.sql(""" Select
+		frappe.db.sql(
+			""" Select
 		pr.name, pr.supplier
 		FROM `tabPurchase Receipt` pr, `tabPurchase Receipt Item` pri
 		WHERE
 			pri.parent = pr.name
 			AND pri.is_fixed_asset=1
 			AND pr.docstatus=1
-			AND pr.is_return=0""")
+			AND pr.is_return=0"""
+		)
 	)
 
 
 def get_purchase_invoice_supplier_map():
 	return frappe._dict(
-		frappe.db.sql(""" Select
+		frappe.db.sql(
+			""" Select
 		pi.name, pi.supplier
 		FROM `tabPurchase Invoice` pi, `tabPurchase Invoice Item` pii
 		WHERE
 			pii.parent = pi.name
 			AND pii.is_fixed_asset=1
 			AND pi.docstatus=1
-			AND pi.is_return=0""")
+			AND pi.is_return=0"""
+		)
 	)
 
 
 def get_columns(filters):
 	if filters.get("group_by") in ["Asset Category", "Location"]:
-		return [
+		group_by = filters.get("group_by")
+		columns = [
 			{
-				"label": _("{}").format(filters.get("group_by")),
+				"label": _(group_by),
 				"fieldtype": "Link",
-				"fieldname": frappe.scrub(filters.get("group_by")),
-				"options": filters.get("group_by"),
+				"fieldname": frappe.scrub(group_by),
+				"options": group_by,
 				"width": 216,
 			},
-			{
-				"label": _("Net Purchase Amount"),
-				"fieldname": "net_purchase_amount",
-				"fieldtype": "Currency",
-				"options": "Company:company:default_currency",
-				"width": 250,
-			},
-			{
-				"label": _("Opening Accumulated Depreciation"),
-				"fieldname": "opening_accumulated_depreciation",
-				"fieldtype": "Currency",
-				"options": "Company:company:default_currency",
-				"width": 250,
-			},
-			{
-				"label": _("Depreciated Amount"),
-				"fieldname": "depreciated_amount",
-				"fieldtype": "Currency",
-				"options": "Company:company:default_currency",
-				"width": 250,
-			},
-			{
-				"label": _("Asset Value"),
-				"fieldname": "asset_value",
-				"fieldtype": "Currency",
-				"options": "Company:company:default_currency",
-				"width": 250,
-			},
-			{
-				"label": _("Company"),
-				"fieldname": "company",
-				"fieldtype": "Link",
-				"options": "Company",
-				"width": 120,
-			},
 		]
+		if group_by == "Asset Category":
+			columns.append(
+				{
+					"label": _("Rate of Depreciation"),
+					"fieldname": "rate_of_depreciation",
+					"fieldtype": "Percent",
+					"width": 150,
+					"disable_total": True,
+				}
+			)
+		columns.extend(
+			[
+				{
+					"label": _("Net Purchase Amount"),
+					"fieldname": "net_purchase_amount",
+					"fieldtype": "Currency",
+					"options": "Company:company:default_currency",
+					"width": 250,
+				},
+				{
+					"label": _("Opening Accumulated Depreciation"),
+					"fieldname": "opening_accumulated_depreciation",
+					"fieldtype": "Currency",
+					"options": "Company:company:default_currency",
+					"width": 250,
+				},
+				{
+					"label": _("Depreciated Amount"),
+					"fieldname": "depreciated_amount",
+					"fieldtype": "Currency",
+					"options": "Company:company:default_currency",
+					"width": 250,
+				},
+				{
+					"label": _("Asset Value"),
+					"fieldname": "asset_value",
+					"fieldtype": "Currency",
+					"options": "Company:company:default_currency",
+					"width": 250,
+				},
+				{
+					"label": _("Company"),
+					"fieldname": "company",
+					"fieldtype": "Link",
+					"options": "Company",
+					"width": 120,
+				},
+			]
+		)
+		return columns
 
 	return [
 		{
@@ -531,13 +648,6 @@ def get_columns(filters):
 			"fieldname": "asset_category",
 			"options": "Asset Category",
 			"width": 100,
-		},
-		{
-			"label": _("Fixed Asset Account"),
-			"fieldtype": "Link",
-			"fieldname": "fixed_asset_account",
-			"options": "Account",
-			"width": 120,
 		},
 		{"label": _("Status"), "fieldtype": "Data", "fieldname": "status", "width": 80},
 		{
@@ -579,12 +689,6 @@ def get_columns(filters):
 			"fieldtype": "Currency",
 			"options": "Company:company:default_currency",
 			"width": 100,
-		},
-		{
-			"label": _("Rate of Depreciation (%)"),
-			"fieldname": "rate_of_depreciation",
-			"fieldtype": "Percent",
-			"width": 90,
 		},
 		{
 			"label": _("Cost Center"),
