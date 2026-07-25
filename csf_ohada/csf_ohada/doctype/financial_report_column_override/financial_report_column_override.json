@@ -1,0 +1,67 @@
+{
+  "actions": [],
+  "creation": "2026-07-24 12:19:26.227010",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "row_reference_code",
+    "column_code",
+    "balance_type",
+    "column_break_ov",
+    "calculation_formula"
+  ],
+  "fields": [
+    {
+      "columns": 2,
+      "description": "Line Reference of the row to override",
+      "fieldname": "row_reference_code",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Row Reference",
+      "reqd": 1
+    },
+    {
+      "columns": 2,
+      "description": "Column Code from Value Columns",
+      "fieldname": "column_code",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Column Code",
+      "reqd": 1
+    },
+    {
+      "columns": 2,
+      "description": "Override row Balance Type for Account Data rows. Leave empty to use the row default.",
+      "fieldname": "balance_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Balance Type Override",
+      "options": "\nOpening Balance\nClosing Balance\nPeriod Movement (Debits - Credits)"
+    },
+    {
+      "fieldname": "column_break_ov",
+      "fieldtype": "Column Break"
+    },
+    {
+      "description": "Override row formula or account filter for this column. Leave empty to use the row default.",
+      "fieldname": "calculation_formula",
+      "fieldtype": "Code",
+      "label": "Formula / Account Filter Override"
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 1,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-07-24 12:19:26.227010",
+  "modified_by": "Administrator",
+  "module": "Csf Ohada",
+  "name": "Financial Report Column Override",
+  "owner": "Administrator",
+  "permissions": [],
+  "row_format": "Dynamic",
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": []
+}
