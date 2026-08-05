@@ -9,6 +9,7 @@
     "column_code",
     "balance_type",
     "column_break_ov",
+    "is_formula",
     "calculation_formula"
   ],
   "fields": [
@@ -32,6 +33,7 @@
     },
     {
       "columns": 2,
+      "depends_on": "eval:!doc.is_formula",
       "description": "Override row Balance Type for Account Data rows. Leave empty to use the row default.",
       "fieldname": "balance_type",
       "fieldtype": "Select",
@@ -44,6 +46,15 @@
       "fieldtype": "Column Break"
     },
     {
+      "columns": 1,
+      "default": "0",
+      "description": "Evaluate the override as a calculation formula instead of an account filter. Lets an Account Data row compute this column from its other value columns, e.g. GROSS - DEPR",
+      "fieldname": "is_formula",
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "label": "Evaluate as Formula"
+    },
+    {
       "description": "Override row formula or account filter for this column. Leave empty to use the row default.",
       "fieldname": "calculation_formula",
       "fieldtype": "Code",
@@ -54,7 +65,7 @@
   "index_web_pages_for_search": 1,
   "istable": 1,
   "links": [],
-  "modified": "2026-07-24 12:19:26.227010",
+  "modified": "2026-08-04 19:46:00.000000",
   "modified_by": "Administrator",
   "module": "Csf Ohada",
   "name": "Financial Report Column Override",

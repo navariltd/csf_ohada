@@ -18,6 +18,7 @@ class FinancialReportColumnOverride(Document):
 		]
 		calculation_formula: DF.Code | None
 		column_code: DF.Data
+		is_formula: DF.Check
 		parent: DF.Data
 		parentfield: DF.Data
 		parenttype: DF.Data

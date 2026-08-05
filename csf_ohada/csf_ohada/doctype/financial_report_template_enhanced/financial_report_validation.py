@@ -193,12 +193,45 @@ class DependencyValidator(Validator):
 		available_codes = {row.reference_code for row in self.template.rows if row.reference_code}
 
 		for row in self.template.rows:
-			if row.reference_code and row.data_source == "Calculated Amount" and row.calculation_formula:
-				deps = extract_reference_codes_from_formula(row.calculation_formula, list(available_codes))
-				if deps:
-					graph[row.reference_code] = deps
+			if not row.reference_code:
+				continue
+
+			deps = []
+			for formula in self.get_row_formulas(row):
+				for dep in extract_reference_codes_from_formula(formula, list(available_codes)):
+					if dep not in deps:
+						deps.append(dep)
+
+			if deps:
+				graph[row.reference_code] = deps
 
 		return graph
+
+	def get_row_formulas(self, row) -> list[str]:
+		"""Row formula plus any column overrides that are evaluated as formulas."""
+		is_calculated = row.data_source == "Calculated Amount"
+		formulas = []
+
+		if is_calculated and row.calculation_formula:
+			formulas.append(row.calculation_formula)
+
+		for override in self.get_formula_overrides(row):
+			formulas.append(override.calculation_formula)
+
+		return formulas
+
+	def get_formula_overrides(self, row) -> list:
+		"""Column overrides of a row whose value is a formula rather than an account filter."""
+		is_calculated = row.data_source == "Calculated Amount"
+		row_reference = (row.reference_code or "").strip()
+
+		return [
+			override
+			for override in getattr(self.template, "column_overrides", None) or []
+			if (override.row_reference_code or "").strip() == row_reference
+			and override.calculation_formula
+			and (is_calculated or override.is_formula)
+		]
 
 	def _validate_circular_dependencies(self) -> ValidationResult:
 		"""

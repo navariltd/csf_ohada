@@ -36,10 +36,10 @@ from csf_ohada.csf_ohada.doctype.financial_report_row_enhanced.financial_report_
 from csf_ohada.csf_ohada.doctype.financial_report_template_enhanced.column_layout import (
 	DEFAULT_MEASURE,
 	build_override_map,
+	build_row_column_plan,
 	get_measure_columns,
 	iter_visible_value_columns,
 	make_fieldname,
-	resolve_row_settings,
 )
 from csf_ohada.csf_ohada.doctype.financial_report_template_enhanced.financial_report_template_enhanced import (
 	FinancialReportTemplateEnhanced as FinancialReportTemplate,
@@ -339,13 +339,16 @@ class FinancialReportEngine:
 			if row.data_source != "Account Data":
 				continue
 
-			for measure in context.measure_columns:
-				settings = resolve_row_settings(row, measure.column_code, context.override_map)
+			for entry in build_row_column_plan(row, context.measure_columns, context.override_map):
+				# Formula columns are computed from other columns, not from a GL query
+				if entry.is_formula:
+					continue
+
 				collector.add_account_request(
 					row,
-					column_code=measure.column_code,
-					balance_type=settings["balance_type"],
-					calculation_formula=settings["calculation_formula"],
+					column_code=entry.column_code,
+					balance_type=entry.balance_type,
+					calculation_formula=entry.formula,
 				)
 
 		all_data = collector.collect_all_data()
@@ -357,6 +360,13 @@ class FinancialReportEngine:
 	def process_calculations(self, context: ReportContext) -> ReportContext:
 		processor = RowProcessor(context)
 		context.processed_rows = processor.process_all_rows()
+
+		if processor.formula_issues:
+			frappe.msgprint(
+				"<br>".join(processor.formula_issues),
+				title=_("Formula Errors"),
+				indicator="red",
+			)
 
 		return context
 
@@ -1200,6 +1210,7 @@ class RowProcessor:
 		self.override_map = context.override_map
 		# ref_code -> { column_code -> [period values] }
 		self.row_values = {}
+		self.formula_issues = []
 		self.dependency_resolver = DependencyResolver(context.template)
 
 	def process_all_rows(self) -> list[RowData]:
@@ -1256,6 +1267,42 @@ class RowProcessor:
 			return
 		self.row_values[ref_code] = column_values
 
+	def _ordered_column_values(self, column_values: dict[str, list]) -> dict[str, list]:
+		"""Restore the template's column order after dependency-ordered evaluation."""
+		zeros = [0.0] * len(self.period_list)
+		return {
+			measure.column_code: column_values.get(measure.column_code, list(zeros))
+			for measure in self.measure_columns
+		}
+
+	def _make_calculator(self) -> "FormulaCalculator":
+		return FormulaCalculator(
+			self.row_values,
+			self.period_list,
+			column_codes={measure.column_code for measure in self.measure_columns},
+		)
+
+	def _evaluate_column_formula(self, row, entry, column_values: dict[str, list], calculator) -> list[float]:
+		formula_row = frappe._dict(row.as_dict() if hasattr(row, "as_dict") else {})
+		formula_row.data_source = "Calculated Amount"
+		formula_row.calculation_formula = entry.formula
+		formula_row.reference_code = row.reference_code
+		# Account Data values are already sign-corrected during collection
+		formula_row.reverse_sign = row.reverse_sign if row.data_source == "Calculated Amount" else 0
+
+		values = calculator.evaluate_formula(
+			formula_row,
+			column_code=entry.column_code,
+			same_row_values=column_values,
+		)
+
+		for issue in calculator.issues:
+			if issue not in self.formula_issues:
+				self.formula_issues.append(issue)
+		calculator.issues.clear()
+
+		return values
+
 	def _process_account_row(
 		self,
 		row,
@@ -1269,9 +1316,19 @@ class RowProcessor:
 		per_col = column_summary.get(ref_code, {}) if ref_code else {}
 		per_col_details = column_account_details.get(ref_code, {}) if ref_code else {}
 
+		calculator = None
 		column_values = {}
-		for measure in self.measure_columns:
-			column_values[measure.column_code] = list(per_col.get(measure.column_code, zeros))
+
+		for entry in build_row_column_plan(row, self.measure_columns, self.override_map):
+			if entry.is_formula:
+				calculator = calculator or self._make_calculator()
+				column_values[entry.column_code] = self._evaluate_column_formula(
+					row, entry, column_values, calculator
+				)
+			else:
+				column_values[entry.column_code] = list(per_col.get(entry.column_code, zeros))
+
+		column_values = self._ordered_column_values(column_values)
 
 		# Legacy/default series
 		values = column_values.get(DEFAULT_MEASURE) or next(iter(column_values.values()), zeros)
@@ -1314,18 +1371,15 @@ class RowProcessor:
 		return RowData(row=row, values=list(values), column_values=column_values)
 
 	def _process_formula_row(self, row) -> RowData:
-		calculator = FormulaCalculator(self.row_values, self.period_list)
+		calculator = self._make_calculator()
 		column_values = {}
 
-		for measure in self.measure_columns:
-			settings = resolve_row_settings(row, measure.column_code, self.override_map)
-			formula_row = frappe._dict(row.as_dict() if hasattr(row, "as_dict") else {})
-			formula_row.calculation_formula = settings["calculation_formula"]
-			formula_row.reverse_sign = row.reverse_sign
-			formula_row.reference_code = row.reference_code
-			column_values[measure.column_code] = calculator.evaluate_formula(
-				formula_row, column_code=measure.column_code
+		for entry in build_row_column_plan(row, self.measure_columns, self.override_map):
+			column_values[entry.column_code] = self._evaluate_column_formula(
+				row, entry, column_values, calculator
 			)
+
+		column_values = self._ordered_column_values(column_values)
 
 		values = column_values.get(DEFAULT_MEASURE) or next(
 			iter(column_values.values()), [0.0] * len(self.period_list)
@@ -1357,6 +1411,7 @@ class DependencyResolver:
 		self.rows = template.rows
 		self.row_map = {row.reference_code: row for row in self.rows if row.reference_code}
 		self.dependencies = {}
+		self.validator = None
 		self._validate_dependencies()
 
 	def _validate_dependencies(self):
@@ -1366,6 +1421,7 @@ class DependencyResolver:
 		result = validator.validate()
 		result.notify_user()
 
+		self.validator = validator
 		self.dependencies = validator.dependencies
 
 	def get_processing_order(self) -> list:
@@ -1379,7 +1435,11 @@ class DependencyResolver:
 			if row.data_source == "Custom API":
 				api_rows.append(row)
 			elif row.data_source == "Account Data":
-				account_rows.append(row)
+				# Account rows with formula columns may reference other rows, so order them too
+				if self.validator.get_formula_overrides(row):
+					formula_rows.append(row)
+				else:
+					account_rows.append(row)
 			elif row.data_source == "Calculated Amount":
 				formula_rows.append(row)
 			else:
@@ -1436,11 +1496,15 @@ class DependencyResolver:
 class FormulaCalculator:
 	"""Enhanced formula calculator with better error handling"""
 
-	def __init__(self, row_data: dict[str, Any], period_list: list[dict]):
+	def __init__(
+		self, row_data: dict[str, Any], period_list: list[dict], column_codes: set[str] | None = None
+	):
 		self.row_data = row_data
 		self.period_list = period_list
+		self.column_codes = column_codes or set()
+		self.issues: list[str] = []
 		self.precision = get_currency_precision()
-		self.validator = CalculationFormulaValidator(set(row_data.keys()))
+		self.validator = CalculationFormulaValidator(set(row_data.keys()) | self.column_codes)
 
 		self.math_functions = {
 			"abs": abs,
@@ -1454,38 +1518,68 @@ class FormulaCalculator:
 			"floor": math.floor,
 		}
 
-	def evaluate_formula(self, report_row: dict[str, Any], column_code: str = DEFAULT_MEASURE) -> list[float]:
+	def evaluate_formula(
+		self,
+		report_row: dict[str, Any],
+		column_code: str = DEFAULT_MEASURE,
+		same_row_values: dict[str, list] | None = None,
+	) -> list[float]:
 		validation_result = self.validator.validate(report_row)
 		formula = report_row.calculation_formula
 		negation_factor = -1 if report_row.reverse_sign else 1
+		label = self._get_label(report_row, column_code)
 
 		if validation_result.issues:
-			# TODO: Throw?
-			messages = "<br><br>".join(issue.message for issue in validation_result.issues)
-			frappe.log_error(f"Formula validation errors found:\n{messages}")
+			self._record_issue(label, "; ".join(issue.message for issue in validation_result.issues))
 			return [0.0] * len(self.period_list)
 
 		results = []
 		for i in range(len(self.period_list)):
-			result = self._evaluate_for_period(formula, i, negation_factor, column_code)
+			result = self._evaluate_for_period(
+				formula, i, negation_factor, column_code, same_row_values, label
+			)
 			results.append(result)
 
 		return results
 
+	def _get_label(self, report_row: dict[str, Any], column_code: str) -> str:
+		label = (
+			getattr(report_row, "display_name", None)
+			or getattr(report_row, "reference_code", None)
+			or _("Row")
+		)
+
+		if column_code and column_code != DEFAULT_MEASURE:
+			return f"{label} [{column_code}]"
+
+		return label
+
+	def _record_issue(self, label: str, message: str) -> None:
+		issue = f"{label}: {message}"
+
+		if issue not in self.issues:
+			self.issues.append(issue)
+			frappe.log_error(f"Financial report formula error - {issue}")
+
 	def _evaluate_for_period(
-		self, formula: str, period_index: int, negation_factor: int, column_code: str = DEFAULT_MEASURE
+		self,
+		formula: str,
+		period_index: int,
+		negation_factor: int,
+		column_code: str = DEFAULT_MEASURE,
+		same_row_values: dict[str, list] | None = None,
+		label: str = "",
 	) -> float:
-		# TODO: consistent error handling
 		try:
-			context = self._build_context(period_index, column_code)
+			context = self._build_context(period_index, column_code, same_row_values)
 			result = frappe.safe_eval(formula, context)
 			return flt(result * negation_factor, self.precision)
 
 		except ZeroDivisionError:
-			frappe.log_error(f"Division by zero in formula: {formula}")
+			self._record_issue(label, _("Division by zero in formula: {0}").format(formula))
 			return 0.0
 		except Exception as e:
-			frappe.log_error(f"Formula evaluation error: {formula} - {e!s}")
+			self._record_issue(label, _("Could not evaluate {0} ({1})").format(formula, str(e)))
 			return 0.0
 
 	def _resolve_series(self, values: Any, column_code: str) -> list:
@@ -1499,21 +1593,35 @@ class FormulaCalculator:
 			return []
 		return values or []
 
-	def _build_context(self, period_index: int, column_code: str = DEFAULT_MEASURE) -> dict[str, Any]:
+	def _build_context(
+		self,
+		period_index: int,
+		column_code: str = DEFAULT_MEASURE,
+		same_row_values: dict[str, list] | None = None,
+	) -> dict[str, Any]:
 		context = {}
 
-		# row values for the active measure column
+		# other rows, read from the column being evaluated
 		for code, values in self.row_data.items():
 			series = self._resolve_series(values, column_code)
-			if period_index < len(series):
-				context[code] = series[period_index] or 0.0
-			else:
-				context[code] = 0.0
+			context[code] = self._value_at(series, period_index)
+
+		# other value columns of the row being evaluated, e.g. GROSS - DEPR
+		for code, series in (same_row_values or {}).items():
+			context[code] = self._value_at(series, period_index)
 
 		# math functions
 		context.update(self.math_functions)
 
 		return context
+
+	@staticmethod
+	def _value_at(series: list, period_index: int) -> float:
+		if period_index < len(series):
+			value = series[period_index]
+			return value if isinstance(value, int | float) else 0.0
+
+		return 0.0
 
 
 # ============================================================================

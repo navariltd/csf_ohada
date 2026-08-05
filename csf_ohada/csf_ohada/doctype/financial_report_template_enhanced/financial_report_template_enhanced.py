@@ -9,6 +9,11 @@ from erpnext.accounts.doctype.account_category.account_category import import_ac
 from frappe import _
 from frappe.model.document import Document
 
+from csf_ohada.csf_ohada.doctype.financial_report_template_enhanced.column_layout import (
+	build_override_map,
+	find_column_cycles,
+	get_measure_columns,
+)
 from csf_ohada.csf_ohada.doctype.financial_report_template_enhanced.financial_report_validation import (
 	TemplateValidator,
 )
@@ -74,6 +79,16 @@ class FinancialReportTemplateEnhanced(Document):
 			column_codes.append(code)
 
 		row_refs = {row.reference_code for row in self.rows if row.reference_code}
+
+		# Formulas resolve column codes and line references in one namespace
+		for code in column_codes:
+			if code in row_refs:
+				frappe.throw(
+					_("Column Code {0} is also used as a Line Reference. Use distinct codes.").format(
+						frappe.bold(code)
+					)
+				)
+
 		for override in self.column_overrides or []:
 			if override.column_code and column_codes and override.column_code not in column_codes:
 				frappe.throw(
@@ -85,6 +100,31 @@ class FinancialReportTemplateEnhanced(Document):
 				frappe.throw(
 					_("Column Override references unknown Row Reference: {0}").format(
 						frappe.bold(override.row_reference_code)
+					)
+				)
+			if override.is_formula and not override.calculation_formula:
+				frappe.throw(
+					_("Column Override for {0} is marked as a formula but no formula is set").format(
+						frappe.bold(f"{override.row_reference_code} / {override.column_code}")
+					)
+				)
+
+		self._validate_column_cycles()
+
+	def _validate_column_cycles(self):
+		if not self.columns:
+			return
+
+		measures = get_measure_columns(self)
+		override_map = build_override_map(self)
+
+		for row in self.rows:
+			cyclic = find_column_cycles(row, measures, override_map)
+			if cyclic:
+				frappe.throw(
+					_("Value columns of row {0} reference each other in a loop: {1}").format(
+						frappe.bold(row.reference_code or row.display_name or row.idx),
+						frappe.bold(", ".join(cyclic)),
 					)
 				)
 
