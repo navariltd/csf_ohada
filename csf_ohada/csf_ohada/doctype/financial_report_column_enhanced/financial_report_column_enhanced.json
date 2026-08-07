@@ -1,0 +1,84 @@
+{
+  "actions": [],
+  "creation": "2026-07-24 12:20:26.237081",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "column_code",
+    "label",
+    "period_scope",
+    "title_template",
+    "column_break_meta",
+    "fieldtype",
+    "hidden"
+  ],
+  "fields": [
+    {
+      "columns": 2,
+      "description": "Code used in overrides and formulas (e.g. GROSS, NET)",
+      "fieldname": "column_code",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Column Code",
+      "reqd": 1
+    },
+    {
+      "columns": 2,
+      "description": "Base column title (e.g. Gross Value, Net Value)",
+      "fieldname": "label",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Label",
+      "reqd": 1
+    },
+    {
+      "columns": 2,
+      "default": "All Periods",
+      "fieldname": "period_scope",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Period Scope",
+      "options": "All Periods\nCurrent Period Only\nPrevious Periods Only",
+      "reqd": 1
+    },
+    {
+      "description": "Optional. Placeholders: {label}, {period}. Default: {label} ({period})",
+      "fieldname": "title_template",
+      "fieldtype": "Data",
+      "label": "Title Template"
+    },
+    {
+      "fieldname": "column_break_meta",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Currency",
+      "fieldname": "fieldtype",
+      "fieldtype": "Select",
+      "label": "Value Type",
+      "options": "\nCurrency\nFloat\nInt\nPercent"
+    },
+    {
+      "default": "0",
+      "description": "Compute values but do not show this measure as a report column",
+      "fieldname": "hidden",
+      "fieldtype": "Check",
+      "label": "Hidden"
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 1,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-07-24 12:20:26.237081",
+  "modified_by": "Administrator",
+  "module": "Csf Ohada",
+  "name": "Financial Report Column Enhanced",
+  "owner": "Administrator",
+  "permissions": [],
+  "row_format": "Dynamic",
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": []
+}
