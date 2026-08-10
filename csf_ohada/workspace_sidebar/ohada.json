@@ -9,6 +9,18 @@
   {
    "child": 0,
    "collapsible": 1,
+   "icon": "layout-template",
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Financial Report Template Enhanced",
+   "link_to": "Financial Report Template Enhanced",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 0,
+   "collapsible": 1,
    "icon": "sheet",
    "indent": 1,
    "keep_closed": 0,
@@ -22,6 +34,17 @@
    "collapsible": 1,
    "indent": 0,
    "keep_closed": 0,
+   "label": "Financial Statement Enhanced",
+   "link_to": "Financial Statement Enhanced",
+   "link_type": "Report",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 1,
+   "collapsible": 1,
+   "indent": 0,
+   "keep_closed": 0,
    "label": "Fixed Asset Register Enhanced",
    "link_to": "Fixed Asset Register Enhanced",
    "link_type": "Report",
@@ -29,7 +52,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-06-02 09:05:54.392303",
+ "modified": "2026-08-10 13:04:19.887812",
  "modified_by": "Administrator",
  "module": "Csf Ohada",
  "name": "Ohada",
