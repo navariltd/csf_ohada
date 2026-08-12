@@ -1,6 +1,6 @@
 {
  "app": "csf_ohada",
- "creation": "2026-06-02 08:57:06.880712",
+ "creation": "2026-08-12 07:18:11.390551",
  "docstatus": 0,
  "doctype": "Workspace Sidebar",
  "header_icon": "money-coins-1",
@@ -9,7 +9,18 @@
   {
    "child": 0,
    "collapsible": 1,
-   "icon": "layout-template",
+   "icon": "accounting",
+   "indent": 1,
+   "keep_closed": 0,
+   "label": "Financial Reports",
+   "link_to": "Financial Report Template Enhanced",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Section Break"
+  },
+  {
+   "child": 1,
+   "collapsible": 1,
    "indent": 0,
    "keep_closed": 0,
    "label": "Financial Report Template Enhanced",
@@ -17,17 +28,6 @@
    "link_type": "DocType",
    "show_arrow": 0,
    "type": "Link"
-  },
-  {
-   "child": 0,
-   "collapsible": 1,
-   "icon": "sheet",
-   "indent": 1,
-   "keep_closed": 0,
-   "label": "Reports",
-   "link_type": "DocType",
-   "show_arrow": 0,
-   "type": "Section Break"
   },
   {
    "child": 1,
@@ -52,9 +52,8 @@
    "type": "Link"
   }
  ],
- "modified": "2026-08-10 13:04:19.887812",
+ "modified": "2026-08-12 07:18:11.390551",
  "modified_by": "Administrator",
- "module": "Csf Ohada",
  "name": "Ohada",
  "owner": "Administrator",
  "standard": 1,
