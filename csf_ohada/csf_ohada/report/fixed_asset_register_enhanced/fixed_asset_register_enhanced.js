@@ -39,6 +39,12 @@ frappe.query_reports["Fixed Asset Register Enhanced"] = {
 			reqd: 1,
 		},
 		{
+			fieldname: "show_account_number",
+			label: __("Show Account Number"),
+			fieldtype: "Check",
+			depends_on: "eval: doc.group_by == 'Asset Category'",
+		},
+		{
 			fieldname: "only_existing_assets",
 			label: __("Only existing assets"),
 			fieldtype: "Check",

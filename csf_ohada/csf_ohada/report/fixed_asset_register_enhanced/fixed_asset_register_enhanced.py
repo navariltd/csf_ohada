@@ -53,6 +53,11 @@ def get_data(filters):
 		depreciation_rate_map = (
 			get_asset_depreciation_rate_map(filters, finance_book) if group_by == "asset_category" else {}
 		)
+		account_number_map = (
+			get_fixed_asset_account_number_map(filters.company)
+			if group_by == "asset_category" and filters.get("show_account_number")
+			else {}
+		)
 		data = get_group_by_data(
 			group_by,
 			conditions,
@@ -60,6 +65,7 @@ def get_data(filters):
 			depreciation_amount_map,
 			revaluation_amount_map,
 			depreciation_rate_map,
+			account_number_map,
 		)
 		return data
 
@@ -456,6 +462,23 @@ def get_asset_depreciation_rate_map(filters, finance_book):
 	return rate_map
 
 
+def get_fixed_asset_account_number_map(company):
+	"""Map Asset Category -> account number of its fixed asset account for the company."""
+	aca = frappe.qb.DocType("Asset Category Account")
+	account = frappe.qb.DocType("Account")
+
+	rows = (
+		frappe.qb.from_(aca)
+		.join(account)
+		.on(account.name == aca.fixed_asset_account)
+		.select(aca.parent, account.account_number)
+		.where(aca.parenttype == "Asset Category")
+		.where(aca.company_name == company)
+	).run()
+
+	return dict(rows)
+
+
 def get_group_by_data(
 	group_by,
 	conditions,
@@ -463,6 +486,7 @@ def get_group_by_data(
 	depreciation_amount_map,
 	revaluation_amount_map,
 	depreciation_rate_map=None,
+	account_number_map=None,
 ):
 	fields = [
 		group_by,
@@ -473,6 +497,7 @@ def get_group_by_data(
 	]
 	assets = frappe.db.get_all("Asset", filters=conditions, fields=fields)
 	depreciation_rate_map = depreciation_rate_map or {}
+	account_number_map = account_number_map or {}
 	split_by_rate = group_by == "asset_category"
 
 	# When a category has a single known rate, reuse it for assets that lack finance-book data
@@ -492,6 +517,7 @@ def get_group_by_data(
 
 		a["depreciated_amount"] = depreciation_amount_map.get(a["name"], 0.0)
 		a["revaluation_amount"] = revaluation_amount_map.get(a["name"], 0.0)
+		a["cumulative_depreciation"] = a["opening_accumulated_depreciation"] + a["depreciated_amount"]
 		a["asset_value"] = (
 			a["net_purchase_amount"]
 			- a["opening_accumulated_depreciation"]
@@ -509,6 +535,9 @@ def get_group_by_data(
 					# Non-depreciable assets show 0%
 					rate = 0.0
 			a["rate_of_depreciation"] = rate
+
+		if account_number_map:
+			a["account_number"] = account_number_map.get(a[group_by])
 
 		del a["name"]
 		del a["calculate_depreciation"]
@@ -528,6 +557,7 @@ def get_group_by_data(
 				"net_purchase_amount",
 				"opening_accumulated_depreciation",
 				"depreciated_amount",
+				"cumulative_depreciation",
 				"asset_value",
 			):
 				data[idx][field] = data[idx][field] + a[field]
@@ -568,15 +598,25 @@ def get_purchase_invoice_supplier_map():
 def get_columns(filters):
 	if filters.get("group_by") in ["Asset Category", "Location"]:
 		group_by = filters.get("group_by")
-		columns = [
+		columns = []
+		if group_by == "Asset Category" and filters.get("show_account_number"):
+			columns.append(
+				{
+					"label": _("Account Number"),
+					"fieldname": "account_number",
+					"fieldtype": "Data",
+					"width": 120,
+				}
+			)
+		columns.append(
 			{
 				"label": _(group_by),
 				"fieldtype": "Link",
 				"fieldname": frappe.scrub(group_by),
 				"options": group_by,
 				"width": 216,
-			},
-		]
+			}
+		)
 		if group_by == "Asset Category":
 			columns.append(
 				{
@@ -606,6 +646,13 @@ def get_columns(filters):
 				{
 					"label": _("Depreciated Amount"),
 					"fieldname": "depreciated_amount",
+					"fieldtype": "Currency",
+					"options": "Company:company:default_currency",
+					"width": 250,
+				},
+				{
+					"label": _("Cumulative Depreciation"),
+					"fieldname": "cumulative_depreciation",
 					"fieldtype": "Currency",
 					"options": "Company:company:default_currency",
 					"width": 250,
