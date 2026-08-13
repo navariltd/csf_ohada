@@ -2,6 +2,7 @@
 # Based on ERPNext Financial Report Template validation
 # For license information, please see license.txt
 
+import ast
 import json
 import re
 from abc import ABC, abstractmethod
@@ -11,6 +12,18 @@ from typing import Any
 import frappe
 from frappe import _
 from frappe.database.operator_map import OPERATOR_MAP
+
+FORMULA_MATH_FUNCTIONS = {
+	"abs",
+	"round",
+	"min",
+	"max",
+	"sum",
+	"sqrt",
+	"pow",
+	"ceil",
+	"floor",
+}
 
 
 @dataclass
@@ -304,69 +317,105 @@ class DependencyValidator(Validator):
 
 
 class CalculationFormulaValidator(Validator):
-	"""Validates calculation formulas used in Calculated Amount rows"""
+	"""Validates calculation formulas used in Calculated Amount rows and formula column overrides"""
 
 	def __init__(self, reference_codes: set[str]):
 		self.reference_codes = reference_codes
 
 	def validate(self, row) -> ValidationResult:
 		"""Validate calculation formula for a single row"""
-		result = ValidationResult()
-
 		if row.data_source != "Calculated Amount":
-			return result
+			return ValidationResult()
 
-		if not row.calculation_formula:
-			result.add_error(
-				ValidationIssue(
-					message="Formula is required for Calculated Amount",
-					row_idx=row.idx,
-					field="Formula",
+		if row.calculation_formula:
+			row.calculation_formula = self._preprocess_formula(row.calculation_formula)
+
+		return self.validate_formula(
+			row.calculation_formula,
+			row_idx=getattr(row, "idx", None),
+			reference_code=getattr(row, "reference_code", None),
+			require_formula=True,
+		)
+
+	def validate_formula(
+		self,
+		formula: str | None,
+		*,
+		row_idx: int | None = None,
+		reference_code: str | None = None,
+		column_code: str | None = None,
+		field: str | None = None,
+		require_formula: bool = True,
+	) -> ValidationResult:
+		"""Validate a calculation formula string.
+
+		`reference_codes` may include both line references and value column codes.
+		"""
+		result = ValidationResult()
+		if not field:
+			field = f"Column Override ({column_code})" if column_code else "Formula"
+		formula = self._preprocess_formula(formula)
+
+		if not formula:
+			if require_formula:
+				result.add_error(
+					ValidationIssue(
+						message="Formula is required for Calculated Amount",
+						row_idx=row_idx,
+						field=field,
+					)
 				)
-			)
 			return result
 
-		formula = self._preprocess_formula(row.calculation_formula)
-		row.calculation_formula = formula
-
-		# Check parentheses
 		if not self._are_parentheses_balanced(formula):
 			result.add_error(
 				ValidationIssue(
 					message="Formula has unbalanced parentheses",
-					row_idx=row.idx,
+					row_idx=row_idx,
+					field=field,
 				)
 			)
 			return result
 
-		# Check self-reference
 		available_codes = list(self.reference_codes)
 		refs = extract_reference_codes_from_formula(formula, available_codes)
-		if row.reference_code and row.reference_code in refs:
+
+		if reference_code and reference_code in refs:
 			result.add_error(
 				ValidationIssue(
-					message=f"Formula references itself ('{row.reference_code}')",
-					row_idx=row.idx,
+					message=f"Formula references itself ('{reference_code}')",
+					row_idx=row_idx,
+					field=field,
 				)
 			)
 
-		# Check undefined references
-		undefined = set(refs) - set(available_codes)
+		if column_code and column_code in refs:
+			result.add_error(
+				ValidationIssue(
+					message=f"Formula references its own column ('{column_code}')",
+					row_idx=row_idx,
+					field=field,
+				)
+			)
+
+		undefined = self._undefined_names(formula, available_codes)
 		if undefined:
 			result.add_error(
 				ValidationIssue(
 					message=f"Formula references undefined codes: {', '.join(undefined)}",
-					row_idx=row.idx,
+					row_idx=row_idx,
+					field=field,
 				)
 			)
+			return result
 
-		# Try to evaluate with dummy values
 		eval_error = self._test_formula_evaluation(formula, available_codes)
 		if eval_error:
 			result.add_error(
 				ValidationIssue(
 					message=f"Formula evaluation error: {eval_error}",
-					row_idx=row.idx,
+					row_idx=row_idx,
+					field=field,
 				)
 			)
 
@@ -381,6 +430,21 @@ class CalculationFormulaValidator(Validator):
 	@staticmethod
 	def _are_parentheses_balanced(formula: str) -> bool:
 		return formula.count("(") == formula.count(")")
+
+	@staticmethod
+	def _undefined_names(formula: str, available_codes: list[str]) -> list[str]:
+		try:
+			tree = ast.parse(formula, mode="eval")
+		except SyntaxError:
+			return []
+
+		allowed = set(available_codes) | FORMULA_MATH_FUNCTIONS
+		undefined = []
+		for node in ast.walk(tree):
+			if isinstance(node, ast.Name) and isinstance(node.ctx, ast.Load) and node.id not in allowed:
+				if node.id not in undefined:
+					undefined.append(node.id)
+		return undefined
 
 	def _test_formula_evaluation(self, formula: str, available_codes: list[str]) -> str | None:
 		try:
@@ -515,24 +579,96 @@ class FormulaValidator(Validator):
 	def __init__(self, template):
 		self.template = template
 		reference_codes = {row.reference_code for row in template.rows if row.reference_code}
+		column_codes = {
+			(col.column_code or "").strip()
+			for col in getattr(template, "columns", None) or []
+			if (col.column_code or "").strip()
+		}
 		self.calculation_validator = CalculationFormulaValidator(reference_codes)
+		self.override_formula_validator = CalculationFormulaValidator(reference_codes | column_codes)
 		self.account_filter_validator = AccountFilterValidator()
 
 	def validate(self, row) -> ValidationResult:
 		result = ValidationResult()
 
-		if not row.calculation_formula:
+		if row.calculation_formula:
+			if row.data_source == "Calculated Amount":
+				result.merge(self.calculation_validator.validate(row))
+			elif row.data_source == "Account Data":
+				result.merge(self.account_filter_validator.validate(row))
+			elif row.data_source == "Custom API":
+				result.merge(self._validate_custom_api(row))
+
+		result.merge(self._validate_column_overrides(row))
+		return result
+
+	def _validate_column_overrides(self, row) -> ValidationResult:
+		result = ValidationResult()
+		row_reference = (row.reference_code or "").strip()
+		is_calculated = row.data_source == "Calculated Amount"
+
+		for override in getattr(self.template, "column_overrides", None) or []:
+			if (override.row_reference_code or "").strip() != row_reference:
+				continue
+			if not override.calculation_formula:
+				continue
+
+			column_code = (override.column_code or "").strip() or None
+			field = self._override_field_label(row_reference, column_code)
+
+			if is_calculated or override.is_formula:
+				override.calculation_formula = (override.calculation_formula or "").strip()
+				result.merge(
+					self.override_formula_validator.validate_formula(
+						override.calculation_formula,
+						row_idx=override.idx,
+						reference_code=row.reference_code,
+						column_code=column_code,
+						field=field,
+						require_formula=False,
+					)
+				)
+			elif row.data_source == "Account Data":
+				result.merge(self._validate_override_account_filter(row, override, field))
+
+		return result
+
+	@staticmethod
+	def _override_field_label(row_reference: str, column_code: str | None) -> str:
+		if row_reference and column_code:
+			return f"Column Override ({row_reference} / {column_code})"
+		if column_code:
+			return f"Column Override ({column_code})"
+		return "Column Override"
+
+	def _validate_override_account_filter(self, row, override, field: str) -> ValidationResult:
+		formula = (override.calculation_formula or "").strip()
+		if formula and formula[0] not in "[{":
+			result = ValidationResult()
+			result.add_error(
+				ValidationIssue(
+					message=(
+						"Not a valid account filter. Enable 'Evaluate as Formula' "
+						"if this is a calculation formula."
+					),
+					row_idx=override.idx,
+					field=field,
+				)
+			)
 			return result
 
-		if row.data_source == "Calculated Amount":
-			return self.calculation_validator.validate(row)
-
-		elif row.data_source == "Account Data":
-			return self.account_filter_validator.validate(row)
-
-		elif row.data_source == "Custom API":
-			result.merge(self._validate_custom_api(row))
-
+		dummy = frappe._dict(
+			{
+				"data_source": "Account Data",
+				"calculation_formula": override.calculation_formula,
+				"advanced_filtering": getattr(row, "advanced_filtering", 0),
+				"idx": override.idx,
+			}
+		)
+		result = self.account_filter_validator.validate(dummy)
+		for issue in result.issues:
+			issue.field = field
+			issue.row_idx = override.idx
 		return result
 
 	def _validate_custom_api(self, row) -> ValidationResult:
