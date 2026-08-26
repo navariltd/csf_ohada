@@ -40,6 +40,7 @@ from csf_ohada.csf_ohada.doctype.financial_report_template_enhanced.column_layou
 	get_measure_columns,
 	iter_visible_value_columns,
 	make_fieldname,
+	resolve_row_settings,
 )
 from csf_ohada.csf_ohada.doctype.financial_report_template_enhanced.financial_report_template_enhanced import (
 	FinancialReportTemplateEnhanced as FinancialReportTemplate,
@@ -52,6 +53,14 @@ from csf_ohada.csf_ohada.doctype.financial_report_template_enhanced.financial_re
 
 DEFAULT_BULLET_PREFIX = "• "
 SEGMENT_PREFIX = "seg_"
+
+BALANCE_FILTER_ALL = "All"
+BALANCE_FILTER_DEBIT_ACCOUNTS = "Debit Accounts"
+BALANCE_FILTER_CREDIT_ACCOUNTS = "Credit Accounts"
+BALANCE_FILTER_NET_DEBIT = "Net Debit"
+BALANCE_FILTER_NET_CREDIT = "Net Credit"
+ACCOUNT_SIGN_FILTERS = {BALANCE_FILTER_DEBIT_ACCOUNTS, BALANCE_FILTER_CREDIT_ACCOUNTS}
+NET_SIGN_FILTERS = {BALANCE_FILTER_NET_DEBIT, BALANCE_FILTER_NET_CREDIT}
 
 # ============================================================================
 # DATA MODELS
@@ -78,7 +87,10 @@ class PeriodValue:
 
 	def copy(self):
 		return PeriodValue(
-			period_key=self.period_key, opening=self.opening, closing=self.closing, movement=self.movement
+			period_key=self.period_key,
+			opening=self.opening,
+			closing=self.closing,
+			movement=self.movement,
 		)
 
 
@@ -102,7 +114,7 @@ class AccountData:
 
 	def get_ordered_values(self, period_keys: list[str], balance_type: str) -> list[float]:
 		return [
-			self.period_values[key].get_value(balance_type) if key in self.period_values else 0.0
+			(self.period_values[key].get_value(balance_type) if key in self.period_values else 0.0)
 			for key in period_keys
 		]
 
@@ -133,6 +145,16 @@ class AccountData:
 			period_value.opening = -period_value.opening if period_value.opening else 0.0
 			period_value.closing = -period_value.closing if period_value.closing else 0.0
 			period_value.movement = -period_value.movement if period_value.movement else 0.0
+
+	def zero_period(self, period_key: str) -> None:
+		period_value = self.get_period(period_key)
+		if period_value:
+			period_value.opening = 0.0
+			period_value.closing = 0.0
+			period_value.movement = 0.0
+
+	def has_nonzero_value(self, period_keys: list[str], balance_type: str) -> bool:
+		return any(flt(value) for value in self.get_ordered_values(period_keys, balance_type))
 
 
 @dataclass
@@ -225,6 +247,60 @@ class FormattingRule:
 		if callable(self.format_properties):
 			return self.format_properties(row_data)
 		return self.format_properties
+
+
+def get_row_balance_filter(row) -> str:
+	return getattr(row, "balance_filter", None) or BALANCE_FILTER_ALL
+
+
+def to_gl_amount(value: Any, reverse_sign: bool) -> float:
+	"""Undo Reverse Sign so debit/credit checks use GL sign (debit minus credit)."""
+	if not isinstance(value, int | float):
+		return 0.0
+	return -value if reverse_sign else value
+
+
+def gl_amount_matches_filter(value: float, balance_filter: str) -> bool:
+	amount = flt(value)
+	if balance_filter in (BALANCE_FILTER_DEBIT_ACCOUNTS, BALANCE_FILTER_NET_DEBIT):
+		return amount > 0
+	if balance_filter in (BALANCE_FILTER_CREDIT_ACCOUNTS, BALANCE_FILTER_NET_CREDIT):
+		return amount < 0
+	return True
+
+
+def mask_account_periods_by_sign(
+	account_data: AccountData,
+	period_keys: list[str],
+	balance_type: str,
+	balance_filter: str,
+) -> None:
+	for period_key in period_keys:
+		period_value = account_data.get_period(period_key)
+		if not period_value:
+			continue
+		if not gl_amount_matches_filter(period_value.get_value(balance_type), balance_filter):
+			account_data.zero_period(period_key)
+
+
+def apply_period_keep_mask(values: list, keep: list[bool]) -> list:
+	masked = []
+	for i, value in enumerate(values):
+		if i < len(keep) and not keep[i] and isinstance(value, int | float):
+			masked.append(0.0)
+		else:
+			masked.append(value)
+	return masked
+
+
+def prune_empty_accounts(
+	account_details: dict[str, AccountData], period_keys: list[str], balance_type: str
+) -> dict[str, AccountData]:
+	return {
+		name: data
+		for name, data in account_details.items()
+		if data.has_nonzero_value(period_keys, balance_type)
+	}
 
 
 # ============================================================================
@@ -412,7 +488,11 @@ class DataCollector:
 		self.account_fields = {field.fieldname for field in frappe.get_meta("Account").fields}
 
 	def add_account_request(
-		self, row, column_code=DEFAULT_MEASURE, balance_type=None, calculation_formula=None
+		self,
+		row,
+		column_code=DEFAULT_MEASURE,
+		balance_type=None,
+		calculation_formula=None,
 	):
 		self.account_requests.append(
 			{
@@ -481,6 +561,14 @@ class DataCollector:
 					continue
 
 				account_obj: AccountData = account_data[account_name].copy()
+				balance_filter = get_row_balance_filter(request["row"])
+
+				# Filter on GL sign before Reverse Sign so "debit" always means debit - credit > 0
+				if balance_filter in ACCOUNT_SIGN_FILTERS:
+					mask_account_periods_by_sign(account_obj, period_keys, balance_type, balance_filter)
+					if not account_obj.has_nonzero_value(period_keys, balance_type):
+						continue
+
 				if request["reverse_sign"]:
 					account_obj.reverse_values()
 
@@ -604,7 +692,10 @@ class FinancialQueryBuilder:
 		account_names = list({acc.name for acc in accounts})
 		# NOTE: do not change accounts list as it is used in caller function
 		self.account_meta = {
-			acc.name: {"account_name": acc.account_name, "account_number": acc.account_number}
+			acc.name: {
+				"account_name": acc.account_name,
+				"account_number": acc.account_number,
+			}
 			for acc in accounts
 		}
 
@@ -1037,7 +1128,10 @@ class FormulaFieldUpdater:
 	"""Update field values in filter formulas"""
 
 	def __init__(
-		self, field_name: str, value_mapping: dict[str, str], exclude_operators: list[str] | None = None
+		self,
+		field_name: str,
+		value_mapping: dict[str, str],
+		exclude_operators: list[str] | None = None,
 	):
 		"""
 		Initialize field updater.
@@ -1224,7 +1318,11 @@ class RowProcessor:
 
 		for row in processing_order:
 			row_data = self._process_single_row(
-				row, account_summary, account_details, column_summary, column_account_details
+				row,
+				account_summary,
+				account_details,
+				column_summary,
+				column_account_details,
 			)
 			processed_rows.append(row_data)
 
@@ -1242,7 +1340,11 @@ class RowProcessor:
 	) -> RowData:
 		if row.data_source == "Account Data":
 			return self._process_account_row(
-				row, account_summary, account_details, column_summary, column_account_details
+				row,
+				account_summary,
+				account_details,
+				column_summary,
+				column_account_details,
 			)
 		elif row.data_source == "Custom API":
 			return self._process_api_row(row)
@@ -1329,15 +1431,18 @@ class RowProcessor:
 				column_values[entry.column_code] = list(per_col.get(entry.column_code, zeros))
 
 		column_values = self._ordered_column_values(column_values)
+		column_values, per_col_details = self._apply_net_balance_filter(row, column_values, per_col_details)
 
 		# Legacy/default series
 		values = column_values.get(DEFAULT_MEASURE) or next(iter(column_values.values()), zeros)
 		if not values and ref_code:
 			values = account_summary.get(ref_code, zeros)
 
-		details = per_col_details.get(DEFAULT_MEASURE) or account_details.get(ref_code, {})
-		if not details and per_col_details:
-			details = next(iter(per_col_details.values()), {})
+		details = {}
+		if per_col_details:
+			details = per_col_details.get(DEFAULT_MEASURE) or next(iter(per_col_details.values()), {})
+		elif ref_code:
+			details = account_details.get(ref_code, {})
 
 		self._store_row_values(ref_code, column_values)
 
@@ -1349,12 +1454,62 @@ class RowProcessor:
 			column_account_details=per_col_details,
 		)
 
+	def _net_decision_series(self, column_values: dict[str, list]) -> list[float]:
+		"""Overall sign is taken from the last visible value column (typically NET)."""
+		zeros = [0.0] * len(self.period_list)
+		visible = [measure for measure in self.measure_columns if not measure.hidden]
+		for measure in reversed(visible or list(self.measure_columns)):
+			series = column_values.get(measure.column_code)
+			if series is not None:
+				return series
+		if column_values:
+			return next(iter(column_values.values()))
+		return zeros
+
+	def _apply_net_balance_filter(self, row, column_values: dict[str, list], per_col_details: dict):
+		"""Keep or drop every column together based on the line's overall GL sign."""
+		balance_filter = get_row_balance_filter(row)
+		if balance_filter not in NET_SIGN_FILTERS:
+			return column_values, per_col_details
+
+		reverse_sign = bool(getattr(row, "reverse_sign", 0))
+		decision_series = self._net_decision_series(column_values)
+		keep = []
+		for i in range(len(self.period_list)):
+			value = decision_series[i] if i < len(decision_series) else 0.0
+			keep.append(gl_amount_matches_filter(to_gl_amount(value, reverse_sign), balance_filter))
+		if all(keep):
+			return column_values, per_col_details
+
+		column_values = {code: apply_period_keep_mask(series, keep) for code, series in column_values.items()}
+
+		period_keys = [period["key"] for period in self.period_list]
+		default_balance_type = getattr(row, "balance_type", None) or "Closing Balance"
+
+		for column_code, column_accounts in list(per_col_details.items()):
+			balance_type = (
+				resolve_row_settings(row, column_code, self.override_map).get("balance_type")
+				or default_balance_type
+			)
+			for account_data in column_accounts.values():
+				for period_key, keep_period in zip(period_keys, keep):  # noqa: B905
+					if not keep_period:
+						account_data.zero_period(period_key)
+			per_col_details[column_code] = prune_empty_accounts(column_accounts, period_keys, balance_type)
+
+		return column_values, per_col_details
+
 	def _process_api_row(self, row) -> RowData:
 		api_path = row.calculation_formula
 		# TODO
 
 		try:
-			values = frappe.call(api_path, filters=self.context.filters, periods=self.period_list, row=row)
+			values = frappe.call(
+				api_path,
+				filters=self.context.filters,
+				periods=self.period_list,
+				row=row,
+			)
 
 			if row.reverse_sign:
 				values = [-1 * v for v in values]
@@ -1497,7 +1652,10 @@ class FormulaCalculator:
 	"""Enhanced formula calculator with better error handling"""
 
 	def __init__(
-		self, row_data: dict[str, Any], period_list: list[dict], column_codes: set[str] | None = None
+		self,
+		row_data: dict[str, Any],
+		period_list: list[dict],
+		column_codes: set[str] | None = None,
 	):
 		self.row_data = row_data
 		self.period_list = period_list
@@ -1704,7 +1862,7 @@ class DataFormatter:
 					"fieldname": spec["fieldname"],
 					"label": spec["label"],
 					"fieldtype": measure.fieldtype or "Currency",
-					"options": "currency" if (measure.fieldtype or "Currency") == "Currency" else None,
+					"options": ("currency" if (measure.fieldtype or "Currency") == "Currency" else None),
 					"width": 150,
 				}
 			)
@@ -1720,8 +1878,7 @@ class DataFormatter:
 					expanded_rows.append(row_data)
 
 					if row_data.account_details or row_data.column_account_details:
-						builder = DetailRowBuilder(self.context.filters, row_data)
-						builder.context = self.context
+						builder = DetailRowBuilder(self.context, row_data)
 						detail_rows = builder.build()
 						expanded_rows.extend(detail_rows)
 
@@ -1737,10 +1894,12 @@ class FormattingEngine:
 	def initialize_rules(self):
 		self.rules = [
 			FormattingRule(
-				condition=lambda rd: getattr(rd.row, "bold_text", False), format_properties={"bold": True}
+				condition=lambda rd: getattr(rd.row, "bold_text", False),
+				format_properties={"bold": True},
 			),
 			FormattingRule(
-				condition=lambda rd: getattr(rd.row, "italic_text", False), format_properties={"italic": True}
+				condition=lambda rd: getattr(rd.row, "italic_text", False),
+				format_properties={"italic": True},
 			),
 			FormattingRule(
 				condition=lambda rd: rd.is_detail_row,
@@ -1811,7 +1970,11 @@ class SegmentOrganizer:
 				if current_section_rows:
 					section_segments = self._organize_into_segments(current_section_rows, section_label)
 					sections.append(
-						SectionData(segments=section_segments, label=section_label, index=section_index)
+						SectionData(
+							segments=section_segments,
+							label=section_label,
+							index=section_index,
+						)
 					)
 					section_index += 1
 					current_section_rows = []
@@ -1880,7 +2043,7 @@ class SegmentOrganizer:
 		return max(len(seg.rows) for seg in section.segments) if section.segments else 0
 
 	@property
-	def max_segments(self) -> bool:
+	def max_segments(self) -> int:
 		return max(len(s.segments) for s in self.sections)
 
 	@property
@@ -2068,9 +2231,11 @@ class MultiSegmentFormatter(RowFormatterBase):
 class DetailRowBuilder:
 	"""Builds detail rows for account breakdown"""
 
-	def __init__(self, filters: dict, parent_row_data: RowData):
-		self.filters = filters
+	def __init__(self, context: ReportContext, parent_row_data: RowData):
+		self.context = context
+		self.filters = context.filters
 		self.parent_row_data = parent_row_data
+		self.period_keys = [period["key"] for period in context.period_list]
 
 	def build(self) -> list[RowData]:
 		# Prefer default/first measure account details when custom columns exist
@@ -2084,26 +2249,28 @@ class DetailRowBuilder:
 
 		detail_rows = []
 		parent_row = self.parent_row_data.row
-		context = getattr(self, "context", None)
+		default_balance_type = getattr(parent_row, "balance_type", None) or "Closing Balance"
 
 		for account_name, account_data in details_map.items():
 			detail_row = self._create_detail_row_object(account_data, parent_row)
-
-			balance_type = getattr(parent_row, "balance_type", "Closing Balance")
-			values = account_data.get_values_by_type(balance_type)
+			values = account_data.get_ordered_values(self.period_keys, default_balance_type)
 			column_values = {}
 
-			# Build per-measure detail series when parent has column details
 			if column_details:
 				for col_code, col_accounts in column_details.items():
 					acct = col_accounts.get(account_name)
+					balance_type = self._balance_type_for_column(col_code, default_balance_type)
 					if not acct:
-						column_values[col_code] = [0.0] * len(values)
+						column_values[col_code] = [0.0] * len(self.period_keys)
 						continue
-					# Infer balance type from parent defaults (detail uses parent row balance)
-					column_values[col_code] = acct.get_values_by_type(balance_type)
-			elif context and getattr(context, "measure_columns", None):
-				column_values = {m.column_code: list(values) for m in context.measure_columns}
+					column_values[col_code] = acct.get_ordered_values(self.period_keys, balance_type)
+			elif self.context.measure_columns:
+				column_values = {m.column_code: list(values) for m in self.context.measure_columns}
+
+			if not any(flt(v) for v in values) and not any(
+				flt(v) for series in column_values.values() for v in series
+			):
+				continue
 
 			detail_row_data = RowData(
 				row=detail_row,
@@ -2116,6 +2283,12 @@ class DetailRowBuilder:
 			detail_rows.append(detail_row_data)
 
 		return detail_rows
+
+	def _balance_type_for_column(self, column_code: str, default: str) -> str:
+		settings = resolve_row_settings(
+			self.parent_row_data.row, column_code, self.context.override_map or {}
+		)
+		return settings.get("balance_type") or default
 
 	def _create_detail_row_object(self, account_data: AccountData, parent_row):
 		acc_name = account_data.account_name or ""

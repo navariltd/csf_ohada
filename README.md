@@ -44,6 +44,7 @@ Each row represents a line in the financial report:
   - **Custom API:** Calls a custom Python method
   - **Visual Elements:** Blank Line, Column Break, or Section Break for layout
 - **Balance Type:** Default for Account Data rows (Opening, Closing, or Period Movement) unless a Column Override replaces it
+- **Balance Filter:** For Account Data rows, which GL balances to include (see below)
 - **Formatting:** Bold, italic, colour, indentation, hide if zero, reverse sign, include in charts
 
 ###### 3. Financial Report Column Enhanced (Value Columns)
@@ -186,6 +187,10 @@ Standard ERPNext reports (Balance Sheet, Profit and Loss Statement, Cash Flow, C
 - **Indentation:** Visual hierarchy
 - **Hide If Zero:** Omit empty lines
 - **Reverse Sign:** Show expenses as positive where helpful
+- **Balance Filter:** Place debit and credit balances on opposite sides of a statement without hidden helper rows:
+  - **Debit Accounts / Credit Accounts:** Keep only accounts whose GL balance has that sign in each period (clients débiteurs vs clients créditeurs)
+  - **Net Debit / Net Credit:** Keep the whole line when the overall balance (last visible value column, typically Net) has that sign; otherwise zero
+  - Sign is always debit minus credit, before Reverse Sign. Pair the two sides and enable Hide If Zero.
 - **Include in Charts:** Drive the report chart (first visible value column when Value Columns are defined)
 - **Hidden value columns:** Keep intermediate amounts (e.g. Depreciation) out of the printed columns while still using them in formulas
 

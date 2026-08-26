@@ -350,6 +350,7 @@ function update_formula_description(frm, data_source) {
 				</ul>
 
 				<p ${note_style}><strong>Available operators:</strong> <code>=, !=, in, not in, like, not like, is</code></p>
+				<p ${tip_style}><strong>Balance Filter:</strong> Use <code>Debit Accounts</code> / <code>Credit Accounts</code> to place only those accounts on this line (the counterpart row keeps the other sign). Use <code>Net Debit</code> / <code>Net Credit</code> to move the whole line when the overall balance (last visible column) has that sign. Pair with Hide If Zero. Sign is debit minus credit, before Reverse Sign.</p>
 				<p ${tip_style}><strong>Multi-Company Tip:</strong> Use fields like <code>account_type</code>, <code>root_type</code>, and <code>account_category</code> for templates that work across multiple companies.</p>
 			</div>`;
 	} else if (data_source === "Calculated Amount") {

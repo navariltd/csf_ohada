@@ -14,6 +14,7 @@ class FinancialReportRowEnhanced(Document):
 		from frappe.types import DF
 
 		advanced_filtering: DF.Check
+		balance_filter: DF.Literal["All", "Debit Accounts", "Credit Accounts", "Net Debit", "Net Credit"]
 		balance_type: DF.Literal[
 			"", "Opening Balance", "Closing Balance", "Period Movement (Debits - Credits)"
 		]
