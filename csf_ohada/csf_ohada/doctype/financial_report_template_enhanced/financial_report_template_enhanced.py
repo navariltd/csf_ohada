@@ -58,6 +58,7 @@ class FinancialReportTemplateEnhanced(Document):
 		for row in self.rows:
 			if row.data_source != "Account Data":
 				row.balance_type = None
+				row.balance_filter = "All"
 
 			if row.data_source in style_data_sources:
 				row.calculation_formula = None

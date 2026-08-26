@@ -11,6 +11,7 @@
     "indentation_level",
     "data_source",
     "balance_type",
+    "balance_filter",
     "column_break_hxqu",
     "fieldtype",
     "color",
@@ -69,6 +70,15 @@
       "label": "Balance Type",
       "mandatory_depends_on": "eval:doc.data_source == 'Account Data'",
       "options": "\nOpening Balance\nClosing Balance\nPeriod Movement (Debits - Credits)"
+    },
+    {
+      "default": "All",
+      "depends_on": "eval:doc.data_source == 'Account Data'",
+      "description": "Which GL balances to include. Debit/Credit Accounts: keep only accounts with that sign in each period. Net Debit/Net Credit: keep the whole line when the overall balance (last visible column) has that sign, otherwise zero. Pair with a counterpart row and Hide If Zero. Sign is always debit minus credit, before Reverse Sign.",
+      "fieldname": "balance_filter",
+      "fieldtype": "Select",
+      "label": "Balance Filter",
+      "options": "All\nDebit Accounts\nCredit Accounts\nNet Debit\nNet Credit"
     },
     {
       "fieldname": "column_break_hxqu",
@@ -174,7 +184,7 @@
   "index_web_pages_for_search": 1,
   "istable": 1,
   "links": [],
-  "modified": "2026-07-24 12:20:26.232081",
+  "modified": "2026-08-14 10:20:00.000000",
   "modified_by": "Administrator",
   "module": "Csf Ohada",
   "name": "Financial Report Row Enhanced",
