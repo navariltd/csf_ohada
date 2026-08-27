@@ -14,6 +14,16 @@ class FinancialReportColumnEnhanced(Document):
 		from frappe.types import DF
 
 		column_code: DF.Data
+		default_balance_type: DF.Literal[
+			"",
+			"Opening Balance",
+			"Closing Balance",
+			"Period Movement (Debits - Credits)",
+			"Debits",
+			"Credits",
+		]
+		default_calculation_formula: DF.Code | None
+		default_is_formula: DF.Check
 		fieldtype: DF.Literal["", "Currency", "Float", "Int", "Percent"]
 		hidden: DF.Check
 		label: DF.Data

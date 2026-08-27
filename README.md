@@ -12,11 +12,11 @@ Instead of editing reports in Excel, set up a template once and generate Balance
 
 ##### What is different from ERPNext?
 
-| ERPNext template                                          | Financial Report Template Enhanced                                            |
-| --------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| One value column per report period                        | Named **Value Columns** (Gross, Net, …) expanded across periods               |
-| Balance type / formula apply to the whole row             | Same defaults on the row, with optional **Column Overrides** per value column |
-| Run from Balance Sheet / P&L / Custom Financial Statement | Run from **Financial Statement Enhanced**                                     |
+| ERPNext template                                          | Financial Report Template Enhanced                                                                 |
+| --------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| One value column per report period                        | Named **Value Columns** (Gross, Net, …) expanded across periods                                    |
+| Balance type / formula apply to the whole row             | Same defaults on the row, with optional **per-column settings** (and Value Column defaults)        |
+| Run from Balance Sheet / P&L / Custom Financial Statement | Run from **Financial Statement Enhanced**                                                          |
 
 Leave Value Columns empty to keep ERPNext-style behaviour (one value column per period).
 
@@ -28,9 +28,8 @@ This is the report blueprint. It defines:
 
 - **Template Name:** Descriptive name for identification (e.g., "OHADA Balance Sheet")
 - **Report Type:** Balance Sheet, Profit & Loss, Cash Flow, or Custom (metadata; the report is always run from Financial Statement Enhanced)
-- **Value Columns:** Named measures such as Gross Value or Net Value (optional)
-- **Column Overrides:** Per-row exceptions for a specific value column (optional)
-- **Rows:** The individual lines that make up the report
+- **Value Columns:** Named measures such as Gross Value or Net Value (optional). Each column can declare a default formula or balance type for every row.
+- **Rows:** The individual lines that make up the report. Expand a line to set a different filter or formula per value column.
 
 ###### 2. Financial Report Row Enhanced (Child Table)
 
@@ -40,11 +39,12 @@ Each row represents a line in the financial report:
 - **Reference Code (Line Reference):** Short code for calculations (e.g., `FA_MACHINES`, `REV100`)
 - **Data Source:** Where the numbers come from:
   - **Account Data:** Pulls balances from the Chart of Accounts
-  - **Calculated Amount:** Uses formulas based on other rows (and value columns when overridden)
+  - **Calculated Amount:** Uses formulas based on other rows (and value columns when a column setting or column default replaces the row formula)
   - **Custom API:** Calls a custom Python method
   - **Visual Elements:** Blank Line, Column Break, or Section Break for layout
-- **Balance Type:** Default for Account Data rows (Opening, Closing, or Period Movement) unless a Column Override replaces it
+- **Balance Type:** Default for Account Data rows (Opening, Closing, Period Movement, Debits, or Credits) unless a column setting or Value Column default replaces it
 - **Balance Filter:** For Account Data rows, which GL balances to include (see below)
+- **Value Column Settings:** When Value Columns are defined, expand the line and customise only the columns that should differ from this row (and from the column default)
 - **Formatting:** Bold, italic, colour, indentation, hide if zero, reverse sign, include in charts
 
 ###### 3. Financial Report Column Enhanced (Value Columns)
@@ -53,7 +53,7 @@ Value Columns define _what kinds of amounts_ appear, not which period. Report fi
 
 For each value column:
 
-- **Column Code:** Used in overrides and formulas (e.g., `GROSS`, `DEPR`, `NET`)
+- **Column Code:** Used in column settings and formulas (e.g., `GROSS`, `DEPR`, `NET`)
 - **Label:** Base title (e.g., "Gross Value", "Net Value")
 - **Period Scope:**
   - **All Periods:** Show this column for every generated period
@@ -62,6 +62,7 @@ For each value column:
 - **Title Template:** Optional; placeholders `{label}` and `{period}`. Default: `{label} ({period})` e.g. `Net Value (2026)`
 - **Value Type:** Currency, Float, Int, or Percent
 - **Hidden:** Compute the column but do not show it (useful for intermediate columns such as Depreciation)
+- **Default Balance Type / Default is Formula / Default Formula:** Optional. Applied to every row that does not set that column on the line. Use this for a formula that is the same on all lines (e.g. `NET = GROSS - DEPR`).
 
 **Example**
 
@@ -73,35 +74,27 @@ Value Columns:
 | `DEPR`      | Depreciation | Current Period Only | Yes    |
 | `NET`       | Net Value    | All Periods         | No     |
 
-Filters: FY 2025 and FY 2026 -> report columns like `Gross Value (2026)`, `Net Value (2026)`, `Net Value (2025)`.
+Filters: FY 2025 and FY 2026 -> report columns grouped by value column (newest period first), e.g. `Gross Value (2026)`, `Gross Value (2025)`, `Net Value (2026)`, `Net Value (2025)`.
 
-###### 4. Financial Report Column Override (Child Table)
+###### 4. Per-column values (row settings, then column defaults)
 
-Balance type and formula stay on the row by default. Use Column Overrides when a specific value column needs different behaviour.
+Balance type and formula stay on the row by default and apply to every value column. Change a column in two places, in this order of precedence:
 
-For each override:
+1. **Value Column Settings on the row** (expand a report line): different account filter, balance type, or formula for that column on that line only.
+2. **Defaults on the Value Column:** e.g. mark `NET` as a formula default `GROSS - DEPR` once, instead of repeating it on 50 lines.
+3. **Row fields:** used when the column has no setting and no column default.
 
-- **Row Reference:** Line Reference of the row to override
-- **Column Code:** Value column to override
-- **Balance Type Override:** Optional; Account Data only
-- **Evaluate as Formula:** When checked, the override is a calculation formula (not an account filter). Lets an Account Data row compute one column from its other value columns (e.g. `GROSS - DEPR`)
-- **Formula / Account Filter Override:**
-  - Account Data (Evaluate as Formula **off**): account filter JSON for that column only
-  - Account Data (Evaluate as Formula **on**) or Calculated Amount: calculation formula
+Leave a column on **Use row default** to fall through.
 
-Unset override fields keep the row defaults.
+**Example: Gross from the row filter, Depreciation per line, Net from a column default**
 
-**Example: Gross from one account set, Net from Gross − Depreciation**
-
-| Row Reference | Column Code | Evaluate as Formula | Formula / Account Filter Override   |
-| ------------- | ----------- | ------------------- | ----------------------------------- |
-| `FA_MACHINES` | `GROSS`     | No                  | `["account_number", "like", "24%"]` |
-| `FA_MACHINES` | `DEPR`      | No                  | `["account_number", "like", "28%"]` |
-| `FA_MACHINES` | `NET`       | Yes                 | `GROSS - DEPR`                      |
+- Row `FA_MACHINES`: Account Filter `["account_number", "like", "24%"]` (this is Gross).
+- On that same line, uncheck Use row default for `DEPR` and set `["account_number", "like", "281%"]`.
+- On the `NET` Value Column, set Default is Formula and `GROSS - DEPR`. Every line inherits Net; you do not set NET on the row.
 
 **Example: Formula that references other rows for one column**
 
-On a Calculated Amount row `CM1`, override column `DEPR` with `CM3 + CM2`. The engine orders rows so `CM2` and `CM3` are computed before `CM1`, even if they appear later in the template.
+On a Calculated Amount row `CM1`, customise column `DEPR` with `CM3 + CM2`. The engine orders rows so `CM2` and `CM3` are computed before `CM1`, even if they appear later in the template.
 
 ###### 5. Account Category
 
@@ -140,7 +133,9 @@ Balance types:
 
 - **Opening Balance:** Balance at the start of the period
 - **Closing Balance:** Balance at the end of the period
-- **Period Movement (Debits − Credits):** Change during the period
+- **Period Movement (Debits − Credits):** Change during the period (debits minus credits)
+- **Debits:** Sum of debit postings in the period (not netted with credits)
+- **Credits:** Sum of credit postings in the period (not netted with debits)
 
 From the template form, use **View Account Coverage** to see which accounts a row (or selected rows) include or miss.
 
@@ -160,7 +155,7 @@ Safe division:
 (GROSS_PROFIT / REVENUE) * 100 if REVENUE != 0 else 0
 ```
 
-With Value Columns, a formula on a Calculated Amount row is evaluated **per value column**. Cross-row references use the same column of the other row (e.g. under `NET`, `FA` means that row’s Net series). Same-row value columns can also appear in a formula when an override sets **Evaluate as Formula** (e.g. `GROSS - DEPR`).
+With Value Columns, a formula on a Calculated Amount row is evaluated **per value column**. Cross-row references use the same column of the other row (e.g. under `NET`, `FA` means that row’s Net series). Same-row value columns can also appear in a formula when a column setting or Value Column default sets **Evaluate as Formula** (e.g. `GROSS - DEPR`).
 
 ###### 3. Visual Elements
 
@@ -171,7 +166,7 @@ With Value Columns, a formula on a Calculated Amount row is evaluated **per valu
 ##### How to Run a Report
 
 1. Create or open a **Financial Report Template Enhanced**
-2. Define Value Columns (optional), Column Overrides (optional), and Rows
+2. Define Value Columns (optional, including column defaults), Rows, and per-column settings on lines that need them
 3. Open **Financial Statement Enhanced**
 4. Set Company, fiscal years or date range, periodicity
 5. Select the template under **Report Template** and run
@@ -205,12 +200,12 @@ The system checks templates to prevent silent mistakes:
   ✅ `REV100`, `ASSET1`  
   ❌ `100REV`, `ASSET-1`
 
-**Value Columns and Overrides**
+**Value Columns and column settings**
 
 - Column Codes must be unique
-- Overrides must point at an existing Row Reference and Column Code
 - A Column Code must not reuse a Line Reference (formulas share one namespace; the row’s own column would shadow the other row)
-- **Evaluate as Formula** requires a formula
+- **Evaluate as Formula** / **Default is Formula** requires a formula
+- Column settings and legacy overrides must point at an existing Column Code
 - Value columns of the same row must not form a dependency loop (e.g. `NET = GROSS - DEPR` and `GROSS = NET + DEPR`)
 
 **Calculations**

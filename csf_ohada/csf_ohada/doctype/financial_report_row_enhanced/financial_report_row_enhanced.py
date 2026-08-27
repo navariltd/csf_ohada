@@ -16,11 +16,17 @@ class FinancialReportRowEnhanced(Document):
 		advanced_filtering: DF.Check
 		balance_filter: DF.Literal["All", "Debit Accounts", "Credit Accounts", "Net Debit", "Net Credit"]
 		balance_type: DF.Literal[
-			"", "Opening Balance", "Closing Balance", "Period Movement (Debits - Credits)"
+			"",
+			"Opening Balance",
+			"Closing Balance",
+			"Period Movement (Debits - Credits)",
+			"Debits",
+			"Credits",
 		]
 		bold_text: DF.Check
 		calculation_formula: DF.Code | None
 		color: DF.Color | None
+		column_settings: DF.JSON | None
 		data_source: DF.Literal[
 			"",
 			"Account Data",

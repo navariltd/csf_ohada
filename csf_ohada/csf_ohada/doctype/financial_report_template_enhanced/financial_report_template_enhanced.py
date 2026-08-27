@@ -10,9 +10,11 @@ from frappe import _
 from frappe.model.document import Document
 
 from csf_ohada.csf_ohada.doctype.financial_report_template_enhanced.column_layout import (
-	build_override_map,
+	build_column_defaults,
 	find_column_cycles,
 	get_measure_columns,
+	get_template_column_codes,
+	prune_row_column_settings,
 )
 from csf_ohada.csf_ohada.doctype.financial_report_template_enhanced.financial_report_validation import (
 	TemplateValidator,
@@ -31,14 +33,10 @@ class FinancialReportTemplateEnhanced(Document):
 		from csf_ohada.csf_ohada.doctype.financial_report_column_enhanced.financial_report_column_enhanced import (
 			FinancialReportColumnEnhanced,
 		)
-		from csf_ohada.csf_ohada.doctype.financial_report_column_override.financial_report_column_override import (
-			FinancialReportColumnOverride,
-		)
 		from csf_ohada.csf_ohada.doctype.financial_report_row_enhanced.financial_report_row_enhanced import (
 			FinancialReportRowEnhanced,
 		)
 
-		column_overrides: DF.Table[FinancialReportColumnOverride]
 		columns: DF.Table[FinancialReportColumnEnhanced]
 		disabled: DF.Check
 		module: DF.Link | None
@@ -51,6 +49,25 @@ class FinancialReportTemplateEnhanced(Document):
 
 	def before_validate(self):
 		self.clear_hidden_fields()
+		self._prune_stale_column_references()
+
+	def _prune_stale_column_references(self):
+		"""Remove row column settings that point at deleted Value Columns."""
+		valid_codes = get_template_column_codes(self)
+		pruned_rows = 0
+
+		for row in self.rows or []:
+			if prune_row_column_settings(row, valid_codes):
+				pruned_rows += 1
+
+		if pruned_rows:
+			frappe.msgprint(
+				_(
+					"Removed column settings from {0} report line(s) that referenced deleted Value Columns."
+				).format(frappe.bold(str(pruned_rows))),
+				title=_("Column settings updated"),
+				indicator="orange",
+			)
 
 	def clear_hidden_fields(self):
 		style_data_sources = {"Blank Line", "Column Break", "Section Break"}
@@ -62,6 +79,7 @@ class FinancialReportTemplateEnhanced(Document):
 
 			if row.data_source in style_data_sources:
 				row.calculation_formula = None
+				row.column_settings = None
 
 	def validate(self):
 		self._validate_columns()
@@ -90,23 +108,11 @@ class FinancialReportTemplateEnhanced(Document):
 					)
 				)
 
-		for override in self.column_overrides or []:
-			if override.column_code and column_codes and override.column_code not in column_codes:
+		for col in self.columns or []:
+			if col.default_is_formula and not (col.default_calculation_formula or "").strip():
 				frappe.throw(
-					_("Column Override references unknown Column Code: {0}").format(
-						frappe.bold(override.column_code)
-					)
-				)
-			if override.row_reference_code and override.row_reference_code not in row_refs:
-				frappe.throw(
-					_("Column Override references unknown Row Reference: {0}").format(
-						frappe.bold(override.row_reference_code)
-					)
-				)
-			if override.is_formula and not override.calculation_formula:
-				frappe.throw(
-					_("Column Override for {0} is marked as a formula but no formula is set").format(
-						frappe.bold(f"{override.row_reference_code} / {override.column_code}")
+					_("Value Column {0} is marked as a formula default but no formula is set").format(
+						frappe.bold(col.column_code)
 					)
 				)
 
@@ -117,10 +123,10 @@ class FinancialReportTemplateEnhanced(Document):
 			return
 
 		measures = get_measure_columns(self)
-		override_map = build_override_map(self)
+		column_defaults = build_column_defaults(self)
 
 		for row in self.rows:
-			cyclic = find_column_cycles(row, measures, override_map)
+			cyclic = find_column_cycles(row, measures, column_defaults)
 			if cyclic:
 				frappe.throw(
 					_("Value columns of row {0} reference each other in a loop: {1}").format(
