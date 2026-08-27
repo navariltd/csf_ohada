@@ -4,7 +4,9 @@
 
 frappe.ui.form.on("Financial Report Template Enhanced", {
 	refresh(frm) {
-		if (frm.is_new() || frm.doc.rows.length === 0) return;
+		collapse_legacy_overrides(frm);
+
+		if (frm.is_new() || !frm.doc.rows || frm.doc.rows.length === 0) return;
 
 		// add custom button to view missed accounts
 		frm.add_custom_button(__("View Account Coverage"), function () {
@@ -30,6 +32,11 @@ frappe.ui.form.on("Financial Report Template Enhanced", {
 			);
 		}
 	},
+
+	columns_remove(frm) {
+		prune_stale_column_settings_on_form(frm);
+		refresh_open_column_settings_editors(frm);
+	},
 });
 
 frappe.ui.form.on("Financial Report Row Enhanced", {
@@ -40,6 +47,7 @@ frappe.ui.form.on("Financial Report Row Enhanced", {
 		update_formula_description(frm, row.data_source);
 
 		set_up_filters_editor(frm, cdt, cdn);
+		set_up_column_settings_editor(frm, cdt, cdn);
 	},
 
 	form_render(frm, cdt, cdn) {
@@ -48,6 +56,7 @@ frappe.ui.form.on("Financial Report Row Enhanced", {
 		update_formula_label(frm, row.data_source);
 		update_advanced_formula_property(frm, cdt, cdn);
 		set_up_filters_editor(frm, cdt, cdn);
+		set_up_column_settings_editor(frm, cdt, cdn);
 		update_formula_description(frm, row.data_source);
 	},
 
@@ -57,6 +66,7 @@ frappe.ui.form.on("Financial Report Row Enhanced", {
 
 	advanced_filtering(frm, cdt, cdn) {
 		set_up_filters_editor(frm, cdt, cdn);
+		set_up_column_settings_editor(frm, cdt, cdn);
 	},
 });
 
@@ -441,4 +451,374 @@ function update_formula_description(frm, data_source) {
 	}
 
 	grid.update_docfield_property("formula_description", "options", description_html);
+}
+
+// COLUMN SETTINGS (per value column on the row)
+
+const STYLE_DATA_SOURCES = ["Blank Line", "Column Break", "Section Break", "Custom API"];
+const BALANCE_TYPE_OPTIONS = [
+	"",
+	"Opening Balance",
+	"Closing Balance",
+	"Period Movement (Debits - Credits)",
+	"Debits",
+	"Credits",
+];
+
+frappe.ui.form.on("Financial Report Column Enhanced", {
+	column_code(frm) {
+		refresh_open_column_settings_editors(frm);
+	},
+	label(frm) {
+		refresh_open_column_settings_editors(frm);
+	},
+	default_is_formula(frm) {
+		refresh_open_column_settings_editors(frm);
+	},
+	default_calculation_formula(frm) {
+		refresh_open_column_settings_editors(frm);
+	},
+	default_balance_type(frm) {
+		refresh_open_column_settings_editors(frm);
+	},
+});
+
+function collapse_legacy_overrides(frm) {
+	const section = frm.get_field("section_break_overrides");
+	if (section && typeof section.collapse === "function") {
+		section.collapse(true);
+	}
+}
+
+function refresh_open_column_settings_editors(frm) {
+	const grid = frm.fields_dict.rows && frm.fields_dict.rows.grid;
+	if (!grid) return;
+
+	(grid.grid_rows || []).forEach((grid_row) => {
+		if (grid_row && grid_row.grid_form && grid_row.doc) {
+			set_up_column_settings_editor(frm, grid_row.doc.doctype, grid_row.doc.name);
+		}
+	});
+}
+
+function parse_column_settings(row) {
+	if (!row || !row.column_settings) return {};
+	if (typeof row.column_settings === "object") return { ...row.column_settings };
+	try {
+		return JSON.parse(row.column_settings) || {};
+	} catch (e) {
+		return {};
+	}
+}
+
+function save_column_settings(cdt, cdn, settings) {
+	const cleaned = {};
+	for (const [code, val] of Object.entries(settings || {})) {
+		if (!val || val.use_default) continue;
+		cleaned[code] = {
+			balance_type: val.balance_type || "",
+			is_formula: val.is_formula ? 1 : 0,
+			calculation_formula: val.calculation_formula || "",
+		};
+	}
+	const json = Object.keys(cleaned).length ? JSON.stringify(cleaned) : "";
+	frappe.model.set_value(cdt, cdn, "column_settings", json);
+}
+
+function value_columns(frm) {
+	return (frm.doc.columns || []).filter((col) => (col.column_code || "").trim());
+}
+
+function prune_stale_column_settings_on_form(frm) {
+	const valid_codes = new Set(
+		value_columns(frm)
+			.map((col) => (col.column_code || "").trim())
+			.filter(Boolean)
+	);
+
+	for (const row of frm.doc.rows || []) {
+		const settings = parse_column_settings(row);
+		const pruned = {};
+		for (const [code, val] of Object.entries(settings)) {
+			if (valid_codes.has(code)) {
+				pruned[code] = val;
+			}
+		}
+		if (Object.keys(pruned).length !== Object.keys(settings).length) {
+			frappe.model.set_value(
+				row.doctype,
+				row.name,
+				"column_settings",
+				Object.keys(pruned).length ? JSON.stringify(pruned) : ""
+			);
+		}
+	}
+}
+
+function column_default_hint(col) {
+	if (cint(col.default_is_formula) && col.default_calculation_formula) {
+		return __("Column default: {0}", [col.default_calculation_formula]);
+	}
+	if (col.default_calculation_formula) {
+		return __("Column default filter is set");
+	}
+	if (col.default_balance_type) {
+		return __("Column default balance: {0}", [col.default_balance_type]);
+	}
+	return "";
+}
+
+function set_up_column_settings_editor(frm, cdt, cdn) {
+	const row = locals[cdt][cdn];
+	const grid = frm.fields_dict.rows && frm.fields_dict.rows.grid;
+	const grid_row = grid && grid.get_row(cdn);
+	if (!grid_row) return;
+
+	const field = grid_row.get_field("column_settings_editor");
+	if (!field) return;
+
+	const wrapper = field.$wrapper;
+	wrapper.empty();
+
+	if (!row || STYLE_DATA_SOURCES.includes(row.data_source)) return;
+
+	const columns = value_columns(frm);
+	if (!columns.length) {
+		wrapper.html(
+			`<p class="text-muted" style="margin-top: var(--margin-sm);">${__(
+				"Add Value Columns to set a different filter or formula per column on this line."
+			)}</p>`
+		);
+		return;
+	}
+
+	const settings = parse_column_settings(row);
+	const is_account = row.data_source === "Account Data";
+	const is_calculated = row.data_source === "Calculated Amount";
+
+	const panel = $(`
+		<div class="column-settings-panel" style="margin-top: var(--margin-sm);">
+			<p class="text-muted" style="margin-bottom: var(--margin-sm);">
+				${__(
+					"Row fields apply to every value column. Customise a column here only when it should differ. Keys left on row default use the Value Column default, then this line's Balance Type and Formula."
+				)}
+			</p>
+		</div>
+	`);
+	wrapper.append(panel);
+
+	columns.forEach((col) => {
+		const code = (col.column_code || "").trim();
+		const stored = settings[code] || {};
+		const use_default = !settings[code];
+		const state = {
+			use_default,
+			balance_type: stored.balance_type || "",
+			is_formula: is_calculated ? 1 : cint(stored.is_formula),
+			calculation_formula: stored.calculation_formula || "",
+		};
+
+		const card = render_column_setting_card(col, code, state, is_account, is_calculated);
+		panel.append(card);
+
+		bind_column_setting_card({
+			frm,
+			cdt,
+			cdn,
+			row,
+			code,
+			state,
+			settings,
+			card,
+			is_account,
+			is_calculated,
+		});
+	});
+}
+
+function render_column_setting_card(col, code, state, is_account, is_calculated) {
+	const hint = column_default_hint(col);
+	const label = col.label
+		? `${frappe.utils.escape_html(code)} — ${frappe.utils.escape_html(col.label)}`
+		: frappe.utils.escape_html(code);
+	const balance_options = BALANCE_TYPE_OPTIONS.map(
+		(opt) =>
+			`<option value="${frappe.utils.escape_html(opt)}" ${
+				state.balance_type === opt ? "selected" : ""
+			}>${frappe.utils.escape_html(opt || __("Row default"))}</option>`
+	).join("");
+
+	return $(`
+		<div class="column-setting-card" data-column-code="${frappe.utils.escape_html(code)}"
+			style="border: 1px solid var(--border-color); border-radius: var(--border-radius); padding: var(--padding-sm); margin-bottom: var(--margin-sm);">
+			<div class="flex justify-between align-center" style="gap: var(--margin-sm); flex-wrap: wrap;">
+				<strong>${label}</strong>
+				<label class="mb-0">
+					<input type="checkbox" class="cs-use-default" ${state.use_default ? "checked" : ""}>
+					${__("Use row default")}
+				</label>
+			</div>
+			${
+				hint
+					? `<p class="text-muted small mb-0" style="margin-top: 4px;">${frappe.utils.escape_html(
+							hint
+					  )}</p>`
+					: ""
+			}
+			<div class="cs-custom" style="margin-top: var(--margin-sm); ${
+				state.use_default ? "display: none;" : ""
+			}">
+				${
+					is_account
+						? `<div class="form-group">
+							<label class="control-label">${__("Balance Type")}</label>
+							<select class="form-control cs-balance-type">${balance_options}</select>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" class="cs-is-formula" ${state.is_formula ? "checked" : ""}>
+								${__("Evaluate as Formula")}
+							</label>
+						</div>`
+						: ""
+				}
+				<div class="cs-formula-area"></div>
+			</div>
+		</div>
+	`);
+}
+
+function bind_column_setting_card(ctx) {
+	const { cdt, cdn, code, state, settings, card, is_account, is_calculated } = ctx;
+
+	const persist = () => {
+		settings[code] = { ...state };
+		save_column_settings(cdt, cdn, settings);
+	};
+
+	const render_formula_area = () => {
+		const area = card.find(".cs-formula-area");
+		area.empty();
+		if (state.use_default) return;
+
+		const show_formula = is_calculated || state.is_formula;
+		if (show_formula) {
+			area.append(`
+				<div class="form-group">
+					<label class="control-label">${__("Formula")}</label>
+					<textarea class="form-control cs-formula" rows="3">${frappe.utils.escape_html(
+						state.calculation_formula || ""
+					)}</textarea>
+				</div>
+			`);
+			area.find(".cs-formula").on("change input", function () {
+				state.calculation_formula = $(this).val();
+				persist();
+			});
+			return;
+		}
+
+		if (is_account && ctx.row.advanced_filtering) {
+			area.append(`
+				<div class="form-group">
+					<label class="control-label">${__("Account Filter")}</label>
+					<textarea class="form-control cs-formula" rows="3">${frappe.utils.escape_html(
+						state.calculation_formula || ""
+					)}</textarea>
+				</div>
+			`);
+			area.find(".cs-formula").on("change input", function () {
+				state.calculation_formula = $(this).val();
+				persist();
+			});
+			return;
+		}
+
+		if (is_account) {
+			mount_column_filter_group(area, state, persist);
+		}
+	};
+
+	card.find(".cs-use-default").on("change", function () {
+		state.use_default = this.checked;
+		card.find(".cs-custom").toggle(!state.use_default);
+		if (state.use_default) {
+			delete settings[code];
+			save_column_settings(cdt, cdn, settings);
+		} else {
+			persist();
+			render_formula_area();
+		}
+	});
+
+	card.find(".cs-balance-type").on("change", function () {
+		state.balance_type = $(this).val();
+		persist();
+	});
+
+	card.find(".cs-is-formula").on("change", function () {
+		state.is_formula = this.checked ? 1 : 0;
+		if (!state.is_formula && looks_like_formula(state.calculation_formula)) {
+			state.calculation_formula = "";
+		}
+		persist();
+		render_formula_area();
+	});
+
+	render_formula_area();
+}
+
+function looks_like_formula(value) {
+	if (!value) return false;
+	const trimmed = String(value).trim();
+	return trimmed && !["[", "{"].includes(trimmed[0]);
+}
+
+function mount_column_filter_group(area, state, persist) {
+	const ACCOUNT = "Account";
+	const FIELD_IDX = 1;
+	const OPERATOR_IDX = 2;
+	const VALUE_IDX = 3;
+	const filter_parent = $('<div class="cs-filter-group"></div>');
+	area.append(filter_parent);
+
+	let saved_filters = [];
+	if (state.calculation_formula) {
+		try {
+			const parsed = JSON.parse(state.calculation_formula);
+			if (Array.isArray(parsed)) saved_filters = [parsed];
+			else if (parsed.and) saved_filters = parsed.and;
+		} catch (e) {
+			filter_parent.append(
+				`<p class="text-danger">${__("Invalid filter. Please check the syntax.")}</p>`
+			);
+		}
+	}
+
+	if (saved_filters.length) {
+		saved_filters = saved_filters.map((f) => [ACCOUNT, ...f]);
+	}
+
+	frappe.model.with_doctype(ACCOUNT, () => {
+		const filter_group = new frappe.ui.FilterGroup({
+			parent: filter_parent,
+			doctype: ACCOUNT,
+			on_change: () => {
+				const filters = filter_group
+					.get_filters()
+					.map((f) => [f[FIELD_IDX], f[OPERATOR_IDX], f[VALUE_IDX]]);
+				if (!filters.length) {
+					state.calculation_formula = "";
+				} else {
+					const current = filters.length > 1 ? { and: filters } : filters[0];
+					state.calculation_formula = JSON.stringify(current);
+				}
+				persist();
+			},
+		});
+
+		if (saved_filters.length) {
+			filter_group.add_filters_to_filter_group(saved_filters);
+		}
+	});
 }

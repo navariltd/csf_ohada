@@ -109,6 +109,8 @@ class TemplateValidator:
 		for validator in self.validators:
 			result.merge(validator.validate(self.template))
 
+		result.merge(self.formula_validator.validate_column_defaults())
+
 		# Run row-level validations
 		for row in self.template.rows:
 			result.merge(self.formula_validator.validate(row))
@@ -221,30 +223,26 @@ class DependencyValidator(Validator):
 		return graph
 
 	def get_row_formulas(self, row) -> list[str]:
-		"""Row formula plus any column overrides that are evaluated as formulas."""
+		"""Row formula plus any column settings that are evaluated as formulas."""
 		is_calculated = row.data_source == "Calculated Amount"
 		formulas = []
 
 		if is_calculated and row.calculation_formula:
 			formulas.append(row.calculation_formula)
 
-		for override in self.get_formula_overrides(row):
-			formulas.append(override.calculation_formula)
+		for setting in self.get_formula_overrides(row):
+			if setting.calculation_formula and setting.calculation_formula not in formulas:
+				formulas.append(setting.calculation_formula)
 
 		return formulas
 
 	def get_formula_overrides(self, row) -> list:
-		"""Column overrides of a row whose value is a formula rather than an account filter."""
-		is_calculated = row.data_source == "Calculated Amount"
-		row_reference = (row.reference_code or "").strip()
+		"""Column settings of a row whose value is a formula rather than an account filter."""
+		from csf_ohada.csf_ohada.doctype.financial_report_template_enhanced.column_layout import (
+			iter_formula_column_settings,
+		)
 
-		return [
-			override
-			for override in getattr(self.template, "column_overrides", None) or []
-			if (override.row_reference_code or "").strip() == row_reference
-			and override.calculation_formula
-			and (is_calculated or override.is_formula)
-		]
+		return iter_formula_column_settings(row, self.template)
 
 	def _validate_circular_dependencies(self) -> ValidationResult:
 		"""
@@ -599,29 +597,123 @@ class FormulaValidator(Validator):
 			elif row.data_source == "Custom API":
 				result.merge(self._validate_custom_api(row))
 
-		result.merge(self._validate_column_overrides(row))
+		result.merge(self._validate_column_settings(row))
 		return result
 
-	def _validate_column_overrides(self, row) -> ValidationResult:
+	def validate_column_defaults(self) -> ValidationResult:
+		"""Validate Value Column defaults once per template."""
+		from csf_ohada.csf_ohada.doctype.financial_report_template_enhanced.column_layout import (
+			build_column_defaults,
+		)
+
 		result = ValidationResult()
-		row_reference = (row.reference_code or "").strip()
-		is_calculated = row.data_source == "Calculated Amount"
+		defaults = build_column_defaults(self.template)
+		if not defaults:
+			return result
 
-		for override in getattr(self.template, "column_overrides", None) or []:
-			if (override.row_reference_code or "").strip() != row_reference:
+		dummy_row = frappe._dict(
+			{
+				"data_source": "Account Data",
+				"advanced_filtering": 0,
+				"idx": None,
+			}
+		)
+
+		for column_code, default in defaults.items():
+			if not default.get("calculation_formula") and not default.get("is_formula"):
 				continue
-			if not override.calculation_formula:
-				continue
 
-			column_code = (override.column_code or "").strip() or None
-			field = self._override_field_label(row_reference, column_code)
-
-			if is_calculated or override.is_formula:
-				override.calculation_formula = (override.calculation_formula or "").strip()
+			field = f"Value Column default ({column_code})"
+			if default.get("is_formula"):
+				if not default.get("calculation_formula"):
+					result.add_error(
+						ValidationIssue(
+							message="Default is Formula is set but no default formula is provided",
+							field=field,
+						)
+					)
+					continue
 				result.merge(
 					self.override_formula_validator.validate_formula(
-						override.calculation_formula,
-						row_idx=override.idx,
+						default["calculation_formula"],
+						column_code=column_code,
+						field=field,
+						require_formula=False,
+					)
+				)
+			elif default.get("calculation_formula"):
+				result.merge(
+					self._validate_override_account_filter(
+						dummy_row,
+						frappe._dict(
+							{
+								"calculation_formula": default["calculation_formula"],
+								"idx": None,
+							}
+						),
+						field,
+					)
+				)
+
+		return result
+
+	def _validate_column_settings(self, row) -> ValidationResult:
+		from csf_ohada.csf_ohada.doctype.financial_report_template_enhanced.column_layout import (
+			load_row_column_settings,
+		)
+
+		result = ValidationResult()
+		settings, error = load_row_column_settings(row)
+		if error:
+			result.add_error(
+				ValidationIssue(
+					message=f"Invalid column settings JSON: {error}",
+					row_idx=row.idx,
+					field="Column Settings",
+				)
+			)
+			return result
+
+		if not settings:
+			return result
+
+		is_calculated = row.data_source == "Calculated Amount"
+		column_codes = {
+			(col.column_code or "").strip()
+			for col in getattr(self.template, "columns", None) or []
+			if (col.column_code or "").strip()
+		}
+
+		for column_code, setting in settings.items():
+			field = f"Column setting ({column_code})"
+			if column_codes and column_code not in column_codes:
+				result.add_error(
+					ValidationIssue(
+						message=f"Unknown Column Code: {column_code}",
+						row_idx=row.idx,
+						field=field,
+					)
+				)
+				continue
+
+			formula = setting.get("calculation_formula")
+			if setting.get("is_formula") and not formula:
+				result.add_error(
+					ValidationIssue(
+						message="Evaluate as Formula is set but no formula is provided",
+						row_idx=row.idx,
+						field=field,
+					)
+				)
+				continue
+			if not formula:
+				continue
+
+			if is_calculated or setting.get("is_formula"):
+				result.merge(
+					self.override_formula_validator.validate_formula(
+						formula,
+						row_idx=row.idx,
 						reference_code=row.reference_code,
 						column_code=column_code,
 						field=field,
@@ -629,17 +721,15 @@ class FormulaValidator(Validator):
 					)
 				)
 			elif row.data_source == "Account Data":
-				result.merge(self._validate_override_account_filter(row, override, field))
+				result.merge(
+					self._validate_override_account_filter(
+						row,
+						frappe._dict({"calculation_formula": formula, "idx": row.idx}),
+						field,
+					)
+				)
 
 		return result
-
-	@staticmethod
-	def _override_field_label(row_reference: str, column_code: str | None) -> str:
-		if row_reference and column_code:
-			return f"Column Override ({row_reference} / {column_code})"
-		if column_code:
-			return f"Column Override ({column_code})"
-		return "Column Override"
 
 	def _validate_override_account_filter(self, row, override, field: str) -> ValidationResult:
 		formula = (override.calculation_formula or "").strip()

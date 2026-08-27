@@ -13,9 +13,7 @@
   "section_break_fvlw",
   "rows",
   "section_break_columns",
-  "columns",
-  "section_break_overrides",
-  "column_overrides"
+  "columns"
  ],
  "fields": [
   {
@@ -69,19 +67,6 @@
    "options": "Financial Report Column Enhanced"
   },
   {
-   "description": "Optional per-row overrides of Balance Type or Formula / Account Filter for a specific value column.",
-   "fieldname": "section_break_overrides",
-   "fieldtype": "Section Break",
-   "label": "Column Overrides"
-  },
-  {
-   "allow_bulk_edit": 1,
-   "fieldname": "column_overrides",
-   "fieldtype": "Table",
-   "label": "Column Overrides",
-   "options": "Financial Report Column Override"
-  },
-  {
    "fieldname": "section_break_fvlw",
    "fieldtype": "Section Break",
    "label": "Report Line Items"
@@ -97,7 +82,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-07-25 12:38:52.794297",
+ "modified": "2026-08-27 18:18:51.952656",
  "modified_by": "Administrator",
  "module": "Csf Ohada",
  "name": "Financial Report Template Enhanced",

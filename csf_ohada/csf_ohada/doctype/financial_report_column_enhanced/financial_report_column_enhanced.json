@@ -1,84 +1,115 @@
 {
-  "actions": [],
-  "creation": "2026-07-24 12:20:26.237081",
-  "doctype": "DocType",
-  "editable_grid": 1,
-  "engine": "InnoDB",
-  "field_order": [
-    "column_code",
-    "label",
-    "period_scope",
-    "title_template",
-    "column_break_meta",
-    "fieldtype",
-    "hidden"
-  ],
-  "fields": [
-    {
-      "columns": 2,
-      "description": "Code used in overrides and formulas (e.g. GROSS, NET)",
-      "fieldname": "column_code",
-      "fieldtype": "Data",
-      "in_list_view": 1,
-      "label": "Column Code",
-      "reqd": 1
-    },
-    {
-      "columns": 2,
-      "description": "Base column title (e.g. Gross Value, Net Value)",
-      "fieldname": "label",
-      "fieldtype": "Data",
-      "in_list_view": 1,
-      "label": "Label",
-      "reqd": 1
-    },
-    {
-      "columns": 2,
-      "default": "All Periods",
-      "fieldname": "period_scope",
-      "fieldtype": "Select",
-      "in_list_view": 1,
-      "label": "Period Scope",
-      "options": "All Periods\nCurrent Period Only\nPrevious Periods Only",
-      "reqd": 1
-    },
-    {
-      "description": "Optional. Placeholders: {label}, {period}. Default: {label} ({period})",
-      "fieldname": "title_template",
-      "fieldtype": "Data",
-      "label": "Title Template"
-    },
-    {
-      "fieldname": "column_break_meta",
-      "fieldtype": "Column Break"
-    },
-    {
-      "default": "Currency",
-      "fieldname": "fieldtype",
-      "fieldtype": "Select",
-      "label": "Value Type",
-      "options": "\nCurrency\nFloat\nInt\nPercent"
-    },
-    {
-      "default": "0",
-      "description": "Compute values but do not show this measure as a report column",
-      "fieldname": "hidden",
-      "fieldtype": "Check",
-      "label": "Hidden"
-    }
-  ],
-  "grid_page_length": 50,
-  "index_web_pages_for_search": 1,
-  "istable": 1,
-  "links": [],
-  "modified": "2026-07-24 12:20:26.237081",
-  "modified_by": "Administrator",
-  "module": "Csf Ohada",
-  "name": "Financial Report Column Enhanced",
-  "owner": "Administrator",
-  "permissions": [],
-  "row_format": "Dynamic",
-  "sort_field": "creation",
-  "sort_order": "DESC",
-  "states": []
+ "actions": [],
+ "creation": "2026-07-24 12:20:26.237081",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "column_code",
+  "label",
+  "period_scope",
+  "title_template",
+  "column_break_meta",
+  "fieldtype",
+  "hidden",
+  "section_break_defaults",
+  "default_balance_type",
+  "default_is_formula",
+  "default_calculation_formula"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "description": "Code used in column settings and formulas (e.g. GROSS, NET)",
+   "fieldname": "column_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Column Code",
+   "reqd": 1
+  },
+  {
+   "columns": 2,
+   "description": "Base column title (e.g. Gross Value, Net Value)",
+   "fieldname": "label",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Label",
+   "reqd": 1
+  },
+  {
+   "columns": 2,
+   "default": "All Periods",
+   "fieldname": "period_scope",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Period Scope",
+   "options": "All Periods\nCurrent Period Only\nPrevious Periods Only",
+   "reqd": 1
+  },
+  {
+   "description": "Optional. Placeholders: {label}, {period}. Default: {label} ({period})",
+   "fieldname": "title_template",
+   "fieldtype": "Data",
+   "label": "Title Template"
+  },
+  {
+   "fieldname": "column_break_meta",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Currency",
+   "fieldname": "fieldtype",
+   "fieldtype": "Select",
+   "label": "Value Type",
+   "options": "\nCurrency\nFloat\nInt\nPercent"
+  },
+  {
+   "default": "0",
+   "description": "Compute values but do not show this measure as a report column",
+   "fieldname": "hidden",
+   "fieldtype": "Check",
+   "label": "Hidden"
+  },
+  {
+   "fieldname": "section_break_defaults",
+   "fieldtype": "Section Break",
+   "label": "Defaults for all rows"
+  },
+  {
+   "depends_on": "eval:!doc.default_is_formula",
+   "description": "Override row Balance Type for this column on every line. Leave empty to use each row's Balance Type.",
+   "fieldname": "default_balance_type",
+   "fieldtype": "Select",
+   "label": "Default Balance Type",
+   "options": "\nOpening Balance\nClosing Balance\nPeriod Movement (Debits - Credits)\nDebits\nCredits"
+  },
+  {
+   "default": "0",
+   "description": "Evaluate the default as a calculation formula instead of an account filter (e.g. GROSS - DEPR on every row)",
+   "fieldname": "default_is_formula",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Default is Formula"
+  },
+  {
+   "description": "Default formula or account filter for this column. Leave empty to use each row's Formula / Account Filter. A line-level column setting still wins.",
+   "fieldname": "default_calculation_formula",
+   "fieldtype": "Code",
+   "label": "Default Formula / Account Filter"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-08-27 18:20:36.092914",
+ "modified_by": "Administrator",
+ "module": "Csf Ohada",
+ "name": "Financial Report Column Enhanced",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
 }

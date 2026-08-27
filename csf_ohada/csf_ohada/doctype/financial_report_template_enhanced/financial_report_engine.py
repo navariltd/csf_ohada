@@ -35,11 +35,12 @@ from csf_ohada.csf_ohada.doctype.financial_report_row_enhanced.financial_report_
 )
 from csf_ohada.csf_ohada.doctype.financial_report_template_enhanced.column_layout import (
 	DEFAULT_MEASURE,
-	build_override_map,
+	build_column_defaults,
 	build_row_column_plan,
 	get_measure_columns,
 	iter_visible_value_columns,
 	make_fieldname,
+	parse_row_column_settings,
 	resolve_row_settings,
 )
 from csf_ohada.csf_ohada.doctype.financial_report_template_enhanced.financial_report_template_enhanced import (
@@ -75,6 +76,8 @@ class PeriodValue:
 	opening: float = 0.0
 	closing: float = 0.0
 	movement: float = 0.0
+	debit: float = 0.0
+	credit: float = 0.0
 
 	def get_value(self, balance_type: str) -> float:
 		if balance_type == "Opening Balance":
@@ -83,6 +86,10 @@ class PeriodValue:
 			return self.closing
 		elif balance_type == "Period Movement (Debits - Credits)":
 			return self.movement
+		elif balance_type == "Debits":
+			return self.debit
+		elif balance_type == "Credits":
+			return self.credit
 		return 0.0
 
 	def copy(self):
@@ -91,6 +98,8 @@ class PeriodValue:
 			opening=self.opening,
 			closing=self.closing,
 			movement=self.movement,
+			debit=self.debit,
+			credit=self.credit,
 		)
 
 
@@ -145,6 +154,8 @@ class AccountData:
 			period_value.opening = -period_value.opening if period_value.opening else 0.0
 			period_value.closing = -period_value.closing if period_value.closing else 0.0
 			period_value.movement = -period_value.movement if period_value.movement else 0.0
+			period_value.debit = -period_value.debit if period_value.debit else 0.0
+			period_value.credit = -period_value.credit if period_value.credit else 0.0
 
 	def zero_period(self, period_key: str) -> None:
 		period_value = self.get_period(period_key)
@@ -152,6 +163,8 @@ class AccountData:
 			period_value.opening = 0.0
 			period_value.closing = 0.0
 			period_value.movement = 0.0
+			period_value.debit = 0.0
+			period_value.credit = 0.0
 
 	def has_nonzero_value(self, period_keys: list[str], balance_type: str) -> bool:
 		return any(flt(value) for value in self.get_ordered_values(period_keys, balance_type))
@@ -219,7 +232,7 @@ class ReportContext:
 	show_detailed: bool = False
 	currency: str | None = None
 	measure_columns: list = field(default_factory=list)
-	override_map: dict = field(default_factory=dict)
+	column_defaults: dict = field(default_factory=dict)
 	has_custom_columns: bool = False
 
 	def get_result(self) -> tuple[list[dict], list[dict]]:
@@ -401,7 +414,7 @@ class FinancialReportEngine:
 			# after fixing which exchange rate to use for P&L
 			currency=get_company_currency(filters.company),
 			measure_columns=measure_columns,
-			override_map=build_override_map(template),
+			column_defaults=build_column_defaults(template),
 			has_custom_columns=has_custom_columns,
 		)
 		# Add period_keys to context
@@ -415,7 +428,7 @@ class FinancialReportEngine:
 			if row.data_source != "Account Data":
 				continue
 
-			for entry in build_row_column_plan(row, context.measure_columns, context.override_map):
+			for entry in build_row_column_plan(row, context.measure_columns, context.column_defaults):
 				# Formula columns are computed from other columns, not from a GL query
 				if entry.is_formula:
 					continue
@@ -655,10 +668,28 @@ class DataCollector:
 		if company:
 			query = query.where(account.company == company)
 
-		if conditions := filter_parser.build_conditions(account_rows, account):
+		expanded_rows = DataCollector._expand_account_filter_rows(account_rows)
+		if conditions := filter_parser.build_conditions(expanded_rows, account):
 			query = query.where(conditions)
 
 		return query.run(pluck=True)
+
+	@staticmethod
+	def _expand_account_filter_rows(account_rows: list) -> list:
+		"""Include per-column account filters from column_settings in coverage queries."""
+		expanded = []
+		for row in account_rows or []:
+			expanded.append(row)
+			for setting in parse_row_column_settings(row).values():
+				if setting.get("is_formula"):
+					continue
+				formula = setting.get("calculation_formula")
+				if not formula:
+					continue
+				dummy = frappe._dict(row.as_dict() if hasattr(row, "as_dict") else dict(row))
+				dummy.calculation_formula = formula
+				expanded.append(dummy)
+		return expanded
 
 
 class FinancialQueryBuilder:
@@ -836,18 +867,15 @@ class FinancialQueryBuilder:
 			# However, in legacy query, this filter only applies to BS accounts
 			query = query.where(gl_table.is_opening == "No")
 
-		# Add period-specific columns
+		# Add period-specific debit and credit columns
 		for period in self.periods:
-			period_condition = (
-				Case()
-				.when(
-					(gl_table.posting_date >= period["from_date"])
-					& (gl_table.posting_date <= period["to_date"]),
-					gl_table.debit - gl_table.credit,
-				)
-				.else_(0)
+			in_period = (gl_table.posting_date >= period["from_date"]) & (
+				gl_table.posting_date <= period["to_date"]
 			)
-			query = query.select(Sum(period_condition).as_(period["key"]))
+			debit_in_period = Case().when(in_period, gl_table.debit).else_(0)
+			credit_in_period = Case().when(in_period, gl_table.credit).else_(0)
+			query = query.select(Sum(debit_in_period).as_(f"{period['key']}_debit"))
+			query = query.select(Sum(credit_in_period).as_(f"{period['key']}_credit"))
 
 		query = self._apply_standard_filters(query, gl_table)
 		return self._execute_with_permissions(query, "GL Entry")
@@ -871,10 +899,21 @@ class FinancialQueryBuilder:
 
 			for period in self.periods:
 				period_key = period["key"]
-				movement = gl_movement.get(period_key, 0.0)
+				debit = flt(gl_movement.get(f"{period_key}_debit"))
+				credit = flt(gl_movement.get(f"{period_key}_credit"))
+				movement = debit - credit
 				closing_balance = current_balance + movement
 
-				account_data.add_period(PeriodValue(period_key, current_balance, closing_balance, movement))
+				account_data.add_period(
+					PeriodValue(
+						period_key,
+						current_balance,
+						closing_balance,
+						movement,
+						debit,
+						credit,
+					)
+				)
 
 				current_balance = closing_balance
 
@@ -1093,14 +1132,21 @@ class FormulaFieldExtractor:
 		values = set()
 
 		for row in rows:
-			if not hasattr(row, "calculation_formula") or not row.calculation_formula:
-				continue
+			formulas = []
+			if hasattr(row, "calculation_formula") and row.calculation_formula:
+				formulas.append(row.calculation_formula)
+			for setting in parse_row_column_settings(row).values():
+				if setting.get("is_formula"):
+					continue
+				if setting.get("calculation_formula"):
+					formulas.append(setting["calculation_formula"])
 
-			try:
-				parsed = ast.literal_eval(row.calculation_formula)
-				self._extract_recursive(parsed, values)
-			except (ValueError, SyntaxError):
-				continue  # Skip rows with invalid formulas
+			for formula in formulas:
+				try:
+					parsed = ast.literal_eval(formula)
+					self._extract_recursive(parsed, values)
+				except (ValueError, SyntaxError):
+					continue  # Skip invalid formulas
 
 		return values
 
@@ -1301,7 +1347,7 @@ class RowProcessor:
 		self.context = context
 		self.period_list = context.period_list
 		self.measure_columns = context.measure_columns
-		self.override_map = context.override_map
+		self.column_defaults = context.column_defaults
 		# ref_code -> { column_code -> [period values] }
 		self.row_values = {}
 		self.formula_issues = []
@@ -1421,7 +1467,7 @@ class RowProcessor:
 		calculator = None
 		column_values = {}
 
-		for entry in build_row_column_plan(row, self.measure_columns, self.override_map):
+		for entry in build_row_column_plan(row, self.measure_columns, self.column_defaults):
 			if entry.is_formula:
 				calculator = calculator or self._make_calculator()
 				column_values[entry.column_code] = self._evaluate_column_formula(
@@ -1488,7 +1534,7 @@ class RowProcessor:
 
 		for column_code, column_accounts in list(per_col_details.items()):
 			balance_type = (
-				resolve_row_settings(row, column_code, self.override_map).get("balance_type")
+				resolve_row_settings(row, column_code, self.column_defaults).get("balance_type")
 				or default_balance_type
 			)
 			for account_data in column_accounts.values():
@@ -1529,7 +1575,7 @@ class RowProcessor:
 		calculator = self._make_calculator()
 		column_values = {}
 
-		for entry in build_row_column_plan(row, self.measure_columns, self.override_map):
+		for entry in build_row_column_plan(row, self.measure_columns, self.column_defaults):
 			column_values[entry.column_code] = self._evaluate_column_formula(
 				row, entry, column_values, calculator
 			)
@@ -2286,7 +2332,9 @@ class DetailRowBuilder:
 
 	def _balance_type_for_column(self, column_code: str, default: str) -> str:
 		settings = resolve_row_settings(
-			self.parent_row_data.row, column_code, self.context.override_map or {}
+			self.parent_row_data.row,
+			column_code,
+			self.context.column_defaults or {},
 		)
 		return settings.get("balance_type") or default
 
