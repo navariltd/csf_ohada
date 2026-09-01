@@ -1,63 +1,53 @@
 # CSF OHADA
 
-ERPNext customizations and compliance features for businesses operating in Francophone OHADA countries. This app extends standard ERPNext reporting with OHADA-oriented financial statements and asset registers.
+ERPNext personnalise et adapte ses fonctionnalités pour les entités de l’espace comptable OHADA. Cette implémentation enrichit les rapports standards fournis par ERPNext en y ajoutant les états financiers de l’OHADA.
 
-## Reports
+## Etats financiers
 
-### Standard in ERPNext
+### Rapports générés à l'aide du modèle des états financiers avancés
 
-These reports ship with ERPNext and are used as-is, no customization from this app is required:
+**Le modèle des États financiers avancés** (Financial Report Template Enhanced) est un générateur de modèles permettant de personnaliser la mise en page de n'importe quel rapport financier, sans aucune restriction. Une fois configuré, visualisez-le depuis **États financiers avancés** (Financial Statement Enhanced).
 
-| Report              | Description                                                              |
-| ------------------- | ------------------------------------------------------------------------ |
-| **Profit and Loss** | Income statement showing revenue, expenses, and net profit for a period. |
+Voici quelques exemples de rapports configurés:
 
-### Customized in this app
+| Etats financiers                  | Description                                                                                                                                              |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Compte de résultat**            | Il récapitule les produits et les charges qui font apparaitre les résultats intermédiaires et, in fine, le bénéfice net ou la perte nette de l’exercice. |
+| **Bilan**                         | Il décrit les éléments d’actif, les éléments du passif et les capitaux propres distinctement.                                                            |
+| **Tableau de Flux de Trésorerie** | Il retrace les mouvements d’entrée et de sortie de liquidités de la période.                                                                             |
 
-These reports extend ERPNext equivalents with additional fields and OHADA-relevant detail:
+Vous pouvez également définir des instructions personnalisées au-delà de ces exemples. Les modèles sont configurés une fois et réutilisés, pas besoin de reconstruire les rapports dans Excel à chaque période.
 
-| Report                            | Based on             | What it adds                                                                                                          |
-| --------------------------------- | -------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| **Fixed Asset Register Enhanced** | Fixed Asset Register | Revaluation amounts, chart-of-accounts numbers (when grouped by asset category), and depreciation rates per category. |
+## Modèle des Etats financiers avancés
 
-Run it from **Accounting → Fixed Asset Register Enhanced** (also available under the **OHADA** workspace).
+Ce modèle d'États financiers avancés s'appuie sur la structure de base d'ERPNext. Sa flexibilité permet de générer n'importe quel rapport financier directement depuis le module **Financial Statement Enhanced**.
 
-### Reports powered by Financial Report Template Enhanced
+**Fonctionnalités**
 
-**Financial Report Template Enhanced** is a template builder for defining any financial report layout, not limited to a fixed set of statements. Once a template is configured, run it from **Financial Statement Enhanced**.
-
-Common reports configured that can be configured using this app include:
-
-| Report                                        | Description                                                                                        |
-| --------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| **Balance Sheet**                             | Statement of financial position with assets, liabilities, and equity.                              |
-| **Balance Sheet Reconciliation (Patrimoine)** | OHADA-style Balance Sheet Reconciliation showing gross and net values side by side across periods. |
-| **Cash Flow**                                 | Statement of cash inflows and outflows.                                                            |
-
-You can also define custom statements beyond these examples. Templates are configured once and reused, no need to rebuild reports in Excel each period.
-
-## Financial Report Template Enhanced
-
-Financial Report Template Enhanced builds on ERPNext's Financial Report Template. It is a flexible blueprint for any financial statement you need to produce from **Financial Statement Enhanced**.
-
-**What it achieves:**
-
-- **Configurable value columns** - define named value columns (for example Gross Value, Net Value, Depreciation) that expand across each report period. Leave value columns empty to keep ERPNext-style behaviour with one value column per period.
-- **Per-column rules** - override balance type, account filters, or formulas for individual value columns without duplicating rows.
-- **Professional layout** - bold headings, indentation, colour, hide-if-zero, debit/credit side filtering, and chart support.
-- **Single run point** - all enhanced templates are executed from **Financial Statement Enhanced**, keeping report generation in one place.
+- **Colonnes de valeur configurables** - nommez des colonnes de valeur (par exemple Valeur brute, Valeur nette, Amortissement) qui s'étendent sur chaque période comptable. Laissez les colonnes de valeur vides pour conserver le style d’ERPNext avec une seule colonne de valeur par période.
+- **Règles par colonne** - reclassez la nature du solde par type de compte, appliquez des filtres de compte ou les formules pour des colonnes de valeur individuelles sans dupliquer les lignes.
+- **Mise en page professionnelle** - en-têtes en gras, indentation, couleurs, masquage des valeurs nulles, filtrage par côté débit/crédit et prise en charge des graphiques..
+- **Point d’exécution unique** - a génération des rapports est centralisée au sein du module Financial Statement Enhanced, d'où sont exécutés tous les modèles améliorés.
 
 Standard ERPNext reports (Balance Sheet, Profit and Loss Statement, Cash Flow, Custom Financial Statement) continue to use ERPNext's original Financial Report Template and are not affected by Enhanced templates.
 
+## Autres rapports
+
+| Etats financiers                        | Provenance                   | Description                                                                                                                                    |
+| --------------------------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Registre des immobilisations avancé** | Registre des immobilisations | Montants des réévaluations, numéros du plan comptable (lorsqu'ils sont regroupés par catégorie d'actifs) et taux d'amortissement par catégorie |
+
+Générer depuis **Accounting → Fixed Asset Register Enhanced** avancé (également disponible dans l’espace de travail **OHADA**)
+
 ## Documentation
 
-Step-by-step setup guides, template configuration, formula reference, and validation rules are available in the full documentation:
+Des guides de configuration étape par étape, la configuration des modèles, le référentiel des formules et les règles de validation sont disponibles dans la documentation complète:
 
 **[docs.navari.co.ke](https://docs.navari.co.ke)**
 
 ## Installation
 
-Install this app using the [bench](https://github.com/frappe/bench) CLI:
+Installez cette application à l'aide de l'interface de ligne de commande (CLI) de [bench](https://github.com/frappe/bench):
 
 ```bash
 cd $PATH_TO_YOUR_BENCH
@@ -67,14 +57,14 @@ bench install-app csf_ohada
 
 ## Contributing
 
-This app uses `pre-commit` for code formatting and linting. Please [install pre-commit](https://pre-commit.com/#installation) and enable it for this repository:
+Cette application utilise `pre-commit` pour le formatage et la validation du code. Veuillez installer [install pre-commit](https://pre-commit.com/#installation) et l'activer pour ce dépôt:
 
 ```bash
 cd apps/csf_ohada
 pre-commit install
 ```
 
-Pre-commit is configured to use the following tools:
+Pre-commit est configuré pour utiliser les outils suivants:
 
 - ruff
 - eslint
@@ -83,10 +73,10 @@ Pre-commit is configured to use the following tools:
 
 ## CI
 
-This app uses GitHub Actions for CI. The following workflows are configured:
+Cette application utilise GitHub Actions pour l'intégration continue (CI). Les workflows suivants sont configurés:
 
-- **CI:** Installs this app and runs unit tests on every push to the `develop` branch.
-- **Linters:** Runs [Frappe Semgrep Rules](https://github.com/frappe/semgrep-rules) and [pip-audit](https://pypi.org/project/pip-audit/) on every pull request.
+- **CI:** installe le projet et exécute les tests unitaires lors de chaque push vers la branche `develop`.
+- **Linters:** exécute [Frappe Semgrep Rules](https://github.com/frappe/semgrep-rules) et [pip-audit](https://pypi.org/project/pip-audit/) lors de chaque pull request.
 
 ## License
 
