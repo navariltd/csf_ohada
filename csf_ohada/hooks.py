@@ -1,7 +1,7 @@
 app_name = "csf_ohada"
-app_title = "Francophone ERPNext Localization"
+app_title = "OHADA ERPNext Localization"
 app_publisher = "Navari Ltd"
-app_description = "A collection of ERPNext customizations, regional settings, and compliance features designed for businesses operating in Francophone countries"
+app_description = "A collection of ERPNext customizations, regional settings, and compliance features designed for OHADA (Organisation pour l'Harmonisation en Afrique du Droit des Affaires)"
 app_email = "solutions@navari.co.ke"
 app_license = "agpl-3.0"
 
