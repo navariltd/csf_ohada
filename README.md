@@ -1,5 +1,7 @@
 # CSF OHADA
 
+[![en](https://img.shields.io/badge/lang-en-red.svg)](./README.en.md)
+
 ERPNext personnalise et adapte ses fonctionnalités pour les entités de l’espace comptable OHADA. Cette implémentation enrichit les rapports standards fournis par ERPNext en y ajoutant les états financiers de l’OHADA.
 
 ## Etats financiers
@@ -29,15 +31,11 @@ Ce modèle d'États financiers avancés s'appuie sur la structure de base d'ERPN
 - **Mise en page professionnelle** - en-têtes en gras, indentation, couleurs, masquage des valeurs nulles, filtrage par côté débit/crédit et prise en charge des graphiques..
 - **Point d’exécution unique** - a génération des rapports est centralisée au sein du module Financial Statement Enhanced, d'où sont exécutés tous les modèles améliorés.
 
-Standard ERPNext reports (Balance Sheet, Profit and Loss Statement, Cash Flow, Custom Financial Statement) continue to use ERPNext's original Financial Report Template and are not affected by Enhanced templates.
-
 ## Autres rapports
 
 | Etats financiers                        | Provenance                   | Description                                                                                                                                    |
 | --------------------------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Registre des immobilisations avancé** | Registre des immobilisations | Montants des réévaluations, numéros du plan comptable (lorsqu'ils sont regroupés par catégorie d'actifs) et taux d'amortissement par catégorie |
-
-Générer depuis **Accounting → Fixed Asset Register Enhanced** avancé (également disponible dans l’espace de travail **OHADA**)
 
 ## Documentation
 
