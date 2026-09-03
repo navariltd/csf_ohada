@@ -174,9 +174,10 @@ required_apps = ["erpnext"]
 # Overriding Methods
 # ------------------------------
 #
-# override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "csf_ohada.event.get_events"
-# }
+override_whitelisted_methods = {
+	"erpnext.accounts.doctype.account.chart_of_accounts.chart_of_accounts.get_chart": "csf_ohada.overrides.chart_of_accounts.chart_of_accounts.get_chart",
+	"erpnext.accounts.doctype.account.chart_of_accounts.chart_of_accounts.get_charts_for_country": "csf_ohada.overrides.chart_of_accounts.chart_of_accounts.get_charts_for_country",
+}
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
