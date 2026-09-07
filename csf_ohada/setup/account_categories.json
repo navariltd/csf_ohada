@@ -1,0 +1,317 @@
+[
+  {
+    "account_category_name": "Capital"
+  },
+  {
+    "account_category_name": "Primes liées au capital social"
+  },
+  {
+    "account_category_name": "Ecarts de réévaluation"
+  },
+  {
+    "account_category_name": "Apporteurs capital non appelé"
+  },
+  {
+    "account_category_name": "Réserves indisponibles"
+  },
+  {
+    "account_category_name": "Réserves libres"
+  },
+  {
+    "account_category_name": "Report à nouveau"
+  },
+  {
+    "account_category_name": "Résultat net de l'exercice"
+  },
+  {
+    "account_category_name": "Subventions d'investissement"
+  },
+  {
+    "account_category_name": "Provisions réglementées"
+  },
+  {
+    "account_category_name": "Emprunts et dettes financières diverses"
+  },
+  {
+    "account_category_name": "Dettes de location acquisition"
+  },
+  {
+    "account_category_name": "Provisions pour risques et charges LT"
+  },
+  {
+    "account_category_name": "Frais de recherche et de prospection"
+  },
+  {
+    "account_category_name": "Brevet, licences, logiciels et droits similaires"
+  },
+  {
+    "account_category_name": "Fonds commercial et droit au bail"
+  },
+  {
+    "account_category_name": "Autres immobilisations incorporelles"
+  },
+  {
+    "account_category_name": "Terrains"
+  },
+  {
+    "account_category_name": "Bâtiments"
+  },
+  {
+    "account_category_name": "Aménagement, agencements et Installations"
+  },
+  {
+    "account_category_name": "Matériel, mobilier et actifs biologiques"
+  },
+  {
+    "account_category_name": "Matériel de transport"
+  },
+  {
+    "account_category_name": "Avances et acomptes versés sur immobilisations"
+  },
+  {
+    "account_category_name": "Titres de participation"
+  },
+  {
+    "account_category_name": "Autres immobilisations financières"
+  },
+  {
+    "account_category_name": "Amortissement des immobilisations incorporelles"
+  },
+  {
+    "account_category_name": "Amortissements des frais de développement"
+  },
+  {
+    "account_category_name": "Amortissements des brevets, licences, concessions et droits similaires"
+  },
+  {
+    "account_category_name": "Amortissements du fonds commercial et du droit au bail"
+  },
+  {
+    "account_category_name": "Amortissements des autres immobilisations incorporelles"
+  },
+  {
+    "account_category_name": "Amortissements des terrains"
+  },
+  {
+    "account_category_name": "Amortissements des bâtiments, installations techniques et agencements"
+  },
+  {
+    "account_category_name": "Amortissements des bâtiments"
+  },
+  {
+    "account_category_name": "Amortissements des aménagements, agencements et installations"
+  },
+  {
+    "account_category_name": "Amortissements du matériel"
+  },
+  {
+    "account_category_name": "Amortissements du matériel, mobilier et actifs biologiques"
+  },
+  {
+    "account_category_name": "Amortissements du matériel de transport"
+  },
+  {
+    "account_category_name": "Dépréciations des immobilisations incorporelles"
+  },
+  {
+    "account_category_name": "Dépréciations des frais de développement"
+  },
+  {
+    "account_category_name": "Dépréciations des brevets, licences, concessions et droits similaires"
+  },
+  {
+    "account_category_name": "Dépréciations du fonds commercial et droit de bail"
+  },
+  {
+    "account_category_name": "Dépréciations des autres immobilisations incorporelles"
+  },
+  {
+    "account_category_name": "Dépréciations des terrains"
+  },
+  {
+    "account_category_name": "Dépréciations des bâtiments, installations techniques et agencements"
+  },
+  {
+    "account_category_name": "Dépréciations de matériel, du mobilier et de l’actif biologique"
+  },
+  {
+    "account_category_name": "Dépréciations du matériel de transport"
+  },
+  {
+    "account_category_name": "Dépréciations des avances et acomptes versés sur immobilisations"
+  },
+  {
+    "account_category_name": "Dépréciations des titres de participation"
+  },
+  {
+    "account_category_name": "Dépréciations des autres immobilisations financières"
+  },
+  {
+    "account_category_name": "Stocks et encours"
+  },
+  {
+    "account_category_name": "Dépréciation des stocks et encours"
+  },
+  {
+    "account_category_name": "Fournisseurs, avances versées"
+  },
+  {
+    "account_category_name": "Clients"
+  },
+  {
+    "account_category_name": "Autres créances"
+  },
+  {
+    "account_category_name": "Ecart de conversion - actif"
+  },
+  {
+    "account_category_name": "Actif circulant H.A.O"
+  },
+  {
+    "account_category_name": "Dépréciations des clients"
+  },
+  {
+    "account_category_name": "Dépréciations des autres créances"
+  },
+  {
+    "account_category_name": "Dépréciations des créances HAO"
+  },
+  {
+    "account_category_name": "Provisions pour risques et charges CT"
+  },
+  {
+    "account_category_name": "Fournisseurs d'exploitation"
+  },
+  {
+    "account_category_name": "Clients, avances reçues"
+  },
+  {
+    "account_category_name": "Autres dettes"
+  },
+  {
+    "account_category_name": "Ecart de conversion - passif"
+  },
+  {
+    "account_category_name": "Dettes circulantes H.A.O"
+  },
+  {
+    "account_category_name": "Titres de placement"
+  },
+  {
+    "account_category_name": "Valeurs à encaisser"
+  },
+  {
+    "account_category_name": "Banques, chèques postaux, caisse"
+  },
+  {
+    "account_category_name": "Banques, établissements financiers et crédits de trésorerie"
+  },
+  {
+    "account_category_name": "Banques, crédits d'escompte"
+  },
+  {
+    "account_category_name": "Dépréciations trésorerie"
+  },
+  {
+    "account_category_name": "Achat de marchandises"
+  },
+  {
+    "account_category_name": "Achats de matières premières et fournitures liées"
+  },
+  {
+    "account_category_name": "Variations des stocks de biens achetés"
+  },
+  {
+    "account_category_name": "Variation de stocks de marchandises"
+  },
+  {
+    "account_category_name": "Variations de stocks de matières premières et fournitures liées"
+  },
+  {
+    "account_category_name": "Variations des autres approvisionnements"
+  },
+  {
+    "account_category_name": "Autres achats"
+  },
+  {
+    "account_category_name": "Transport"
+  },
+  {
+    "account_category_name": "Services extérieurs"
+  },
+  {
+    "account_category_name": "Impôts et taxes"
+  },
+  {
+    "account_category_name": "Autres charges"
+  },
+  {
+    "account_category_name": "Charges de personnel"
+  },
+  {
+    "account_category_name": "Frais financiers et charges assimilées"
+  },
+  {
+    "account_category_name": "Dotations aux amortissements, aux provisions et dépréciations"
+  },
+  {
+    "account_category_name": "Dotations aux provisions et aux dépréciations financières"
+  },
+  {
+    "account_category_name": "Ventes de marchandises"
+  },
+  {
+    "account_category_name": "Vente de produits fabriqués"
+  },
+  {
+    "account_category_name": "Travaux, services vendus"
+  },
+  {
+    "account_category_name": "Produits accessoires"
+  },
+  {
+    "account_category_name": "Subvention d'exploitation"
+  },
+  {
+    "account_category_name": "Production immobilisée"
+  },
+  {
+    "account_category_name": "Production stockées (ou déstockage)"
+  },
+  {
+    "account_category_name": "Autres produits"
+  },
+  {
+    "account_category_name": "Revenus financiers et assimilés"
+  },
+  {
+    "account_category_name": "Transferts de charges d’exploitation"
+  },
+  {
+    "account_category_name": "Transferts de charges financières"
+  },
+  {
+    "account_category_name": "Reprise d’amortissements, provisions et dépréciations"
+  },
+  {
+    "account_category_name": "Reprises de provisions et dépréciations financières"
+  },
+  {
+    "account_category_name": "VNC d'immobilisations"
+  },
+  {
+    "account_category_name": "Autres charges H.A.O"
+  },
+  {
+    "account_category_name": "Participations des travailleurs"
+  },
+  {
+    "account_category_name": "Impôts sur le résultat"
+  },
+  {
+    "account_category_name": "Produits des cessions d'immobilisations"
+  },
+  {
+    "account_category_name": "Autres produits H.A.O"
+  }
+]

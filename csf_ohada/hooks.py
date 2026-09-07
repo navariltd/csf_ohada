@@ -43,7 +43,7 @@ required_apps = ["erpnext"]
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {"Company": "public/js/company.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -78,6 +78,8 @@ required_apps = ["erpnext"]
 # 	"methods": "csf_ohada.utils.jinja_methods",
 # 	"filters": "csf_ohada.utils.jinja_filters"
 # }
+
+after_migrate = "csf_ohada.setup.account_category.import_account_categories"
 
 # Installation
 # ------------
@@ -129,9 +131,7 @@ required_apps = ["erpnext"]
 # ---------------
 # Override standard doctype classes
 
-# override_doctype_class = {
-# 	"ToDo": "custom_app.overrides.CustomToDo"
-# }
+override_doctype_class = {"Company": "csf_ohada.overrides.company.company.CustomCompany"}
 
 # Document Events
 # ---------------
@@ -174,9 +174,10 @@ required_apps = ["erpnext"]
 # Overriding Methods
 # ------------------------------
 #
-# override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "csf_ohada.event.get_events"
-# }
+override_whitelisted_methods = {
+	"erpnext.accounts.doctype.account.chart_of_accounts.chart_of_accounts.get_chart": "csf_ohada.overrides.chart_of_accounts.chart_of_accounts.get_chart",
+	"erpnext.accounts.doctype.account.chart_of_accounts.chart_of_accounts.get_charts_for_country": "csf_ohada.overrides.chart_of_accounts.chart_of_accounts.get_charts_for_country",
+}
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
