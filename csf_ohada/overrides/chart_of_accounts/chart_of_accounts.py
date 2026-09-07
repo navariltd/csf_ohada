@@ -2,7 +2,85 @@ import json
 import os
 
 import frappe
+from erpnext.accounts.doctype.account.chart_of_accounts.chart_of_accounts import (
+	add_suffix_if_duplicate,
+	get_chart_metadata_fields,
+	identify_is_group,
+	rebuild_tree,
+)
 from frappe.utils import cstr
+
+
+def create_charts(
+	company,
+	chart_template=None,
+	existing_company=None,
+	custom_chart=None,
+	from_coa_importer=None,
+):
+	chart = custom_chart or get_chart(chart_template, existing_company)
+	if chart:
+		accounts = []
+
+		def _import_accounts(children, parent, root_type, root_account=False):
+			nonlocal custom_chart
+			for account_name, child in children.items():
+				if root_account:
+					root_type = child.get("root_type")
+
+				if account_name not in get_chart_metadata_fields():
+					account_number = cstr(child.get("account_number")).strip()
+					account_name, account_name_in_db = add_suffix_if_duplicate(
+						account_name, account_number, accounts
+					)
+
+					is_group = identify_is_group(child)
+					report_type = (
+						"Balance Sheet"
+						if root_type in ["Asset", "Liability", "Equity"]
+						else "Profit and Loss"
+					)
+
+					account = frappe.get_doc(
+						{
+							"doctype": "Account",
+							"account_name": (
+								child.get("account_name") if from_coa_importer else account_name
+							),
+							"company": company,
+							"parent_account": parent,
+							"is_group": is_group,
+							"root_type": root_type,
+							"report_type": report_type,
+							"account_number": account_number,
+							"account_type": child.get("account_type"),
+							"account_category": child.get("account_category"),
+							"account_currency": (
+								child.get("account_currency")
+								if custom_chart
+								else frappe.get_cached_value("Company", company, "default_currency")
+							),
+							"tax_rate": child.get("tax_rate"),
+						}
+					)
+
+					if root_account or frappe.local.flags.allow_unverified_charts:
+						account.flags.ignore_mandatory = True
+
+					account.flags.ignore_permissions = True
+
+					account.insert()
+
+					accounts.append(account_name_in_db)
+
+					_import_accounts(child, account.name, root_type)
+
+		# Rebuild NestedSet HSM tree for Account Doctype
+		# after all accounts are already inserted.
+		frappe.local.flags.ignore_update_nsm = True
+		_import_accounts(chart, None, None, root_account=True)
+		rebuild_tree("Account")
+		frappe.local.flags.ignore_update_nsm = False
 
 
 @frappe.whitelist()

@@ -2,7 +2,44 @@
 
 [![fr](https://img.shields.io/badge/lang-fr-green.svg)](./README.md)
 
-ERPNext customizations and compliance features for entities operating within the OHADA accounting framework. This app extends standard ERPNext reporting with OHADA-oriented financial statements
+ERPNext customizations and compliance features for entities operating within the OHADA accounting framework. This app provides SYSCOHADA charts of accounts for all 17 OHADA member countries and extends standard ERPNext reporting with OHADA-oriented financial statements.
+
+## OHADA member countries
+
+CSF OHADA currently covers the 17 member states of [OHADA](https://www.ohada.org/) (Organisation pour l'Harmonisation en Afrique du Droit des Affaires):
+
+| Country                          | Code |
+| -------------------------------- | ---- |
+| Benin                            | BJ   |
+| Burkina Faso                     | BF   |
+| Cameroon                         | CM   |
+| Central African Republic         | CF   |
+| Chad                             | TD   |
+| Comoros                          | KM   |
+| Côte d'Ivoire                    | CI   |
+| Democratic Republic of the Congo | CD   |
+| Equatorial Guinea                | GQ   |
+| Gabon                            | GA   |
+| Guinea                           | GN   |
+| Guinea-Bissau                    | GW   |
+| Mali                             | ML   |
+| Niger                            | NE   |
+| Republic of the Congo            | CG   |
+| Senegal                          | SN   |
+| Togo                             | TG   |
+
+## Chart of Accounts
+
+This app overrides ERPNext's chart-of-accounts lookup so **Company** setup loads SYSCOHADA templates for the countries above, instead of only the charts bundled with ERPNext.
+
+When you create a company in an OHADA member country, the following plans are available:
+
+| Template                                  | Description                                                                                                                                                                                                 |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Syscohada - Plan Comptable**            | SYSCOHADA account tree with class and account codes in the account names (for example `1011-Capital souscrit, non appelé`).                                                                                 |
+| **Syscohada - Plan Comptable avec code**  | Same SYSCOHADA tree with a dedicated account number on each account. Posting and subdivision accounts use 6-digit numbers (trailing zeros). Class accounts (1–8) and two-digit group headings stay short. |
+
+ERPNext **Standard** and **Standard with Numbers** charts remain available. Regional templates for non-OHADA countries are also bundled so company setup still finds a chart when this app is installed.
 
 ## Reports
 
