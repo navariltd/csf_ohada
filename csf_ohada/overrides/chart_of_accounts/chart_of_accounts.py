@@ -51,7 +51,7 @@ def get_charts_for_country(country, with_standard=False):
 				charts.append(content["name"])
 
 	country_code = frappe.get_cached_value("Country", country, "code")
-	print("COUNTRY CODE", country_code)
+
 	if country_code:
 		folders = ("verified",)
 		if frappe.local.flags.allow_unverified_charts:
@@ -60,7 +60,6 @@ def get_charts_for_country(country, with_standard=False):
 		for folder in folders:
 			path = os.path.join(os.path.dirname(__file__), folder)
 			if not os.path.exists(path):
-				print("PATH NOT EXISTS", path)
 				continue
 
 			for fname in os.listdir(path):
@@ -69,7 +68,6 @@ def get_charts_for_country(country, with_standard=False):
 					with open(os.path.join(path, fname)) as f:
 						_get_chart_name(f.read())
 
-	print("CHARTS", charts)
 	# if more than one charts, returned then add the standard
 	if len(charts) != 1 or with_standard:
 		charts += ["Standard", "Standard with Numbers"]
