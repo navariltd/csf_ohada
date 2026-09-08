@@ -50,10 +50,12 @@ from csf_ohada.csf_ohada.doctype.financial_report_template_enhanced.financial_re
 	AccountFilterValidator,
 	CalculationFormulaValidator,
 	DependencyValidator,
+	get_valid_api_method,
 )
 
 DEFAULT_BULLET_PREFIX = "• "
 SEGMENT_PREFIX = "seg_"
+LINE_REFERENCE_FIELD = "reference_code"
 
 BALANCE_FILTER_ALL = "All"
 BALANCE_FILTER_DEBIT_ACCOUNTS = "Debit Accounts"
@@ -429,8 +431,8 @@ class FinancialReportEngine:
 				continue
 
 			for entry in build_row_column_plan(row, context.measure_columns, context.column_defaults):
-				# Formula columns are computed from other columns, not from a GL query
-				if entry.is_formula:
+				# Formula and empty columns are not fetched from GL
+				if entry.is_formula or entry.is_empty:
 					continue
 
 				collector.add_account_request(
@@ -686,7 +688,7 @@ class DataCollector:
 				formula = setting.get("calculation_formula")
 				if not formula:
 					continue
-				dummy = frappe._dict(row.as_dict() if hasattr(row, "as_dict") else dict(row))
+				dummy = frappe._dict(_row_as_dict(row))
 				dummy.calculation_formula = formula
 				expanded.append(dummy)
 		return expanded
@@ -1249,9 +1251,17 @@ class FormulaFieldUpdater:
 		return value
 
 
+def _row_as_dict(row) -> dict:
+	"""Copy a template row that may be a Document or a frappe._dict from JSON."""
+	as_dict = getattr(row, "as_dict", None)
+	if callable(as_dict):
+		return as_dict()
+	return dict(row)
+
+
 @frappe.whitelist()
 def get_filtered_accounts(company: str, account_rows: str | list):
-	frappe.has_permission("Financial Report Template", ptype="read", throw=True)
+	frappe.has_permission("Financial Report Template Enhanced", ptype="read", throw=True)
 
 	if isinstance(account_rows, str):
 		account_rows = json.loads(account_rows, object_hook=frappe._dict)
@@ -1417,11 +1427,15 @@ class RowProcessor:
 
 	def _ordered_column_values(self, column_values: dict[str, list]) -> dict[str, list]:
 		"""Restore the template's column order after dependency-ordered evaluation."""
-		zeros = [0.0] * len(self.period_list)
 		return {
-			measure.column_code: column_values.get(measure.column_code, list(zeros))
+			measure.column_code: column_values.get(measure.column_code, self._blank_series(measure))
 			for measure in self.measure_columns
 		}
+
+	def _blank_series(self, measure) -> list:
+		if getattr(measure, "empty", False):
+			return [None] * len(self.period_list)
+		return [0.0] * len(self.period_list)
 
 	def _make_calculator(self) -> "FormulaCalculator":
 		return FormulaCalculator(
@@ -1431,7 +1445,7 @@ class RowProcessor:
 		)
 
 	def _evaluate_column_formula(self, row, entry, column_values: dict[str, list], calculator) -> list[float]:
-		formula_row = frappe._dict(row.as_dict() if hasattr(row, "as_dict") else {})
+		formula_row = frappe._dict(_row_as_dict(row))
 		formula_row.data_source = "Calculated Amount"
 		formula_row.calculation_formula = entry.formula
 		formula_row.reference_code = row.reference_code
@@ -1468,7 +1482,9 @@ class RowProcessor:
 		column_values = {}
 
 		for entry in build_row_column_plan(row, self.measure_columns, self.column_defaults):
-			if entry.is_formula:
+			if entry.is_empty:
+				column_values[entry.column_code] = [None] * len(self.period_list)
+			elif entry.is_formula:
 				calculator = calculator or self._make_calculator()
 				column_values[entry.column_code] = self._evaluate_column_formula(
 					row, entry, column_values, calculator
@@ -1503,7 +1519,11 @@ class RowProcessor:
 	def _net_decision_series(self, column_values: dict[str, list]) -> list[float]:
 		"""Overall sign is taken from the last visible value column (typically NET)."""
 		zeros = [0.0] * len(self.period_list)
-		visible = [measure for measure in self.measure_columns if not measure.hidden]
+		visible = [
+			measure
+			for measure in self.measure_columns
+			if not measure.hidden and not getattr(measure, "empty", False)
+		]
 		for measure in reversed(visible or list(self.measure_columns)):
 			series = column_values.get(measure.column_code)
 			if series is not None:
@@ -1547,11 +1567,11 @@ class RowProcessor:
 
 	def _process_api_row(self, row) -> RowData:
 		api_path = row.calculation_formula
-		# TODO
+		method = get_valid_api_method(api_path)
 
 		try:
 			values = frappe.call(
-				api_path,
+				method,
 				filters=self.context.filters,
 				periods=self.period_list,
 				row=row,
@@ -1566,7 +1586,10 @@ class RowProcessor:
 			frappe.log_error(f"Custom API Error: {api_path} - {e!s}")
 			values = [0.0] * len(self.period_list)
 
-		column_values = {m.column_code: list(values) for m in self.measure_columns}
+		column_values = {
+			m.column_code: ([None] * len(self.period_list) if m.empty else list(values))
+			for m in self.measure_columns
+		}
 		self._store_row_values(row.reference_code, column_values)
 
 		return RowData(row=row, values=list(values), column_values=column_values)
@@ -1576,6 +1599,9 @@ class RowProcessor:
 		column_values = {}
 
 		for entry in build_row_column_plan(row, self.measure_columns, self.column_defaults):
+			if entry.is_empty:
+				column_values[entry.column_code] = [None] * len(self.period_list)
+				continue
 			column_values[entry.column_code] = self._evaluate_column_formula(
 				row, entry, column_values, calculator
 			)
@@ -1880,7 +1906,26 @@ class DataFormatter:
 				self.context.filters.get("company"),
 			)
 
-		return self.formatter.get_columns(self.organizer.section_with_max_segments.segments, base_columns)
+		return self.formatter.get_columns(
+			self.organizer.section_with_max_segments.segments,
+			self._insert_line_reference_column(base_columns),
+		)
+
+	def _insert_line_reference_column(self, columns: list[dict]) -> list[dict]:
+		if any(col.get("fieldname") == LINE_REFERENCE_FIELD for col in columns):
+			return columns
+
+		line_ref_col = {
+			"fieldname": LINE_REFERENCE_FIELD,
+			"label": _("Line Reference"),
+			"fieldtype": "Data",
+			"width": 100,
+			"align": "left",
+		}
+		for i, col in enumerate(columns):
+			if col.get("fieldname") == "account":
+				return columns[:i] + [line_ref_col] + columns[i:]
+		return [line_ref_col, *columns]
 
 	def _build_measure_columns(self) -> list[dict]:
 		company = self.context.filters.get("company")
@@ -1903,6 +1948,18 @@ class DataFormatter:
 
 		for spec in iter_visible_value_columns(self.context.measure_columns, self.context.period_list):
 			measure = spec["measure"]
+			if measure.empty:
+				columns.append(
+					{
+						"fieldname": spec["fieldname"],
+						"label": spec["label"],
+						"fieldtype": "Data",
+						"width": 80,
+						"align": "center",
+						"empty_column": 1,
+					}
+				)
+				continue
 			columns.append(
 				{
 					"fieldname": spec["fieldname"],
@@ -2143,6 +2200,7 @@ class RowFormatterBase(ABC):
 
 		values = {
 			"account": _get_row_data("account", "") or display_name,
+			LINE_REFERENCE_FIELD: self._get_line_reference(row_data),
 			"account_name": display_name,
 			"acc_name": _get_row_data("account_name", ""),
 			"acc_number": _get_row_data("account_number", ""),
@@ -2157,6 +2215,9 @@ class RowFormatterBase(ABC):
 		if self.context.has_custom_columns:
 			for spec in iter_visible_value_columns(self.context.measure_columns, self.period_list):
 				measure = spec["measure"]
+				if measure.empty:
+					values[spec["fieldname"]] = None
+					continue
 				period_index = spec["period_index"]
 				series = (row_data.column_values or {}).get(measure.column_code) or row_data.values or []
 				period_value = series[period_index] if period_index < len(series) else ""
@@ -2179,6 +2240,13 @@ class RowFormatterBase(ABC):
 			values["total"] = values["total"] / divisor
 
 		return values
+
+	def _get_line_reference(self, row_data: RowData) -> str | None:
+		if row_data.is_detail_row:
+			return None
+		if not getattr(row_data.row, "show_line_reference", 1):
+			return None
+		return getattr(row_data.row, "reference_code", None) or None
 
 	def _get_period_value(self, row_data: RowData, period_index: int) -> Any:
 		if period_index < len(row_data.values):
@@ -2203,7 +2271,7 @@ class SingleSegmentFormatter(RowFormatterBase):
 
 	def get_columns(self, segments: list[SegmentData], base_columns: list[dict]) -> list[dict]:
 		for col in base_columns:
-			if col["fieldname"] == "account":
+			if col["fieldname"] in ("account", LINE_REFERENCE_FIELD):
 				col["align"] = "left"
 
 		return base_columns
@@ -2235,6 +2303,10 @@ class MultiSegmentFormatter(RowFormatterBase):
 				if col["fieldname"] == "account":
 					new_col["label"] = segment.label or f"Account (Segment {segment.index + 1})"
 					new_col["align"] = "left"
+				elif col["fieldname"] == LINE_REFERENCE_FIELD:
+					new_col["align"] = "left"
+					if segment.label:
+						new_col["label"] = f"{segment.label} - {col['label']}"
 
 				value_fieldnames = (
 					[
@@ -2264,6 +2336,7 @@ class MultiSegmentFormatter(RowFormatterBase):
 
 	def _add_empty_segment(self, formatted: dict, segment: SegmentData):
 		formatted[f"account_{segment.id}"] = ""
+		formatted[f"{segment.id}_{LINE_REFERENCE_FIELD}"] = None
 		if self.context.has_custom_columns:
 			for spec in iter_visible_value_columns(self.context.measure_columns, self.period_list):
 				formatted[f"{segment.id}_{spec['fieldname']}"] = ""
@@ -2311,10 +2384,13 @@ class DetailRowBuilder:
 						continue
 					column_values[col_code] = acct.get_ordered_values(self.period_keys, balance_type)
 			elif self.context.measure_columns:
-				column_values = {m.column_code: list(values) for m in self.context.measure_columns}
+				column_values = {
+					m.column_code: ([None] * len(self.period_keys) if m.empty else list(values))
+					for m in self.context.measure_columns
+				}
 
-			if not any(flt(v) for v in values) and not any(
-				flt(v) for series in column_values.values() for v in series
+			if not any(flt(v) for v in values if v is not None) and not any(
+				flt(v) for series in column_values.values() for v in series if v is not None
 			):
 				continue
 
@@ -2352,6 +2428,8 @@ class DetailRowBuilder:
 				"display_name": display_name,
 				"account_name": acc_name,
 				"account_number": acc_number,
+				"reference_code": None,
+				"show_line_reference": 0,
 				"data_source": "Account Detail",
 				"indentation_level": getattr(parent_row, "indentation_level", 0) + 1,
 				"fieldtype": getattr(parent_row, "fieldtype", None),
@@ -2391,7 +2469,7 @@ class ChartDataGenerator:
 		chart_measure = None
 		if self.context.has_custom_columns:
 			for measure in self.context.measure_columns:
-				if not measure.hidden:
+				if not measure.hidden and not measure.empty:
 					chart_measure = measure.column_code
 					break
 
@@ -2439,7 +2517,11 @@ class GrowthViewTransformer:
 
 	def transform(self) -> None:
 		has_custom = self.context.has_custom_columns
-		measures = [m for m in self.context.measure_columns if not m.hidden] if has_custom else [None]
+		measures = (
+			[m for m in self.context.measure_columns if not m.hidden and not m.empty]
+			if has_custom
+			else [None]
+		)
 
 		for row_data in self.formatted_rows:
 			if row_data.get("is_blank_line"):
@@ -2551,6 +2633,7 @@ def get_xlsx_styles(metadata: XLSXMetadata) -> dict | None:
 		for col_idx, col in metadata.column_map.items():
 			fieldname = col.get("fieldname")
 			is_account = fieldname == "account"
+			is_text_column = fieldname == LINE_REFERENCE_FIELD or col.get("empty_column")
 
 			# determine formatting bucket
 			if is_segmented and fieldname.startswith(SEGMENT_PREFIX):
@@ -2558,6 +2641,7 @@ def get_xlsx_styles(metadata: XLSXMetadata) -> dict | None:
 
 				_, seg_idx, seg_fieldname = fieldname.split("_", 2)
 				is_account = seg_fieldname == "account"
+				is_text_column = seg_fieldname == LINE_REFERENCE_FIELD or col.get("empty_column")
 				formatting.update(segment_values.get(f"{SEGMENT_PREFIX}{seg_idx}", {}) or {})
 			else:
 				formatting = row  # default formatting bucket.
@@ -2580,9 +2664,10 @@ def get_xlsx_styles(metadata: XLSXMetadata) -> dict | None:
 				# custom indentation (different segment might have different indentation levels)
 				if is_segmented and (indent := formatting.get("indent")) and indent > 0:
 					style_cell(row_idx, col_idx, get_indent_style(indent))
-			else:
-				if col_fieldtype != cell_fieldtype and cell_fieldtype in fieldtype_formats:
-					style_cell(row_idx, col_idx, fieldtype_formats[cell_fieldtype])
+			elif (
+				not is_text_column and col_fieldtype != cell_fieldtype and cell_fieldtype in fieldtype_formats
+			):
+				style_cell(row_idx, col_idx, fieldtype_formats[cell_fieldtype])
 
 			# text styles
 			for style_key in ("bold", "italic"):

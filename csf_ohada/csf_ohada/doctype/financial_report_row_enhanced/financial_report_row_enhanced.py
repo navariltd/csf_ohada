@@ -48,6 +48,7 @@ class FinancialReportRowEnhanced(Document):
 		parenttype: DF.Data
 		reference_code: DF.Data | None
 		reverse_sign: DF.Check
+		show_line_reference: DF.Check
 	# end: auto-generated types
 
 	pass

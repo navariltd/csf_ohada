@@ -390,7 +390,7 @@ function update_formula_description(frm, data_source) {
 		description_html = `
 			<div ${container_style}>
 				<h5 ${title_style}>Custom API Setup</h5>
-				<p ${text_style}>Path to your custom method that returns financial data.</p>
+				<p ${text_style}>Path to your custom whitelisted method that returns financial data. It must permit GET requests..</p>
 
 				<h6 ${subtitle_style}>Format:</h6>
 				<ul ${list_style}>
@@ -400,7 +400,8 @@ function update_formula_description(frm, data_source) {
 
 				<h6 ${subtitle_style}>Method Signature:</h6>
 				<div ${code_style}>
-					<pre ${pre_style}>def get_custom_data(filters, periods, row): <br>&nbsp; # filters: dict — report filters (company, period, etc.) <br>&nbsp; # periods: list[dict] — period definitions <br>&nbsp; # row: dict — the current report row <br><br>&nbsp; return [1000.0, 1200.0, 1150.0]  # one value per period</pre>
+					<!-- &#10; is used for line breaks since frappe.render replaces newlines with spaces -->
+					<pre ${pre_style} class="language-python">@frappe.whitelist(methods=["GET"])&#10;def get_custom_data(filters, periods, row):&#10;    # filters: dict — report filters (company, period, etc.)&#10;    # periods: list[dict] — period definitions&#10;    # row: dict — the current report row&#10;&#10;    return [1000.0, 1200.0, 1150.0]  # one value per period</pre>
 				</div>
 
 				<h6 ${subtitle_style}>Return Format:</h6>
@@ -472,6 +473,9 @@ frappe.ui.form.on("Financial Report Column Enhanced", {
 	label(frm) {
 		refresh_open_column_settings_editors(frm);
 	},
+	empty_column(frm) {
+		refresh_open_column_settings_editors(frm);
+	},
 	default_is_formula(frm) {
 		refresh_open_column_settings_editors(frm);
 	},
@@ -521,8 +525,12 @@ function save_column_settings(cdt, cdn, settings) {
 			calculation_formula: val.calculation_formula || "",
 		};
 	}
-	const json = Object.keys(cleaned).length ? JSON.stringify(cleaned) : "";
-	frappe.model.set_value(cdt, cdn, "column_settings", json);
+	frappe.model.set_value(cdt, cdn, "column_settings", serialize_column_settings(cleaned));
+}
+
+function serialize_column_settings(settings) {
+	// MariaDB JSON columns reject empty strings; use null when there is nothing to store.
+	return Object.keys(settings || {}).length ? JSON.stringify(settings) : null;
 }
 
 function value_columns(frm) {
@@ -549,7 +557,7 @@ function prune_stale_column_settings_on_form(frm) {
 				row.doctype,
 				row.name,
 				"column_settings",
-				Object.keys(pruned).length ? JSON.stringify(pruned) : ""
+				serialize_column_settings(pruned)
 			);
 		}
 	}
@@ -608,6 +616,7 @@ function set_up_column_settings_editor(frm, cdt, cdn) {
 	wrapper.append(panel);
 
 	columns.forEach((col) => {
+		if (cint(col.empty_column)) return;
 		const code = (col.column_code || "").trim();
 		const stored = settings[code] || {};
 		const use_default = !settings[code];
