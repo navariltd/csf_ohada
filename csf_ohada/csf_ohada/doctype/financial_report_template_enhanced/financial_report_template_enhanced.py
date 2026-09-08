@@ -15,6 +15,7 @@ from csf_ohada.csf_ohada.doctype.financial_report_template_enhanced.column_layou
 	get_measure_columns,
 	get_template_column_codes,
 	prune_row_column_settings,
+	sanitize_row_column_settings,
 )
 from csf_ohada.csf_ohada.doctype.financial_report_template_enhanced.financial_report_validation import (
 	TemplateValidator,
@@ -50,6 +51,12 @@ class FinancialReportTemplateEnhanced(Document):
 	def before_validate(self):
 		self.clear_hidden_fields()
 		self._prune_stale_column_references()
+		self._sanitize_column_settings()
+
+	def _sanitize_column_settings(self):
+		"""Blank JSON strings fail MariaDB's json_valid() CHECK on column_settings."""
+		for row in self.rows or []:
+			sanitize_row_column_settings(row)
 
 	def _prune_stale_column_references(self):
 		"""Remove row column settings that point at deleted Value Columns."""
@@ -71,6 +78,12 @@ class FinancialReportTemplateEnhanced(Document):
 
 	def clear_hidden_fields(self):
 		style_data_sources = {"Blank Line", "Column Break", "Section Break"}
+
+		for col in self.columns or []:
+			if getattr(col, "empty_column", 0):
+				col.default_is_formula = 0
+				col.default_calculation_formula = None
+				col.default_balance_type = None
 
 		for row in self.rows:
 			if row.data_source != "Account Data":
@@ -109,6 +122,8 @@ class FinancialReportTemplateEnhanced(Document):
 				)
 
 		for col in self.columns or []:
+			if getattr(col, "empty_column", 0):
+				continue
 			if col.default_is_formula and not (col.default_calculation_formula or "").strip():
 				frappe.throw(
 					_("Value Column {0} is marked as a formula default but no formula is set").format(

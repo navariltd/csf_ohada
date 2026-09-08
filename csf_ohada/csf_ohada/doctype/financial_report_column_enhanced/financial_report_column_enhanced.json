@@ -12,6 +12,7 @@
   "column_break_meta",
   "fieldtype",
   "hidden",
+  "empty_column",
   "section_break_defaults",
   "default_balance_type",
   "default_is_formula",
@@ -39,6 +40,7 @@
   {
    "columns": 2,
    "default": "All Periods",
+   "depends_on": "eval:!doc.empty_column",
    "fieldname": "period_scope",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -47,6 +49,7 @@
    "reqd": 1
   },
   {
+   "depends_on": "eval:!doc.empty_column",
    "description": "Optional. Placeholders: {label}, {period}. Default: {label} ({period})",
    "fieldname": "title_template",
    "fieldtype": "Data",
@@ -58,6 +61,7 @@
   },
   {
    "default": "Currency",
+   "depends_on": "eval:!doc.empty_column",
    "fieldname": "fieldtype",
    "fieldtype": "Select",
    "label": "Value Type",
@@ -71,12 +75,21 @@
    "label": "Hidden"
   },
   {
+   "default": "0",
+   "description": "Show only this column's label. All row cells stay empty.",
+   "fieldname": "empty_column",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Empty Column"
+  },
+  {
+   "depends_on": "eval:!doc.empty_column",
    "fieldname": "section_break_defaults",
    "fieldtype": "Section Break",
    "label": "Defaults for all rows"
   },
   {
-   "depends_on": "eval:!doc.default_is_formula",
+   "depends_on": "eval:!doc.empty_column && !doc.default_is_formula",
    "description": "Override row Balance Type for this column on every line. Leave empty to use each row's Balance Type.",
    "fieldname": "default_balance_type",
    "fieldtype": "Select",
@@ -85,6 +98,7 @@
   },
   {
    "default": "0",
+   "depends_on": "eval:!doc.empty_column",
    "description": "Evaluate the default as a calculation formula instead of an account filter (e.g. GROSS - DEPR on every row)",
    "fieldname": "default_is_formula",
    "fieldtype": "Check",
@@ -92,6 +106,7 @@
    "label": "Default is Formula"
   },
   {
+   "depends_on": "eval:!doc.empty_column",
    "description": "Default formula or account filter for this column. Leave empty to use each row's Formula / Account Filter. A line-level column setting still wins.",
    "fieldname": "default_calculation_formula",
    "fieldtype": "Code",
@@ -102,7 +117,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-08-27 18:20:36.092914",
+ "modified": "2026-09-08 14:43:58.955589",
  "modified_by": "Administrator",
  "module": "Csf Ohada",
  "name": "Financial Report Column Enhanced",

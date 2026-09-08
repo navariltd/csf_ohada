@@ -16,6 +16,7 @@ DEFAULT_MEASURE = "_default"
 
 MODE_ACCOUNT = "account"
 MODE_FORMULA = "formula"
+MODE_EMPTY = "empty"
 
 
 @dataclass(frozen=True)
@@ -26,6 +27,7 @@ class MeasureColumn:
 	title_template: str | None = None
 	fieldtype: str | None = "Currency"
 	hidden: bool = False
+	empty: bool = False
 
 	@property
 	def is_default(self) -> bool:
@@ -44,6 +46,7 @@ def get_measure_columns(template) -> list[MeasureColumn]:
 				title_template="{period}",
 				fieldtype="Currency",
 				hidden=False,
+				empty=False,
 			)
 		]
 
@@ -55,6 +58,7 @@ def get_measure_columns(template) -> list[MeasureColumn]:
 			title_template=col.title_template,
 			fieldtype=col.fieldtype or "Currency",
 			hidden=bool(col.hidden),
+			empty=bool(getattr(col, "empty_column", 0)),
 		)
 		for col in columns
 		if (col.column_code or "").strip()
@@ -82,6 +86,20 @@ def parse_row_column_settings(row) -> dict[str, dict[str, Any]]:
 	if error:
 		return {}
 	return data
+
+
+def sanitize_row_column_settings(row) -> bool:
+	"""Coerce blank column_settings to None so MariaDB's JSON CHECK accepts the row.
+
+	Empty strings fail `json_valid()` (error 4025). Returns True if the value changed.
+	"""
+	raw = getattr(row, "column_settings", None)
+	if raw is None:
+		return False
+	if isinstance(raw, str) and not raw.strip():
+		row.column_settings = None
+		return True
+	return False
 
 
 def load_row_column_settings(row) -> tuple[dict[str, dict[str, Any]], str | None]:
@@ -222,6 +240,8 @@ def iter_formula_column_settings(row, template) -> list[FormulaColumnSetting]:
 	results = []
 
 	for measure in measures:
+		if measure.empty:
+			continue
 		settings = resolve_row_settings(row, measure.column_code, column_defaults)
 		formula = (settings.get("calculation_formula") or "").strip()
 		if not formula:
@@ -257,6 +277,10 @@ class ColumnPlanEntry:
 	def is_formula(self) -> bool:
 		return self.mode == MODE_FORMULA
 
+	@property
+	def is_empty(self) -> bool:
+		return self.mode == MODE_EMPTY
+
 
 def _build_plan_entries(
 	row,
@@ -267,6 +291,15 @@ def _build_plan_entries(
 	entries = []
 
 	for measure in measures:
+		if measure.empty:
+			entries.append(
+				ColumnPlanEntry(
+					column_code=measure.column_code,
+					mode=MODE_EMPTY,
+				)
+			)
+			continue
+
 		settings = resolve_row_settings(row, measure.column_code, column_defaults)
 
 		if data_source == "Calculated Amount":
@@ -363,10 +396,12 @@ def period_in_scope(period_index: int, period_count: int, period_scope: str) -> 
 	return True
 
 
-def make_fieldname(column_code: str, period_key: str) -> str:
+def make_fieldname(column_code: str, period_key: str | None = None) -> str:
 	if column_code == DEFAULT_MEASURE:
-		return period_key
+		return period_key or column_code
 	safe_code = "".join(ch if ch.isalnum() or ch == "_" else "_" for ch in column_code).lower()
+	if not period_key:
+		return safe_code
 	return f"{safe_code}_{period_key}"
 
 
@@ -387,6 +422,17 @@ def iter_visible_value_columns(measures: list[MeasureColumn], period_list: list[
 
 	for measure in measures:
 		if measure.hidden:
+			continue
+		if measure.empty:
+			result.append(
+				{
+					"measure": measure,
+					"period": None,
+					"period_index": None,
+					"fieldname": make_fieldname(measure.column_code),
+					"label": measure.label or measure.column_code,
+				}
+			)
 			continue
 		for period_index in period_indices:
 			if not period_in_scope(period_index, period_count, measure.period_scope):

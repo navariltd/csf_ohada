@@ -10,7 +10,7 @@ from dataclasses import dataclass, field
 from typing import Any
 
 import frappe
-from frappe import _
+from frappe import _, is_whitelisted
 from frappe.database.operator_map import OPERATOR_MAP
 
 FORMULA_MATH_FUNCTIONS = {
@@ -24,6 +24,30 @@ FORMULA_MATH_FUNCTIONS = {
 	"ceil",
 	"floor",
 }
+
+
+def get_valid_api_method(api_path: str):
+	"""Resolve `api_path`, ensuring it is whitelisted and permits GET (i.e. read-only)."""
+	method = frappe.get_attr(api_path)
+	is_whitelisted(method)
+
+	if "GET" not in frappe.allowed_http_methods_for_whitelisted_func.get(method, ()):
+		frappe.throw(
+			_("Method {0} must permit GET requests").format(frappe.bold(api_path)),
+			frappe.PermissionError,
+			title=_("Method Not Allowed"),
+		)
+
+	return method
+
+
+def get_formula_field_label(data_source: str) -> str:
+	# Must mirror the `labels` map in financial_report_template.js (update_formula_label),
+	labels = {
+		"Account Data": _("Account Filter"),
+		"Custom API": _("API Method Path"),
+	}
+	return labels.get(data_source, _("Calculation Formula"))
 
 
 @dataclass
@@ -775,27 +799,24 @@ class FormulaValidator(Validator):
 			)
 			return result
 
-		# Method exists?
 		try:
-			module_path, method_name = api_path.rsplit(".", 1)
-			module = frappe.get_module(module_path)
-
-			if not hasattr(module, method_name):
-				result.add_error(
-					ValidationIssue(
-						message=f"Method '{method_name}' not found in module '{module_path}' (might be environment-specific)",
-						row_idx=row.idx,
-						field="Formula",
-					)
-				)
+			get_valid_api_method(api_path)
 		except Exception as e:
-			result.add_error(
-				ValidationIssue(
-					message=f"Could not validate API path: {e!s}",
-					row_idx=row.idx,
-					field="Formula",
+			if isinstance(e, frappe.PermissionError | frappe.ValidationError):
+				# frappe.throw inside get_valid_api_method logs a message that would pop up in UI
+				frappe.clear_last_message()
+
+			if isinstance(e, frappe.PermissionError):
+				message = _("{0}: Method '{1}' must be whitelisted and permit GET requests").format(
+					get_formula_field_label(row.data_source), api_path
 				)
-			)
+
+			else:
+				message = _("Could not validate {0}: {1}").format(
+					get_formula_field_label(row.data_source), str(e)
+				)
+
+			result.add_error(ValidationIssue(message=message, row_idx=row.idx, field="Formula"))
 
 		return result
 

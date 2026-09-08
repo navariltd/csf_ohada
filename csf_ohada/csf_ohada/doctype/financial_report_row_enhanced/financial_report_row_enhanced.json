@@ -21,6 +21,7 @@
   "hide_when_empty",
   "reverse_sign",
   "include_in_charts",
+  "show_line_reference",
   "section_break_ornw",
   "column_break_asfe",
   "advanced_filtering",
@@ -39,6 +40,14 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Line Reference"
+  },
+  {
+   "columns": 1,
+   "default": "1",
+   "description": "Show this line's reference code in the report. Uncheck to output None.",
+   "fieldname": "show_line_reference",
+   "fieldtype": "Check",
+   "label": "Show Line Reference"
   },
   {
    "description": "Text displayed on the financial statement (e.g., 'Total Revenue', 'Cash and Cash Equivalents')",
@@ -200,7 +209,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-08-27 18:19:54.873622",
+ "modified": "2026-09-08 14:44:38.132568",
  "modified_by": "Administrator",
  "module": "Csf Ohada",
  "name": "Financial Report Row Enhanced",
