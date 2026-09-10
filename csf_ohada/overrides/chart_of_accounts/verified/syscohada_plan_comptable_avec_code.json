@@ -1595,8 +1595,7 @@
             "account_number": "283800",
             "account_category": "Amortissements des aménagements. agencements et installations"
           },
-          "account_number": "283000",
-          "account_category": "Amortissements des bâtiments, installations techniques et agencements"
+          "account_number": "283000"
         },
         "Amortissements du matériel": {
           "Amortissements du matériel et outillage industriel et commercial": {
@@ -1750,8 +1749,7 @@
             "account_number": "293900",
             "account_category": "Dépréciations des bâtiments"
           },
-          "account_number": "293000",
-          "account_category": "Dépréciations des bâtiments, installations techniques et agencements"
+          "account_number": "293000"
         },
         "Dépréciations de matériel, du mobilier et de l’actif biologique": {
           "Dépréciations du matériel et outillage industriel et commercial": {
@@ -2587,8 +2585,7 @@
         },
         "474-Compte de répartition périodique des charges et des produits": {
           "Compte de répartition périodique des produits": {
-            "account_number": "474700",
-            "account_category": "Autres créances"
+            "account_number": "474700"
           }
         },
         "475-Compte transitoire, ajustement spécial lié à la révision du SYSCOHADA": {
@@ -3050,8 +3047,7 @@
             "account_number": "444900",
             "account_category": "Autres créances"
           },
-          "account_number": "444000",
-          "account_category": "Autres dettes"
+          "account_number": "444000"
         },
         "État, autres taxes sur le chiffre d’affaires": {
           "account_number": "446000",
@@ -4682,8 +4678,7 @@
             "account_number": "681300",
             "account_category": "Dotations amort. immob. corp."
           },
-          "account_number": "681000",
-          "account_category": "Dotations aux amortissements, aux provisions et dépréciations"
+          "account_number": "681000"
         },
         "account_number": "68"
       },
@@ -4701,8 +4696,7 @@
             "account_number": "691400",
             "account_category": "Dotations prov et dépr immob corp"
           },
-          "account_number": "691000",
-          "account_category": "Dotations aux amortissements, aux provisions et dépréciations"
+          "account_number": "691000"
         },
         "Dotations aux provisions et aux dépréciations financières": {
           "Dotations aux provisions pour risques et charges": {
@@ -4713,8 +4707,7 @@
             "account_number": "697200",
             "account_category": "Dotations prov et dépr d'immob financières"
           },
-          "account_number": "697000",
-          "account_category": "Dotations aux provisions et aux dépréciations financières"
+          "account_number": "697000"
         },
         "account_number": "69"
       },

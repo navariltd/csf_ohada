@@ -1595,8 +1595,7 @@
                         "account_number": "283800",
                         "account_category": "Amortissements des am\u00e9nagements. agencements et installations"
                     },
-                    "account_number": "283000",
-                    "account_category": "Amortissements des b\u00e2timents, installations techniques et agencements"
+                    "account_number": "283000"
                 },
                 "Amortissements du mat\u00e9riel": {
                     "Amortissements du mat\u00e9riel et outillage industriel et commercial": {
@@ -1750,8 +1749,7 @@
                         "account_number": "293900",
                         "account_category": "D\u00e9pr\u00e9ciations des b\u00e2timents"
                     },
-                    "account_number": "293000",
-                    "account_category": "D\u00e9pr\u00e9ciations des b\u00e2timents, installations techniques et agencements"
+                    "account_number": "293000"
                 },
                 "D\u00e9pr\u00e9ciations de mat\u00e9riel, du mobilier et de l\u2019actif biologique": {
                     "D\u00e9pr\u00e9ciations du mat\u00e9riel et outillage industriel et commercial": {
@@ -2587,8 +2585,7 @@
                 },
                 "474-Compte de r\u00e9partition p\u00e9riodique des charges et des produits": {
                     "Compte de r\u00e9partition p\u00e9riodique des produits": {
-                        "account_number": "474700",
-                        "account_category": "Autres cr\u00e9ances"
+                        "account_number": "474700"
                     }
                 },
                 "475-Compte transitoire, ajustement sp\u00e9cial li\u00e9 \u00e0 la r\u00e9vision du SYSCOHADA": {
@@ -3050,8 +3047,7 @@
                         "account_number": "444900",
                         "account_category": "Autres cr\u00e9ances"
                     },
-                    "account_number": "444000",
-                    "account_category": "Autres dettes"
+                    "account_number": "444000"
                 },
                 "\u00c9tat, autres taxes sur le chiffre d\u2019affaires": {
                     "account_number": "446000",
@@ -4682,8 +4678,7 @@
                         "account_number": "681300",
                         "account_category": "Dotations amort. immob. corp."
                     },
-                    "account_number": "681000",
-                    "account_category": "Dotations aux amortissements, aux provisions et d\u00e9pr\u00e9ciations"
+                    "account_number": "681000"
                 },
                 "account_number": "68"
             },
@@ -4701,8 +4696,7 @@
                         "account_number": "691400",
                         "account_category": "Dotations prov et d\u00e9pr immob corp"
                     },
-                    "account_number": "691000",
-                    "account_category": "Dotations aux amortissements, aux provisions et d\u00e9pr\u00e9ciations"
+                    "account_number": "691000"
                 },
                 "Dotations aux provisions et aux d\u00e9pr\u00e9ciations financi\u00e8res": {
                     "Dotations aux provisions pour risques et charges": {
@@ -4713,8 +4707,7 @@
                         "account_number": "697200",
                         "account_category": "Dotations prov et d\u00e9pr d'immob financi\u00e8res"
                     },
-                    "account_number": "697000",
-                    "account_category": "Dotations aux provisions et aux d\u00e9pr\u00e9ciations financi\u00e8res"
+                    "account_number": "697000"
                 },
                 "account_number": "69"
             },
