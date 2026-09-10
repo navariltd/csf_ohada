@@ -515,42 +515,42 @@
                 "Dettes li\u00e9es \u00e0 des participations": {
                     "Dettes li\u00e9es \u00e0 des participations (groupe)": {
                         "account_number": "181100",
-                        "account_category": "Dettes de location acquisition"
+                        "account_category": "Emprunts et dettes financi\u00e8res diverses"
                     },
                     "Dettes li\u00e9es \u00e0 des participations (hors groupe)": {
                         "account_number": "181200",
-                        "account_category": "Dettes de location acquisition"
+                        "account_category": "Emprunts et dettes financi\u00e8res diverses"
                     },
                     "account_number": "181000",
-                    "account_category": "Dettes de location acquisition"
+                    "account_category": "Emprunts et dettes financi\u00e8res diverses"
                 },
                 "Dettes li\u00e9es \u00e0 des soci\u00e9t\u00e9s en participation": {
                     "account_number": "182000",
-                    "account_category": "Dettes de location acquisition"
+                    "account_category": "Emprunts et dettes financi\u00e8res diverses"
                 },
                 "Int\u00e9r\u00eats courus sur dettes li\u00e9es \u00e0 des participations": {
                     "account_number": "183000",
-                    "account_category": "Dettes de location acquisition"
+                    "account_category": "Emprunts et dettes financi\u00e8res diverses"
                 },
                 "Comptes permanents bloqu\u00e9s des \u00e9tablissements et succursales": {
                     "account_number": "184000",
-                    "account_category": "Dettes de location acquisition"
+                    "account_category": "Emprunts et dettes financi\u00e8res diverses"
                 },
                 "Comptes permanents non bloqu\u00e9s des \u00e9tablissements et succursales": {
                     "account_number": "185000",
-                    "account_category": "Dettes de location acquisition"
+                    "account_category": "Emprunts et dettes financi\u00e8res diverses"
                 },
                 "Comptes de liaison charges": {
                     "account_number": "186000",
-                    "account_category": "Dettes de location acquisition"
+                    "account_category": "Emprunts et dettes financi\u00e8res diverses"
                 },
                 "Comptes de liaison produits": {
                     "account_number": "187000",
-                    "account_category": "Dettes de location acquisition"
+                    "account_category": "Emprunts et dettes financi\u00e8res diverses"
                 },
                 "Comptes de liaison des soci\u00e9t\u00e9s en participation": {
                     "account_number": "188000",
-                    "account_category": "Dettes de location acquisition"
+                    "account_category": "Emprunts et dettes financi\u00e8res diverses"
                 },
                 "account_number": "18"
             },
@@ -633,45 +633,45 @@
                     "Brevets": {
                         "account_type": "Fixed Asset",
                         "account_number": "212100",
-                        "account_category": "Brevet, licences, logiciels et droits similaires"
+                        "account_category": "Brevet. licences. logiciels et droits similaires"
                     },
                     "Licences": {
                         "account_type": "Fixed Asset",
                         "account_number": "212200",
-                        "account_category": "Brevet, licences, logiciels et droits similaires"
+                        "account_category": "Brevet. licences. logiciels et droits similaires"
                     },
                     "Concessions de service public": {
                         "account_type": "Fixed Asset",
                         "account_number": "212300",
-                        "account_category": "Brevet, licences, logiciels et droits similaires"
+                        "account_category": "Brevet. licences. logiciels et droits similaires"
                     },
                     "Autres concessions et droits similaires": {
                         "account_type": "Fixed Asset",
                         "account_number": "212800",
-                        "account_category": "Brevet, licences, logiciels et droits similaires"
+                        "account_category": "Brevet. licences. logiciels et droits similaires"
                     },
                     "account_number": "212000",
-                    "account_category": "Brevet, licences, logiciels et droits similaires"
+                    "account_category": "Brevet. licences. logiciels et droits similaires"
                 },
                 "Logiciels et sites internet": {
                     "account_type": "Fixed Asset",
                     "Logiciels": {
                         "account_type": "Fixed Asset",
                         "account_number": "213100",
-                        "account_category": "Brevet, licences, logiciels et droits similaires"
+                        "account_category": "Brevet. licences. logiciels et droits similaires"
                     },
                     "Sites internet": {
                         "account_type": "Fixed Asset",
                         "account_number": "213200",
-                        "account_category": "Brevet, licences, logiciels et droits similaires"
+                        "account_category": "Brevet. licences. logiciels et droits similaires"
                     },
                     "account_number": "213000",
-                    "account_category": "Brevet, licences, logiciels et droits similaires"
+                    "account_category": "Brevet. licences. logiciels et droits similaires"
                 },
                 "Marques": {
                     "account_type": "Fixed Asset",
                     "account_number": "214000",
-                    "account_category": "Brevet, licences, logiciels et droits similaires"
+                    "account_category": "Brevet. licences. logiciels et droits similaires"
                 },
                 "Fonds commercial": {
                     "account_type": "Fixed Asset",
@@ -992,38 +992,38 @@
                 "Am\u00e9nagements, agencements et installations techniques": {
                     "Installations complexes sp\u00e9cialis\u00e9es sur sol propre": {
                         "account_number": "234100",
-                        "account_category": "Am\u00e9nagement, agencements et Installations"
+                        "account_category": "Am\u00e9nagement. agencements et Installations"
                     },
                     "Installations complexes sp\u00e9cialis\u00e9es sur sol d\u2019autrui": {
                         "account_number": "234200",
-                        "account_category": "Am\u00e9nagement, agencements et Installations"
+                        "account_category": "Am\u00e9nagement. agencements et Installations"
                     },
                     "Installations \u00e0 caract\u00e8re sp\u00e9cifique sur sol propre": {
                         "account_number": "234300",
-                        "account_category": "Am\u00e9nagement, agencements et Installations"
+                        "account_category": "Am\u00e9nagement. agencements et Installations"
                     },
                     "Installations \u00e0 caract\u00e8re sp\u00e9cifique sur sol d\u2019autrui": {
                         "account_number": "234400",
-                        "account_category": "Am\u00e9nagement, agencements et Installations"
+                        "account_category": "Am\u00e9nagement. agencements et Installations"
                     },
                     "Am\u00e9nagements et agencements des b\u00e2timents": {
                         "account_number": "234500",
-                        "account_category": "Am\u00e9nagement, agencements et Installations"
+                        "account_category": "Am\u00e9nagement. agencements et Installations"
                     },
                     "account_number": "234000",
-                    "account_category": "Am\u00e9nagement, agencements et Installations"
+                    "account_category": "Am\u00e9nagement. agencements et Installations"
                 },
                 "Am\u00e9nagements de bureaux": {
                     "Installations g\u00e9n\u00e9rales": {
                         "account_number": "235100",
-                        "account_category": "Am\u00e9nagement, agencements et Installations"
+                        "account_category": "Am\u00e9nagement. agencements et Installations"
                     },
                     "Autres am\u00e9nagements de bureaux": {
                         "account_number": "235800",
-                        "account_category": "Am\u00e9nagement, agencements et Installations"
+                        "account_category": "Am\u00e9nagement. agencements et Installations"
                     },
                     "account_number": "235000",
-                    "account_category": "Am\u00e9nagement, agencements et Installations"
+                    "account_category": "Am\u00e9nagement. agencements et Installations"
                 },
                 "B\u00e2timents industriels, agricoles et commerciaux mis en concession": {
                     "account_number": "237000",
@@ -1031,32 +1031,32 @@
                 },
                 "Autres installations et agencements": {
                     "account_number": "238000",
-                    "account_category": "Am\u00e9nagement, agencements et Installations"
+                    "account_category": "Am\u00e9nagement. agencements et Installations"
                 },
                 "B\u00e2timents am\u00e9nagements, agencements et installations en cours": {
                     "B\u00e2timents en cours": {
                         "account_number": "239100",
-                        "account_category": "Am\u00e9nagement, agencements et Installations"
+                        "account_category": "Am\u00e9nagement. agencements et Installations"
                     },
                     "Installations en cours": {
                         "account_number": "239200",
-                        "account_category": "Am\u00e9nagement, agencements et Installations"
+                        "account_category": "Am\u00e9nagement. agencements et Installations"
                     },
                     "Ouvrages d\u2019infrastructure en cours": {
                         "account_number": "239300",
-                        "account_category": "Am\u00e9nagement, agencements et Installations"
+                        "account_category": "Am\u00e9nagement. agencements et Installations"
                     },
                     "Am\u00e9nagements et agencements et installations techniques en cours": {
                         "account_number": "239400",
-                        "account_category": "Am\u00e9nagement, agencements et Installations"
+                        "account_category": "Am\u00e9nagement. agencements et Installations"
                     },
                     "Am\u00e9nagements de bureaux en cours": {
                         "account_number": "239500",
-                        "account_category": "Am\u00e9nagement, agencements et Installations"
+                        "account_category": "Am\u00e9nagement. agencements et Installations"
                     },
                     "Autres installations et agencements en cours": {
                         "account_number": "239800",
-                        "account_category": "Am\u00e9nagement, agencements et Installations"
+                        "account_category": "Am\u00e9nagement. agencements et Installations"
                     },
                     "account_number": "239000",
                     "account_category": "B\u00e2timents"
@@ -1067,111 +1067,111 @@
                 "Mat\u00e9riel et outillage industriel et commercial": {
                     "Mat\u00e9riel industriel": {
                         "account_number": "241100",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Outillage industriel": {
                         "account_number": "241200",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Mat\u00e9riel commercial": {
                         "account_number": "241300",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Outillage commercial": {
                         "account_number": "241400",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Mat\u00e9riel & outillage industriel et commercial de location-acquisition": {
                         "account_number": "241600",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "account_number": "241000",
-                    "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                    "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                 },
                 "Mat\u00e9riel et outillage agricole": {
                     "Mat\u00e9riel agricole": {
                         "account_number": "242100",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Outillage agricole": {
                         "account_number": "242200",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Mat\u00e9riel & outillage agricole de location-acquisition": {
                         "account_number": "242600",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "account_number": "242000",
-                    "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                    "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                 },
                 "Mat\u00e9riel d\u2019emballage r\u00e9cup\u00e9rable et identifiable": {
                     "account_number": "243000",
-                    "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                    "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                 },
                 "Mat\u00e9riel et mobilier": {
                     "Mat\u00e9riel de bureau": {
                         "account_number": "244100",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Mat\u00e9riel informatique": {
                         "account_number": "244200",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Mat\u00e9riel bureautique": {
                         "account_number": "244300",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Mobilier de bureau": {
                         "account_number": "244400",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Mat\u00e9riel et mobilier immeubles de placement": {
                         "account_number": "244500",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Mat\u00e9riel et mobilier de location acquisition": {
                         "account_number": "244600",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Mat\u00e9riel et mobilier des logements du personnel": {
                         "account_number": "244700",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "account_number": "244000",
-                    "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                    "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                 },
                 "Mat\u00e9riel de transport": {
                     "Mat\u00e9riel automobile": {
                         "account_number": "245100",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Mat\u00e9riel ferroviaire": {
                         "account_number": "245200",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Mat\u00e9riel fluvial, lagunaire": {
                         "account_number": "245300",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Mat\u00e9riel naval": {
                         "account_number": "245400",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Mat\u00e9riel a\u00e9rien": {
                         "account_number": "245500",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Mat\u00e9riel de transport de location-acquisition": {
                         "account_number": "245600",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Mat\u00e9riel hippomobile": {
                         "account_number": "245700",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Autres mat\u00e9riels de transport": {
                         "account_number": "245800",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "account_number": "245000",
                     "account_category": "Mat\u00e9riel de transport"
@@ -1179,71 +1179,71 @@
                 "Actifs biologiques": {
                     "Cheptel, animaux de trait": {
                         "account_number": "246100",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Cheptel, animaux reproducteurs": {
                         "account_number": "246200",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Animaux de garde": {
                         "account_number": "246300",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Plantations agricoles": {
                         "account_number": "246500",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Autres actifs biologiques": {
                         "account_number": "246800",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "account_number": "246000",
-                    "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                    "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                 },
                 "Agencements, am\u00e9nagements du mat\u00e9riel et actifs biologiques": {
                     "Agencements et am\u00e9nagements du mat\u00e9riel": {
                         "account_number": "247100",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Agencements et am\u00e9nagements des actifs biologiques": {
                         "account_number": "247200",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Autres agencements, am\u00e9nagements du mat\u00e9riel et actifs biologiques": {
                         "account_number": "247800",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "account_number": "247000",
-                    "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                    "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                 },
                 "Autres mat\u00e9riels et mobiliers": {
                     "Collections et \u0153uvres d\u2019art": {
                         "account_number": "248100",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Divers mat\u00e9riels mobiliers": {
                         "account_number": "248800",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "account_number": "248000",
-                    "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                    "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                 },
                 "Mat\u00e9riels et actifs biologiques en cours": {
                     "Mat\u00e9riel et outillage industriel et commercial": {
                         "account_number": "249100",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Mat\u00e9riel et outillage agricole": {
                         "account_number": "249200",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Mat\u00e9riel d\u2019emballage r\u00e9cup\u00e9rable et identifiable": {
                         "account_number": "249300",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Mat\u00e9riel et mobilier de bureau": {
                         "account_number": "249400",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Mat\u00e9riel de transport": {
                         "account_number": "249500",
@@ -1251,29 +1251,29 @@
                     },
                     "Actifs biologiques": {
                         "account_number": "249600",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Agencements am\u00e9nagements du mat\u00e9riel et actifs biologiques": {
                         "account_number": "249700",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Autres mat\u00e9riels et actifs biologiques en cours": {
                         "account_number": "249800",
-                        "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "account_number": "249000",
-                    "account_category": "Mat\u00e9riel, mobilier et actifs biologiques"
+                    "account_category": "Mat\u00e9riel. mobilier et actifs biologiques"
                 },
                 "account_number": "24"
             },
             "Avances et acomptes vers\u00e9s sur immobilisations": {
                 "Avances et acomptes vers\u00e9s sur immobilisations incorporelles": {
                     "account_number": "251000",
-                    "account_category": "Avances et acomptes vers\u00e9s sur immobilisations"
+                    "account_category": "Avances et acomptes vers\u00e9s sur immob incorp."
                 },
                 "Avances et acomptes vers\u00e9s sur immobilisations corporelles": {
                     "account_number": "252000",
-                    "account_category": "Avances et acomptes vers\u00e9s sur immobilisations"
+                    "account_category": "Avances et acomptes vers\u00e9s sur immob corp."
                 },
                 "account_number": "25"
             },
@@ -1523,17 +1523,17 @@
                     "Amortissements des brevets, licences, concessions et droits similaires": {
                         "account_type": "Accumulated Depreciation",
                         "account_number": "281200",
-                        "account_category": "Amortissements des brevets, licences, concessions et droits similaires"
+                        "account_category": "Amortissements des brevets. licences. concessions et droits similaires"
                     },
                     "Amortissements des logiciels et sites internet": {
                         "account_type": "Accumulated Depreciation",
                         "account_number": "281300",
-                        "account_category": "Amortissements des brevets, licences, concessions et droits similaires"
+                        "account_category": "Amortissements des brevets. licences. concessions et droits similaires"
                     },
                     "Amortissements des marques": {
                         "account_type": "Accumulated Depreciation",
                         "account_number": "281400",
-                        "account_category": "Amortissements des brevets, licences, concessions et droits similaires"
+                        "account_category": "Amortissements des brevets. licences. concessions et droits similaires"
                     },
                     "Amortissements du fonds commercial": {
                         "account_type": "Accumulated Depreciation",
@@ -1581,11 +1581,11 @@
                     },
                     "Amortissements des am\u00e9nagements, agencements et installations techniques": {
                         "account_number": "283400",
-                        "account_category": "Amortissements des am\u00e9nagements, agencements et installations"
+                        "account_category": "Amortissements des am\u00e9nagements. agencements et installations"
                     },
                     "Amortissements des am\u00e9nagements de bureaux": {
                         "account_number": "283500",
-                        "account_category": "Amortissements des am\u00e9nagements, agencements et installations"
+                        "account_category": "Amortissements des am\u00e9nagements. agencements et installations"
                     },
                     "Amortissements des b\u00e2timents industriels, agricoles et commerciaux mis en concession": {
                         "account_number": "283700",
@@ -1593,7 +1593,7 @@
                     },
                     "Amortissements des autres installations et agencements": {
                         "account_number": "283800",
-                        "account_category": "Amortissements des am\u00e9nagements, agencements et installations"
+                        "account_category": "Amortissements des am\u00e9nagements. agencements et installations"
                     },
                     "account_number": "283000",
                     "account_category": "Amortissements des b\u00e2timents, installations techniques et agencements"
@@ -1601,19 +1601,19 @@
                 "Amortissements du mat\u00e9riel": {
                     "Amortissements du mat\u00e9riel et outillage industriel et commercial": {
                         "account_number": "284100",
-                        "account_category": "Amortissements du mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Amortissements du mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Amortissements du mat\u00e9riel et outillage agricole": {
                         "account_number": "284200",
-                        "account_category": "Amortissements du mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Amortissements du mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Amortissements du mat\u00e9riel d\u2019emballage r\u00e9cup\u00e9rable et identifiable": {
                         "account_number": "284300",
-                        "account_category": "Amortissements du mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Amortissements du mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Amortissements du mat\u00e9riel et mobilier": {
                         "account_number": "284400",
-                        "account_category": "Amortissements du mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Amortissements du mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Amortissements du mat\u00e9riel de transport": {
                         "account_number": "284500",
@@ -1621,15 +1621,15 @@
                     },
                     "Amortissements des actifs biologiques": {
                         "account_number": "284600",
-                        "account_category": "Amortissements du mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Amortissements du mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Amortissements des agencements et am\u00e9nagements du mat\u00e9riel et des actifs biologiques": {
                         "account_number": "284700",
-                        "account_category": "Amortissements du mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Amortissements du mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "Amortissements des autres mat\u00e9riels": {
                         "account_number": "284800",
-                        "account_category": "Amortissements du mat\u00e9riel, mobilier et actifs biologiques"
+                        "account_category": "Amortissements du mat\u00e9riel. mobilier et actifs biologiques"
                     },
                     "account_number": "284000",
                     "account_category": "Amortissements du mat\u00e9riel"
@@ -1644,15 +1644,15 @@
                     },
                     "D\u00e9pr\u00e9ciations des brevets, licences, concessions et droits similaires": {
                         "account_number": "291200",
-                        "account_category": "D\u00e9pr\u00e9ciations des brevets, licences, concessions et droits similaires"
+                        "account_category": "D\u00e9pr\u00e9ciations des brevets. licences. concessions et droits similaires"
                     },
                     "D\u00e9pr\u00e9ciations des logiciels et sites internet": {
                         "account_number": "291300",
-                        "account_category": "D\u00e9pr\u00e9ciations des brevets, licences, concessions et droits similaires"
+                        "account_category": "D\u00e9pr\u00e9ciations des brevets. licences. concessions et droits similaires"
                     },
                     "D\u00e9pr\u00e9ciations des marques": {
                         "account_number": "291400",
-                        "account_category": "D\u00e9pr\u00e9ciations des brevets, licences, concessions et droits similaires"
+                        "account_category": "D\u00e9pr\u00e9ciations des brevets. licences. concessions et droits similaires"
                     },
                     "D\u00e9pr\u00e9ciations du fonds commercial": {
                         "account_number": "291500",
@@ -1720,35 +1720,35 @@
                 "D\u00e9pr\u00e9ciations des b\u00e2timents, installations techniques et agencements": {
                     "D\u00e9pr\u00e9ciations des b\u00e2timents industriels, agricoles, administratifs et commerciaux sur sol propre": {
                         "account_number": "293100",
-                        "account_category": "D\u00e9pr\u00e9ciations des b\u00e2timents, installations techniques et agencements"
+                        "account_category": "D\u00e9pr\u00e9ciations des b\u00e2timents"
                     },
                     "D\u00e9pr\u00e9ciations des b\u00e2timents industriels, agricoles, administratifs et commerciaux sur sol d\u2019autrui": {
                         "account_number": "293200",
-                        "account_category": "D\u00e9pr\u00e9ciations des b\u00e2timents, installations techniques et agencements"
+                        "account_category": "D\u00e9pr\u00e9ciations des b\u00e2timents"
                     },
                     "D\u00e9pr\u00e9ciations des ouvrages d\u2019infrastructures": {
                         "account_number": "293300",
-                        "account_category": "D\u00e9pr\u00e9ciations des b\u00e2timents, installations techniques et agencements"
+                        "account_category": "D\u00e9pr\u00e9ciations des b\u00e2timents"
                     },
                     "D\u00e9pr\u00e9ciations des am\u00e9nagements, agencements et installations techniques": {
                         "account_number": "293400",
-                        "account_category": "D\u00e9pr\u00e9ciations des b\u00e2timents, installations techniques et agencements"
+                        "account_category": "D\u00e9pr\u00e9ciations des am\u00e9nagements. agencements et installations"
                     },
                     "D\u00e9pr\u00e9ciations des am\u00e9nagements de bureaux": {
                         "account_number": "293500",
-                        "account_category": "D\u00e9pr\u00e9ciations des b\u00e2timents, installations techniques et agencements"
+                        "account_category": "D\u00e9pr\u00e9ciations des am\u00e9nagements. agencements et installations"
                     },
                     "D\u00e9pr\u00e9ciations des b\u00e2timents industriels, agricoles et commerciaux mis en concession": {
                         "account_number": "293700",
-                        "account_category": "D\u00e9pr\u00e9ciations des b\u00e2timents, installations techniques et agencements"
+                        "account_category": "D\u00e9pr\u00e9ciations des b\u00e2timents"
                     },
                     "D\u00e9pr\u00e9ciations des autres installations et agencements": {
                         "account_number": "293800",
-                        "account_category": "D\u00e9pr\u00e9ciations des b\u00e2timents, installations techniques et agencements"
+                        "account_category": "D\u00e9pr\u00e9ciations des am\u00e9nagements. agencements et installations"
                     },
                     "D\u00e9pr\u00e9ciations des b\u00e2timents et installations en cours": {
                         "account_number": "293900",
-                        "account_category": "D\u00e9pr\u00e9ciations des b\u00e2timents, installations techniques et agencements"
+                        "account_category": "D\u00e9pr\u00e9ciations des b\u00e2timents"
                     },
                     "account_number": "293000",
                     "account_category": "D\u00e9pr\u00e9ciations des b\u00e2timents, installations techniques et agencements"
@@ -1756,19 +1756,19 @@
                 "D\u00e9pr\u00e9ciations de mat\u00e9riel, du mobilier et de l\u2019actif biologique": {
                     "D\u00e9pr\u00e9ciations du mat\u00e9riel et outillage industriel et commercial": {
                         "account_number": "294100",
-                        "account_category": "D\u00e9pr\u00e9ciations de mat\u00e9riel, du mobilier et de l\u2019actif biologique"
+                        "account_category": "D\u00e9pr\u00e9ciations de mat\u00e9riel. du mobilier et de l\u2019actif biologique"
                     },
                     "D\u00e9pr\u00e9ciations du mat\u00e9riel et outillage agricole": {
                         "account_number": "294200",
-                        "account_category": "D\u00e9pr\u00e9ciations de mat\u00e9riel, du mobilier et de l\u2019actif biologique"
+                        "account_category": "D\u00e9pr\u00e9ciations de mat\u00e9riel. du mobilier et de l\u2019actif biologique"
                     },
                     "D\u00e9pr\u00e9ciations du mat\u00e9riel d\u2019emballage r\u00e9cup\u00e9rable et identifiable": {
                         "account_number": "294300",
-                        "account_category": "D\u00e9pr\u00e9ciations de mat\u00e9riel, du mobilier et de l\u2019actif biologique"
+                        "account_category": "D\u00e9pr\u00e9ciations de mat\u00e9riel. du mobilier et de l\u2019actif biologique"
                     },
                     "D\u00e9pr\u00e9ciations du mat\u00e9riel et mobilier": {
                         "account_number": "294400",
-                        "account_category": "D\u00e9pr\u00e9ciations de mat\u00e9riel, du mobilier et de l\u2019actif biologique"
+                        "account_category": "D\u00e9pr\u00e9ciations de mat\u00e9riel. du mobilier et de l\u2019actif biologique"
                     },
                     "D\u00e9pr\u00e9ciations du mat\u00e9riel de transport": {
                         "account_number": "294500",
@@ -1776,22 +1776,22 @@
                     },
                     "D\u00e9pr\u00e9ciations des actifs biologiques": {
                         "account_number": "294600",
-                        "account_category": "D\u00e9pr\u00e9ciations de mat\u00e9riel, du mobilier et de l\u2019actif biologique"
+                        "account_category": "D\u00e9pr\u00e9ciations de mat\u00e9riel. du mobilier et de l\u2019actif biologique"
                     },
                     "D\u00e9pr\u00e9ciations des agencements et am\u00e9nagements du mat\u00e9riel et des actifs biologiques": {
                         "account_number": "294700",
-                        "account_category": "D\u00e9pr\u00e9ciations de mat\u00e9riel, du mobilier et de l\u2019actif biologique"
+                        "account_category": "D\u00e9pr\u00e9ciations de mat\u00e9riel. du mobilier et de l\u2019actif biologique"
                     },
                     "D\u00e9pr\u00e9ciations des autres mat\u00e9riels": {
                         "account_number": "294800",
-                        "account_category": "D\u00e9pr\u00e9ciations de mat\u00e9riel, du mobilier et de l\u2019actif biologique"
+                        "account_category": "D\u00e9pr\u00e9ciations de mat\u00e9riel. du mobilier et de l\u2019actif biologique"
                     },
                     "D\u00e9pr\u00e9ciations de mat\u00e9riel en cours": {
                         "account_number": "294900",
-                        "account_category": "D\u00e9pr\u00e9ciations de mat\u00e9riel, du mobilier et de l\u2019actif biologique"
+                        "account_category": "D\u00e9pr\u00e9ciations de mat\u00e9riel. du mobilier et de l\u2019actif biologique"
                     },
                     "account_number": "294000",
-                    "account_category": "D\u00e9pr\u00e9ciations de mat\u00e9riel, du mobilier et de l\u2019actif biologique"
+                    "account_category": "D\u00e9pr\u00e9ciations de mat\u00e9riel. du mobilier et de l\u2019actif biologique"
                 },
                 "D\u00e9pr\u00e9ciations des avances et acomptes vers\u00e9s sur immobilisations": {
                     "D\u00e9pr\u00e9ciations des avances et acomptes vers\u00e9s sur immobilisations incorporelles": {
@@ -2215,26 +2215,26 @@
                 "Fournisseurs d\u00e9biteurs": {
                     "Fournisseurs Avances et acomptes vers\u00e9s": {
                         "account_number": "409100",
-                        "account_category": "Fournisseurs, avances vers\u00e9es"
+                        "account_category": "Fournisseurs avances vers\u00e9es"
                     },
                     "Fournisseurs Groupe avances et acomptes vers\u00e9s": {
                         "account_number": "409200",
-                        "account_category": "Fournisseurs, avances vers\u00e9es"
+                        "account_category": "Fournisseurs avances vers\u00e9es"
                     },
                     "Fournisseurs Sous-traitants avances et acomptes vers\u00e9s": {
                         "account_number": "409300",
-                        "account_category": "Fournisseurs, avances vers\u00e9es"
+                        "account_category": "Fournisseurs avances vers\u00e9es"
                     },
                     "Fournisseurs Cr\u00e9ances pour emballages et mat\u00e9riels \u00e0 rendre": {
                         "account_number": "409400",
-                        "account_category": "Fournisseurs, avances vers\u00e9es"
+                        "account_category": "Fournisseurs avances vers\u00e9es"
                     },
                     "Fournisseurs Rabais, remises, ristournes et autres avoirs \u00e0 obtenir": {
                         "account_number": "409800",
-                        "account_category": "Fournisseurs, avances vers\u00e9es"
+                        "account_category": "Fournisseurs avances vers\u00e9es"
                     },
                     "account_number": "409000",
-                    "account_category": "Fournisseurs, avances vers\u00e9es"
+                    "account_category": "Fournisseurs avances vers\u00e9es"
                 }
             },
             "41-Clients et comptes rattach\u00e9s (ACTIF)": {
@@ -2409,43 +2409,6 @@
                 }
             },
             "43-Organismes sociaux (ACTIF)": {
-                "431-S\u00e9curit\u00e9 sociale": {
-                    "Prestations familiales": {
-                        "account_number": "431100",
-                        "account_category": "Autres cr\u00e9ances"
-                    },
-                    "Accidents de travail": {
-                        "account_number": "431200",
-                        "account_category": "Autres cr\u00e9ances"
-                    },
-                    "Caisse de retraite obligatoire": {
-                        "account_number": "431300",
-                        "account_category": "Autres cr\u00e9ances"
-                    },
-                    "Caisse de retraite facultative": {
-                        "account_number": "431400",
-                        "account_category": "Autres cr\u00e9ances"
-                    },
-                    "Autres cotisations sociales": {
-                        "account_number": "431800",
-                        "account_category": "Autres cr\u00e9ances"
-                    }
-                },
-                "432-Caisses de retraite compl\u00e9mentaire": {},
-                "433-Autres organismes sociaux": {
-                    "Mutuelle": {
-                        "account_number": "433100",
-                        "account_category": "Autres cr\u00e9ances"
-                    },
-                    "Assurances retraite": {
-                        "account_number": "433200",
-                        "account_category": "Autres cr\u00e9ances"
-                    },
-                    "Assurances et organismes de sant\u00e9": {
-                        "account_number": "433300",
-                        "account_category": "Autres cr\u00e9ances"
-                    }
-                },
                 "438-Organismes sociaux, charges \u00e0 payer et produits \u00e0 recevoir": {
                     "Produits \u00e0 recevoir": {
                         "account_number": "438700",
@@ -2556,14 +2519,6 @@
                 }
             },
             "45-Organismes internationaux (ACTIF)": {
-                "Op\u00e9rations avec les organismes africains": {
-                    "account_number": "451000",
-                    "account_category": "Autres cr\u00e9ances"
-                },
-                "Op\u00e9rations avec les autres organismes internationaux": {
-                    "account_number": "452000",
-                    "account_category": "Autres cr\u00e9ances"
-                },
                 "Organismes internationaux, fonds de dotation et subventions \u00e0 recevoir": {
                     "Organismes internationaux, fonds de dotation \u00e0 recevoir": {
                         "account_number": "458100",
@@ -2892,201 +2847,248 @@
                 "Clients cr\u00e9diteurs": {
                     "Clients, avances et acomptes re\u00e7us": {
                         "account_number": "419100",
-                        "account_category": "Clients, avances re\u00e7ues"
+                        "account_category": "Clients avances re\u00e7ues"
                     },
                     "Clients groupe, avances et acomptes re\u00e7us": {
                         "account_number": "419200",
-                        "account_category": "Clients, avances re\u00e7ues"
+                        "account_category": "Clients avances re\u00e7ues"
                     },
                     "Clients, dettes pour emballages et mat\u00e9riels consign\u00e9s": {
                         "account_number": "419400",
-                        "account_category": "Clients, avances re\u00e7ues"
+                        "account_category": "Clients avances re\u00e7ues"
                     },
                     "Clients, rabais, remises, ristournes et autres avoirs \u00e0 accorder": {
                         "account_number": "419800",
-                        "account_category": "Clients, avances re\u00e7ues"
+                        "account_category": "Clients avances re\u00e7ues"
                     },
                     "account_number": "419000",
-                    "account_category": "Clients, avances re\u00e7ues"
+                    "account_category": "Clients avances re\u00e7ues"
                 }
             },
             "42-Personnel (PASSIF)": {
                 "Personnel, r\u00e9mun\u00e9rations dues": {
                     "account_number": "422000",
-                    "account_category": "Autres dettes"
+                    "account_category": "Dettes fiscales et sociales"
                 },
                 "Personnel, oppositions, saisies-arr\u00eats": {
                     "Personnel, oppositions": {
                         "account_number": "423100",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "Personnel, saisies-arr\u00eats": {
                         "account_number": "423200",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "Personnel, avis \u00e0 tiers d\u00e9tenteur": {
                         "account_number": "423300",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "account_number": "423000",
-                    "account_category": "Autres dettes"
+                    "account_category": "Dettes fiscales et sociales"
                 },
                 "Personnel, \u0153uvres sociales internes": {
                     "Assistance m\u00e9dicale": {
                         "account_number": "424100",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "Allocations familiales": {
                         "account_number": "424200",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "Organismes sociaux rattach\u00e9s \u00e0 l\u2019entit\u00e9": {
                         "account_number": "424500",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "Autres \u0153uvres sociales internes": {
                         "account_number": "424800",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "account_number": "424000",
-                    "account_category": "Autres dettes"
+                    "account_category": "Dettes fiscales et sociales"
                 },
                 "Repr\u00e9sentants du personnel": {
                     "D\u00e9l\u00e9gu\u00e9s du personnel": {
                         "account_number": "425100",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "Syndicats et Comit\u00e9s d\u2019entreprises, d\u2019\u00c9tablissement": {
                         "account_number": "425200",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "Autres repr\u00e9sentants du personnel": {
                         "account_number": "425800",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "account_number": "425000",
-                    "account_category": "Autres dettes"
+                    "account_category": "Dettes fiscales et sociales"
                 },
                 "Personnel, participation aux b\u00e9n\u00e9fices et au capital": {
                     "Participation aux b\u00e9n\u00e9fices": {
                         "account_number": "426100",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "Participation au capital": {
                         "account_number": "426400",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "account_number": "426000",
-                    "account_category": "Autres dettes"
+                    "account_category": "Dettes fiscales et sociales"
                 },
                 "Personnel d\u00e9p\u00f4ts": {
                     "account_number": "427000",
-                    "account_category": "Autres dettes"
+                    "account_category": "Dettes fiscales et sociales"
                 },
                 "Personnel, charges \u00e0 payer et produits \u00e0 recevoir": {
                     "Dettes provisionn\u00e9es pour cong\u00e9s \u00e0 payer": {
                         "account_number": "428100",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "Autres charges \u00e0 payer": {
                         "account_number": "428600",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "Produits \u00e0 recevoir": {
                         "account_number": "428700",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "account_number": "428000",
-                    "account_category": "Autres dettes"
+                    "account_category": "Dettes fiscales et sociales"
                 }
             },
             "43-Organismes sociaux (PASSIF)": {
+                "431-S\u00e9curit\u00e9 sociale": {
+                    "Prestations familiales": {
+                        "account_number": "431100",
+                        "account_category": "Dettes fiscales et sociales"
+                    },
+                    "Accidents de travail": {
+                        "account_number": "431200",
+                        "account_category": "Dettes fiscales et sociales"
+                    },
+                    "Caisse de retraite obligatoire": {
+                        "account_number": "431300",
+                        "account_category": "Dettes fiscales et sociales"
+                    },
+                    "Caisse de retraite facultative": {
+                        "account_number": "431400",
+                        "account_category": "Dettes fiscales et sociales"
+                    },
+                    "Autres cotisations sociales": {
+                        "account_number": "431800",
+                        "account_category": "Dettes fiscales et sociales"
+                    }
+                },
+                "432-Caisses de retraite compl\u00e9mentaire": {},
+                "433-Autres organismes sociaux": {
+                    "Mutuelle": {
+                        "account_number": "433100",
+                        "account_category": "Dettes fiscales et sociales"
+                    },
+                    "Assurances retraite": {
+                        "account_number": "433200",
+                        "account_category": "Dettes fiscales et sociales"
+                    },
+                    "Assurances et organismes de sant\u00e9": {
+                        "account_number": "433300",
+                        "account_category": "Dettes fiscales et sociales"
+                    }
+                },
                 "438-Organismes sociaux, charges \u00e0 payer et produits \u00e0 recevoir": {
                     "Charges sociales sur gratifications \u00e0 payer": {
                         "account_number": "438100",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "Charges sociales sur cong\u00e9s \u00e0 payer": {
                         "account_number": "438200",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "Autres charges \u00e0 payer": {
                         "account_number": "438600",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     }
                 }
             },
             "44-\u00c9tat et collectivit\u00e9s publiques (PASSIF)": {
                 "\u00c9tat, imp\u00f4t sur les b\u00e9n\u00e9fices": {
                     "account_number": "441000",
-                    "account_category": "Autres dettes"
+                    "account_category": "Dettes fiscales et sociales"
                 },
                 "\u00c9tat, autres imp\u00f4ts et taxes": {
                     "Imp\u00f4ts et taxes d\u2019\u00c9tat": {
                         "account_number": "442100",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "Imp\u00f4ts et taxes pour les collectivit\u00e9s publiques": {
                         "account_number": "442200",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "Imp\u00f4ts et taxes recouvrables sur des obligataires": {
                         "account_number": "442300",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "Imp\u00f4ts et taxes recouvrables sur des associ\u00e9s": {
                         "account_number": "442400",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "Droits de douane": {
                         "account_number": "442600",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "Autres imp\u00f4ts et taxes": {
                         "account_number": "442800",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "account_number": "442000",
-                    "account_category": "Autres dettes"
+                    "account_category": "Dettes fiscales et sociales"
                 },
                 "\u00c9tat, TVA due ou cr\u00e9dit de TVA": {
                     "\u00c9tat, TVA due": {
                         "account_number": "444100",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "\u00c9tat, cr\u00e9dit de TVA \u00e0 reporter": {
                         "account_number": "444900",
-                        "account_category": "Autres dettes"
+                        "account_category": "Autres cr\u00e9ances"
                     },
                     "account_number": "444000",
                     "account_category": "Autres dettes"
                 },
                 "\u00c9tat, autres taxes sur le chiffre d\u2019affaires": {
                     "account_number": "446000",
-                    "account_category": "Autres dettes"
+                    "account_category": "Dettes fiscales et sociales"
                 },
                 "\u00c9tat, imp\u00f4ts retenus \u00e0 la source": {
                     "Imp\u00f4t G\u00e9n\u00e9ral sur le revenu": {
                         "account_number": "447100",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "Imp\u00f4ts sur salaires": {
                         "account_number": "447200",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "Contribution nationale": {
                         "account_number": "447300",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "Contribution nationale de solidarit\u00e9": {
                         "account_number": "447400",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "Autres imp\u00f4ts et contributions": {
                         "account_number": "447800",
-                        "account_category": "Autres dettes"
+                        "account_category": "Dettes fiscales et sociales"
                     },
                     "account_number": "447000",
+                    "account_category": "Dettes fiscales et sociales"
+                }
+            },
+            "45-Organismes internationaux (PASSIF)": {
+                "Op\u00e9rations avec les organismes africains": {
+                    "account_number": "451000",
+                    "account_category": "Autres dettes"
+                },
+                "Op\u00e9rations avec les autres organismes internationaux": {
+                    "account_number": "452000",
                     "account_category": "Autres dettes"
                 }
             },
@@ -3150,7 +3152,7 @@
                 "471-D\u00e9biteurs et cr\u00e9diteurs divers": {
                     "D\u00e9biteurs divers": {
                         "account_number": "471100",
-                        "account_category": "Autres dettes"
+                        "account_category": "Autres cr\u00e9ances"
                     },
                     "Cr\u00e9diteurs divers": {
                         "account_number": "471200",
@@ -3166,11 +3168,11 @@
                     },
                     "Compte d\u2019affacturage": {
                         "account_number": "471600",
-                        "account_category": "Autres dettes"
+                        "account_category": "Autres cr\u00e9ances"
                     },
                     "D\u00e9biteurs divers retenues de garantie": {
                         "account_number": "471700",
-                        "account_category": "Autres dettes"
+                        "account_category": "Autres cr\u00e9ances"
                     },
                     "Apport, compte de fusion et op\u00e9rations assimil\u00e9es": {
                         "account_number": "471800",
@@ -3184,7 +3186,7 @@
                 "474-Compte de r\u00e9partition p\u00e9riodique des charges et des produits (PASSIF)": {
                     "Compte de r\u00e9partition p\u00e9riodique des charges": {
                         "account_number": "474600",
-                        "account_category": "Autres dettes"
+                        "account_category": "Autres cr\u00e9ances"
                     }
                 },
                 "475-Compte transitoire, ajustement sp\u00e9cial li\u00e9 \u00e0 la r\u00e9vision du SYSCOHADA (PASSIF)": {
@@ -3440,132 +3442,132 @@
                     "Banques en monnaie nationale": {
                         "account_type": "Bank",
                         "account_number": "521100",
-                        "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                        "account_category": "Banques.ch\u00e8ques postaux.caisse"
                     },
                     "Banques en devises": {
                         "account_type": "Bank",
                         "account_number": "521500",
-                        "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                        "account_category": "Banques.ch\u00e8ques postaux.caisse"
                     },
                     "account_type": "Bank",
                     "account_number": "521000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "Banques autres \u00c9tats r\u00e9gion": {
                     "account_number": "522000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "Banques autres \u00c9tats zone mon\u00e9taire": {
                     "account_number": "523000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "Banques hors zone mon\u00e9taire": {
                     "account_number": "524000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "Banques d\u00e9p\u00f4t \u00e0 terme": {
                     "account_number": "525000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "Banques, int\u00e9r\u00eats courus": {
                     "Banque, int\u00e9r\u00eats courus, charges \u00e0 payer": {
                         "account_number": "526100",
-                        "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                        "account_category": "Banques.ch\u00e8ques postaux.caisse"
                     },
                     "Banque, int\u00e9r\u00eats courus, produits \u00e0 recevoir": {
                         "account_number": "526700",
-                        "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                        "account_category": "Banques.ch\u00e8ques postaux.caisse"
                     },
                     "account_number": "526000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "account_number": "52"
             },
             "\u00c9tablissements financiers et assimil\u00e9s": {
                 "Ch\u00e8ques postaux": {
                     "account_number": "531000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "Tr\u00e9sor": {
                     "account_number": "532000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "Soci\u00e9t\u00e9s de gestion et d\u2019interm\u00e9diation (SGI)": {
                     "account_number": "533000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "\u00c9tablissements financiers, int\u00e9r\u00eats courus": {
                     "account_number": "536000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "Autres organismes financiers": {
                     "account_number": "538000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "account_number": "53"
             },
             "Instruments de tr\u00e9sorerie": {
                 "Options de taux d\u2019int\u00e9r\u00eat": {
                     "account_number": "541000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "Options de taux de change": {
                     "account_number": "542000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "Options de taux boursiers": {
                     "account_number": "543000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "Instruments de march\u00e9s \u00e0 terme": {
                     "account_number": "544000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "Avoirs d\u2019or et autres m\u00e9taux pr\u00e9cieux": {
                     "account_number": "545000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "account_number": "54"
             },
             "Instruments de monnaie \u00e9lectronique": {
                 "Monnaie \u00e9lectronique carte carburant": {
                     "account_number": "551000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "Monnaie \u00e9lectronique t\u00e9l\u00e9phone portable": {
                     "account_number": "552000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "Monnaie \u00e9lectronique carte p\u00e9age": {
                     "account_number": "553000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "Porte-monnaie \u00e9lectronique": {
                     "account_number": "554000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "Autres instruments de monnaies \u00e9lectroniques": {
                     "account_number": "558000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "account_number": "55"
             },
             "Banques, cr\u00e9dits de tr\u00e9sorerie et d\u2019escompte": {
                 "Cr\u00e9dits de tr\u00e9sorerie": {
                     "account_number": "561000",
-                    "account_category": "Banques, \u00e9tablissements financiers et cr\u00e9dits de tr\u00e9sorerie"
+                    "account_category": "Banques. \u00e9tablissements financiers et cr\u00e9dits de tr\u00e9sorerie"
                 },
                 "Escompte de cr\u00e9dits de campagne": {
                     "account_number": "564000",
-                    "account_category": "Banques, cr\u00e9dits d'escompte"
+                    "account_category": "Banques cr\u00e9dits d'escompte"
                 },
                 "Escompte de cr\u00e9dits ordinaires": {
                     "account_number": "565000",
-                    "account_category": "Banques, cr\u00e9dits d'escompte"
+                    "account_category": "Banques cr\u00e9dits d'escompte"
                 },
                 "Banques, cr\u00e9dits de tr\u00e9sorerie, int\u00e9r\u00eats courus": {
                     "account_number": "566000",
-                    "account_category": "Banques, \u00e9tablissements financiers et cr\u00e9dits de tr\u00e9sorerie"
+                    "account_category": "Banques. \u00e9tablissements financiers et cr\u00e9dits de tr\u00e9sorerie"
                 },
                 "account_number": "56"
             },
@@ -3573,84 +3575,84 @@
                 "Caisse si\u00e8ge social": {
                     "Caisse en monnaie nationale": {
                         "account_number": "571100",
-                        "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                        "account_category": "Banques.ch\u00e8ques postaux.caisse"
                     },
                     "Caisse en devises": {
                         "account_number": "571200",
-                        "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                        "account_category": "Banques.ch\u00e8ques postaux.caisse"
                     },
                     "account_number": "571000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "Caisse succursale A": {
                     "En monnaie nationale": {
                         "account_number": "572100",
-                        "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                        "account_category": "Banques.ch\u00e8ques postaux.caisse"
                     },
                     "En devises": {
                         "account_number": "572200",
-                        "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                        "account_category": "Banques.ch\u00e8ques postaux.caisse"
                     },
                     "account_number": "572000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "Caisse succursale B": {
                     "En monnaie nationale": {
                         "account_number": "573100",
-                        "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                        "account_category": "Banques.ch\u00e8ques postaux.caisse"
                     },
                     "En devises": {
                         "account_number": "573200",
-                        "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                        "account_category": "Banques.ch\u00e8ques postaux.caisse"
                     },
                     "account_number": "573000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "account_number": "57"
             },
             "R\u00e9gies d\u2019avances, accr\u00e9ditifs et virements internes": {
                 "R\u00e9gies d\u2019avance": {
                     "account_number": "581000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "Accr\u00e9ditifs": {
                     "account_number": "582000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "Virements de fonds": {
                     "account_number": "585000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "Autres virements internes": {
                     "account_number": "588000",
-                    "account_category": "Banques, ch\u00e8ques postaux, caisse"
+                    "account_category": "Banques.ch\u00e8ques postaux.caisse"
                 },
                 "account_number": "58"
             },
             "D\u00e9pr\u00e9ciations et provisions pour risque \u00e0 court terme": {
                 "D\u00e9pr\u00e9ciations des titres de placement": {
                     "account_number": "590000",
-                    "account_category": "D\u00e9pr\u00e9ciations tr\u00e9sorerie"
+                    "account_category": "D\u00e9pr\u00e9ciations titres de placement"
                 },
                 "D\u00e9pr\u00e9ciations des titres et valeurs \u00e0 encaisser": {
                     "account_number": "591000",
-                    "account_category": "D\u00e9pr\u00e9ciations tr\u00e9sorerie"
+                    "account_category": "D\u00e9pr\u00e9ciations valeurs \u00e0 encaisser"
                 },
                 "D\u00e9pr\u00e9ciations des comptes banques": {
                     "account_number": "592000",
-                    "account_category": "D\u00e9pr\u00e9ciations tr\u00e9sorerie"
+                    "account_category": "D\u00e9pr\u00e9ciations autres instruments de tr\u00e9sorerie"
                 },
                 "D\u00e9pr\u00e9ciations des comptes \u00e9tablissements financiers et assimil\u00e9s": {
                     "account_number": "593000",
-                    "account_category": "D\u00e9pr\u00e9ciations tr\u00e9sorerie"
+                    "account_category": "D\u00e9pr\u00e9ciations autres instruments de tr\u00e9sorerie"
                 },
                 "D\u00e9pr\u00e9ciations des comptes d\u2019instruments de tr\u00e9sorerie": {
                     "account_number": "594000",
-                    "account_category": "D\u00e9pr\u00e9ciations tr\u00e9sorerie"
+                    "account_category": "D\u00e9pr\u00e9ciations autres instruments de tr\u00e9sorerie"
                 },
                 "Provisions pour risque \u00e0 court terme \u00e0 caract\u00e8re financier": {
                     "account_number": "599000",
-                    "account_category": "D\u00e9pr\u00e9ciations tr\u00e9sorerie"
+                    "account_category": "Provisions pour risques et charges CT"
                 },
                 "account_number": "59"
             },
@@ -4674,11 +4676,11 @@
                 "Dotations aux amortissements d\u2019exploitation": {
                     "Dotations aux amortissements des immobilisations incorporelles": {
                         "account_number": "681200",
-                        "account_category": "Dotations aux amortissements, aux provisions et d\u00e9pr\u00e9ciations"
+                        "account_category": "Dotations amort. immob. incorp."
                     },
                     "Dotations aux amortissements des immobilisations corporelles": {
                         "account_number": "681300",
-                        "account_category": "Dotations aux amortissements, aux provisions et d\u00e9pr\u00e9ciations"
+                        "account_category": "Dotations amort. immob. corp."
                     },
                     "account_number": "681000",
                     "account_category": "Dotations aux amortissements, aux provisions et d\u00e9pr\u00e9ciations"
@@ -4689,15 +4691,15 @@
                 "Dotations aux provisions et aux d\u00e9pr\u00e9ciations d\u2019exploitation": {
                     "Dotations aux provisions pour risques et charges": {
                         "account_number": "691100",
-                        "account_category": "Dotations aux amortissements, aux provisions et d\u00e9pr\u00e9ciations"
+                        "account_category": "Dotations prov pour risques et charges"
                     },
                     "Dotations aux d\u00e9pr\u00e9ciations des immobilisations incorporelles": {
                         "account_number": "691300",
-                        "account_category": "Dotations aux amortissements, aux provisions et d\u00e9pr\u00e9ciations"
+                        "account_category": "Dotations prov et d\u00e9pr immob incorp"
                     },
                     "Dotations aux d\u00e9pr\u00e9ciations des immobilisations corporelles": {
                         "account_number": "691400",
-                        "account_category": "Dotations aux amortissements, aux provisions et d\u00e9pr\u00e9ciations"
+                        "account_category": "Dotations prov et d\u00e9pr immob corp"
                     },
                     "account_number": "691000",
                     "account_category": "Dotations aux amortissements, aux provisions et d\u00e9pr\u00e9ciations"
@@ -4705,11 +4707,11 @@
                 "Dotations aux provisions et aux d\u00e9pr\u00e9ciations financi\u00e8res": {
                     "Dotations aux provisions pour risques et charges": {
                         "account_number": "697100",
-                        "account_category": "Dotations aux provisions et aux d\u00e9pr\u00e9ciations financi\u00e8res"
+                        "account_category": "Dotations prov et d\u00e9pr financi\u00e8res LT"
                     },
                     "Dotations aux d\u00e9pr\u00e9ciations des immobilisations financi\u00e8res": {
                         "account_number": "697200",
-                        "account_category": "Dotations aux provisions et aux d\u00e9pr\u00e9ciations financi\u00e8res"
+                        "account_category": "Dotations prov et d\u00e9pr d'immob financi\u00e8res"
                     },
                     "account_number": "697000",
                     "account_category": "Dotations aux provisions et aux d\u00e9pr\u00e9ciations financi\u00e8res"
@@ -4836,58 +4838,58 @@
                 "Travaux factur\u00e9s": {
                     "Dans la R\u00e9gion": {
                         "account_number": "705100",
-                        "account_category": "Travaux, services vendus"
+                        "account_category": "Travaux et services vendus"
                     },
                     "Hors R\u00e9gion": {
                         "account_number": "705200",
-                        "account_category": "Travaux, services vendus"
+                        "account_category": "Travaux et services vendus"
                     },
                     "Aux entit\u00e9s du groupe dans la R\u00e9gion": {
                         "account_number": "705300",
-                        "account_category": "Travaux, services vendus"
+                        "account_category": "Travaux et services vendus"
                     },
                     "Aux entit\u00e9s du groupe hors R\u00e9gion": {
                         "account_number": "705400",
-                        "account_category": "Travaux, services vendus"
+                        "account_category": "Travaux et services vendus"
                     },
                     "Sur internet": {
                         "account_number": "705500",
-                        "account_category": "Travaux, services vendus"
+                        "account_category": "Travaux et services vendus"
                     },
                     "Rabais, remises, ristournes accord\u00e9s (non ventil\u00e9s)": {
                         "account_number": "705900",
-                        "account_category": "Travaux, services vendus"
+                        "account_category": "Travaux et services vendus"
                     },
                     "account_number": "705000",
-                    "account_category": "Travaux, services vendus"
+                    "account_category": "Travaux et services vendus"
                 },
                 "Services vendus": {
                     "Dans la R\u00e9gion": {
                         "account_number": "706100",
-                        "account_category": "Travaux, services vendus"
+                        "account_category": "Travaux et services vendus"
                     },
                     "Hors R\u00e9gion": {
                         "account_number": "706200",
-                        "account_category": "Travaux, services vendus"
+                        "account_category": "Travaux et services vendus"
                     },
                     "Aux entit\u00e9s du groupe dans la R\u00e9gion": {
                         "account_number": "706300",
-                        "account_category": "Travaux, services vendus"
+                        "account_category": "Travaux et services vendus"
                     },
                     "Aux entit\u00e9s du groupe hors R\u00e9gion": {
                         "account_number": "706400",
-                        "account_category": "Travaux, services vendus"
+                        "account_category": "Travaux et services vendus"
                     },
                     "Sur internet": {
                         "account_number": "706500",
-                        "account_category": "Travaux, services vendus"
+                        "account_category": "Travaux et services vendus"
                     },
                     "Rabais, remises, ristournes accord\u00e9s (non ventil\u00e9s)": {
                         "account_number": "706900",
-                        "account_category": "Travaux, services vendus"
+                        "account_category": "Travaux et services vendus"
                     },
                     "account_number": "706000",
-                    "account_category": "Travaux, services vendus"
+                    "account_category": "Travaux et services vendus"
                 },
                 "Produits accessoires": {
                     "Ports, emballages perdus et autres frais factur\u00e9s": {
@@ -5205,18 +5207,18 @@
                 "Reprises de provisions et d\u00e9pr\u00e9ciations d\u2019exploitation": {
                     "Pour risques et charges": {
                         "account_number": "791100",
-                        "account_category": "Reprise d\u2019amortissements, provisions et d\u00e9pr\u00e9ciations"
+                        "account_category": "Reprise d\u2019amortissements. provisions et d\u00e9pr\u00e9ciations"
                     },
                     "Des immobilisations incorporelles": {
                         "account_number": "791300",
-                        "account_category": "Reprise d\u2019amortissements, provisions et d\u00e9pr\u00e9ciations"
+                        "account_category": "Reprise d\u2019amortissements. provisions et d\u00e9pr\u00e9ciations"
                     },
                     "Des immobilisations corporelles": {
                         "account_number": "791400",
-                        "account_category": "Reprise d\u2019amortissements, provisions et d\u00e9pr\u00e9ciations"
+                        "account_category": "Reprise d\u2019amortissements. provisions et d\u00e9pr\u00e9ciations"
                     },
                     "account_number": "791000",
-                    "account_category": "Reprise d\u2019amortissements, provisions et d\u00e9pr\u00e9ciations"
+                    "account_category": "Reprise d\u2019amortissements. provisions et d\u00e9pr\u00e9ciations"
                 },
                 "Reprises de provisions et d\u00e9pr\u00e9ciations financi\u00e8res": {
                     "Pour risques et charges": {
@@ -5232,11 +5234,11 @@
                 },
                 "Reprises d\u2019amortissements": {
                     "account_number": "798000",
-                    "account_category": "Reprise d\u2019amortissements, provisions et d\u00e9pr\u00e9ciations"
+                    "account_category": "Reprise d\u2019amortissements. provisions et d\u00e9pr\u00e9ciations"
                 },
                 "Reprises de subventions d\u2019investissement": {
                     "account_number": "799000",
-                    "account_category": "Reprise d\u2019amortissements, provisions et d\u00e9pr\u00e9ciations"
+                    "account_category": "Reprise d\u2019amortissements. provisions et d\u00e9pr\u00e9ciations"
                 },
                 "account_number": "79"
             },
