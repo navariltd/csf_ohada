@@ -3,7 +3,7 @@ name = "csf_ohada"
 authors = [
     { name = "Navari Ltd", email = "solutions@navari.co.ke"}
 ]
-description = "A collection of ERPNext customizations, regional settings, and compliance features designed for businesses operating in Francophone countries"
+description = "A collection of ERPNext customizations, regional settings, and compliance features designed for OHADA (Organisation pour l'Harmonisation en Afrique du Droit des Affaires"
 requires-python = ">=3.10"
 readme = "README.md"
 dynamic = ["version"]

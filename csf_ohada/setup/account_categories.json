@@ -42,7 +42,7 @@
     "account_category_name": "Frais de recherche et de prospection"
   },
   {
-    "account_category_name": "Brevet, licences, logiciels et droits similaires"
+    "account_category_name": "Brevet. licences. logiciels et droits similaires"
   },
   {
     "account_category_name": "Fonds commercial et droit au bail"
@@ -57,16 +57,19 @@
     "account_category_name": "Bâtiments"
   },
   {
-    "account_category_name": "Aménagement, agencements et Installations"
+    "account_category_name": "Aménagement. agencements et Installations"
   },
   {
-    "account_category_name": "Matériel, mobilier et actifs biologiques"
+    "account_category_name": "Matériel. mobilier et actifs biologiques"
   },
   {
     "account_category_name": "Matériel de transport"
   },
   {
-    "account_category_name": "Avances et acomptes versés sur immobilisations"
+    "account_category_name": "Avances et acomptes versés sur immob corp."
+  },
+  {
+    "account_category_name": "Avances et acomptes versés sur immob incorp."
   },
   {
     "account_category_name": "Titres de participation"
@@ -81,7 +84,7 @@
     "account_category_name": "Amortissements des frais de développement"
   },
   {
-    "account_category_name": "Amortissements des brevets, licences, concessions et droits similaires"
+    "account_category_name": "Amortissements des brevets. licences. concessions et droits similaires"
   },
   {
     "account_category_name": "Amortissements du fonds commercial et du droit au bail"
@@ -93,22 +96,19 @@
     "account_category_name": "Amortissements des terrains"
   },
   {
-    "account_category_name": "Amortissements des bâtiments, installations techniques et agencements"
+    "account_category_name": "Amortissements du matériel"
+  },
+  {
+    "account_category_name": "Amortissements du matériel. mobilier et actifs biologiques"
+  },
+  {
+    "account_category_name": "Amortissements du matériel de transport"
   },
   {
     "account_category_name": "Amortissements des bâtiments"
   },
   {
-    "account_category_name": "Amortissements des aménagements, agencements et installations"
-  },
-  {
-    "account_category_name": "Amortissements du matériel"
-  },
-  {
-    "account_category_name": "Amortissements du matériel, mobilier et actifs biologiques"
-  },
-  {
-    "account_category_name": "Amortissements du matériel de transport"
+    "account_category_name": "Amortissements des aménagements. agencements et installations"
   },
   {
     "account_category_name": "Dépréciations des immobilisations incorporelles"
@@ -117,7 +117,7 @@
     "account_category_name": "Dépréciations des frais de développement"
   },
   {
-    "account_category_name": "Dépréciations des brevets, licences, concessions et droits similaires"
+    "account_category_name": "Dépréciations des brevets. licences. concessions et droits similaires"
   },
   {
     "account_category_name": "Dépréciations du fonds commercial et droit de bail"
@@ -129,10 +129,7 @@
     "account_category_name": "Dépréciations des terrains"
   },
   {
-    "account_category_name": "Dépréciations des bâtiments, installations techniques et agencements"
-  },
-  {
-    "account_category_name": "Dépréciations de matériel, du mobilier et de l’actif biologique"
+    "account_category_name": "Dépréciations de matériel. du mobilier et de l’actif biologique"
   },
   {
     "account_category_name": "Dépréciations du matériel de transport"
@@ -147,13 +144,19 @@
     "account_category_name": "Dépréciations des autres immobilisations financières"
   },
   {
+    "account_category_name": "Dépréciations des bâtiments"
+  },
+  {
+    "account_category_name": "Dépréciations des aménagements. agencements et installations"
+  },
+  {
     "account_category_name": "Stocks et encours"
   },
   {
     "account_category_name": "Dépréciation des stocks et encours"
   },
   {
-    "account_category_name": "Fournisseurs, avances versées"
+    "account_category_name": "Fournisseurs avances versées"
   },
   {
     "account_category_name": "Clients"
@@ -183,7 +186,10 @@
     "account_category_name": "Fournisseurs d'exploitation"
   },
   {
-    "account_category_name": "Clients, avances reçues"
+    "account_category_name": "Clients avances reçues"
+  },
+  {
+    "account_category_name": "Dettes fiscales et sociales"
   },
   {
     "account_category_name": "Autres dettes"
@@ -201,16 +207,22 @@
     "account_category_name": "Valeurs à encaisser"
   },
   {
-    "account_category_name": "Banques, chèques postaux, caisse"
+    "account_category_name": "Banques.chèques postaux.caisse"
   },
   {
-    "account_category_name": "Banques, établissements financiers et crédits de trésorerie"
+    "account_category_name": "Banques. établissements financiers et crédits de trésorerie"
   },
   {
-    "account_category_name": "Banques, crédits d'escompte"
+    "account_category_name": "Banques crédits d'escompte"
   },
   {
-    "account_category_name": "Dépréciations trésorerie"
+    "account_category_name": "Dépréciations autres instruments de trésorerie"
+  },
+  {
+    "account_category_name": "Dépréciations titres de placement"
+  },
+  {
+    "account_category_name": "Dépréciations valeurs à encaisser"
   },
   {
     "account_category_name": "Achat de marchandises"
@@ -252,10 +264,25 @@
     "account_category_name": "Frais financiers et charges assimilées"
   },
   {
-    "account_category_name": "Dotations aux amortissements, aux provisions et dépréciations"
+    "account_category_name": "Dotations amort. immob. incorp."
   },
   {
-    "account_category_name": "Dotations aux provisions et aux dépréciations financières"
+    "account_category_name": "Dotations amort. immob. corp."
+  },
+  {
+    "account_category_name": "Dotations prov et dépr financières LT"
+  },
+  {
+    "account_category_name": "Dotations prov et dépr d'immob financières"
+  },
+  {
+    "account_category_name": "Dotations prov pour risques et charges"
+  },
+  {
+    "account_category_name": "Dotations prov et dépr immob incorp"
+  },
+  {
+    "account_category_name": "Dotations prov et dépr immob corp"
   },
   {
     "account_category_name": "Ventes de marchandises"
@@ -264,7 +291,7 @@
     "account_category_name": "Vente de produits fabriqués"
   },
   {
-    "account_category_name": "Travaux, services vendus"
+    "account_category_name": "Travaux et services vendus"
   },
   {
     "account_category_name": "Produits accessoires"
@@ -291,7 +318,7 @@
     "account_category_name": "Transferts de charges financières"
   },
   {
-    "account_category_name": "Reprise d’amortissements, provisions et dépréciations"
+    "account_category_name": "Reprise d’amortissements. provisions et dépréciations"
   },
   {
     "account_category_name": "Reprises de provisions et dépréciations financières"
