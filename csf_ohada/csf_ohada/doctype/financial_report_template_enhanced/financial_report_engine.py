@@ -440,6 +440,7 @@ class FinancialReportEngine:
 					column_code=entry.column_code,
 					balance_type=entry.balance_type,
 					calculation_formula=entry.formula,
+					reverse_sign=entry.reverse_sign,
 				)
 
 		all_data = collector.collect_all_data()
@@ -508,6 +509,7 @@ class DataCollector:
 		column_code=DEFAULT_MEASURE,
 		balance_type=None,
 		calculation_formula=None,
+		reverse_sign=None,
 	):
 		self.account_requests.append(
 			{
@@ -518,7 +520,7 @@ class DataCollector:
 				"balance_type": balance_type or row.balance_type,
 				"reference_code": row.reference_code,
 				"column_code": column_code or DEFAULT_MEASURE,
-				"reverse_sign": row.reverse_sign,
+				"reverse_sign": (bool(row.reverse_sign) if reverse_sign is None else bool(reverse_sign)),
 			}
 		)
 
@@ -1449,8 +1451,12 @@ class RowProcessor:
 		formula_row.data_source = "Calculated Amount"
 		formula_row.calculation_formula = entry.formula
 		formula_row.reference_code = row.reference_code
-		# Account Data values are already sign-corrected during collection
-		formula_row.reverse_sign = row.reverse_sign if row.data_source == "Calculated Amount" else 0
+		if row.data_source == "Calculated Amount":
+			formula_row.reverse_sign = bool(row.reverse_sign)
+		else:
+			# Account Data formula inputs already inherit the row's sign. Only apply
+			# another negation when this column explicitly resolves to the opposite.
+			formula_row.reverse_sign = entry.reverse_sign != bool(row.reverse_sign)
 
 		values = calculator.evaluate_formula(
 			formula_row,
@@ -1516,7 +1522,7 @@ class RowProcessor:
 			column_account_details=per_col_details,
 		)
 
-	def _net_decision_series(self, column_values: dict[str, list]) -> list[float]:
+	def _net_decision_series(self, column_values: dict[str, list]) -> tuple[str | None, list[float]]:
 		"""Overall sign is taken from the last visible value column (typically NET)."""
 		zeros = [0.0] * len(self.period_list)
 		visible = [
@@ -1527,10 +1533,11 @@ class RowProcessor:
 		for measure in reversed(visible or list(self.measure_columns)):
 			series = column_values.get(measure.column_code)
 			if series is not None:
-				return series
+				return measure.column_code, series
 		if column_values:
-			return next(iter(column_values.values()))
-		return zeros
+			column_code, series = next(iter(column_values.items()))
+			return column_code, series
+		return None, zeros
 
 	def _apply_net_balance_filter(self, row, column_values: dict[str, list], per_col_details: dict):
 		"""Keep or drop every column together based on the line's overall GL sign."""
@@ -1538,8 +1545,12 @@ class RowProcessor:
 		if balance_filter not in NET_SIGN_FILTERS:
 			return column_values, per_col_details
 
+		decision_column, decision_series = self._net_decision_series(column_values)
 		reverse_sign = bool(getattr(row, "reverse_sign", 0))
-		decision_series = self._net_decision_series(column_values)
+		if decision_column:
+			reverse_sign = bool(
+				resolve_row_settings(row, decision_column, self.column_defaults).get("reverse_sign")
+			)
 		keep = []
 		for i in range(len(self.period_list)):
 			value = decision_series[i] if i < len(decision_series) else 0.0
@@ -1577,22 +1588,27 @@ class RowProcessor:
 				row=row,
 			)
 
-			if row.reverse_sign:
-				values = [-1 * v for v in values]
-
 			# TODO: add support for server script
 			# use form_dict to pass input in server script
 		except Exception as e:
 			frappe.log_error(f"Custom API Error: {api_path} - {e!s}")
 			values = [0.0] * len(self.period_list)
 
-		column_values = {
-			m.column_code: ([None] * len(self.period_list) if m.empty else list(values))
-			for m in self.measure_columns
-		}
+		column_values = {}
+		for measure in self.measure_columns:
+			if measure.empty:
+				column_values[measure.column_code] = [None] * len(self.period_list)
+				continue
+			reverse_sign = resolve_row_settings(row, measure.column_code, self.column_defaults).get(
+				"reverse_sign"
+			)
+			column_values[measure.column_code] = [-value if reverse_sign else value for value in values]
 		self._store_row_values(row.reference_code, column_values)
 
-		return RowData(row=row, values=list(values), column_values=column_values)
+		display_values = column_values.get(DEFAULT_MEASURE) or next(
+			iter(column_values.values()), [0.0] * len(self.period_list)
+		)
+		return RowData(row=row, values=list(display_values), column_values=column_values)
 
 	def _process_formula_row(self, row) -> RowData:
 		calculator = self._make_calculator()

@@ -64,6 +64,10 @@ frappe.ui.form.on("Financial Report Row Enhanced", {
 		update_advanced_formula_property(frm, cdt, cdn);
 	},
 
+	reverse_sign(frm, cdt, cdn) {
+		set_up_column_settings_editor(frm, cdt, cdn);
+	},
+
 	advanced_filtering(frm, cdt, cdn) {
 		set_up_filters_editor(frm, cdt, cdn);
 		set_up_column_settings_editor(frm, cdt, cdn);
@@ -485,6 +489,9 @@ frappe.ui.form.on("Financial Report Column Enhanced", {
 	default_balance_type(frm) {
 		refresh_open_column_settings_editors(frm);
 	},
+	default_reverse_sign(frm) {
+		refresh_open_column_settings_editors(frm);
+	},
 });
 
 function collapse_legacy_overrides(frm) {
@@ -521,6 +528,7 @@ function save_column_settings(cdt, cdn, settings) {
 		if (!val || val.use_default) continue;
 		cleaned[code] = {
 			balance_type: val.balance_type || "",
+			reverse_sign: val.reverse_sign ? 1 : 0,
 			is_formula: val.is_formula ? 1 : 0,
 			calculation_formula: val.calculation_formula || "",
 		};
@@ -564,16 +572,19 @@ function prune_stale_column_settings_on_form(frm) {
 }
 
 function column_default_hint(col) {
+	const hints = [];
 	if (cint(col.default_is_formula) && col.default_calculation_formula) {
-		return __("Column default: {0}", [col.default_calculation_formula]);
-	}
-	if (col.default_calculation_formula) {
-		return __("Column default filter is set");
+		hints.push(__("Column default: {0}", [col.default_calculation_formula]));
+	} else if (col.default_calculation_formula) {
+		hints.push(__("Column default filter is set"));
 	}
 	if (col.default_balance_type) {
-		return __("Column default balance: {0}", [col.default_balance_type]);
+		hints.push(__("Column default balance: {0}", [col.default_balance_type]));
 	}
-	return "";
+	if (col.default_reverse_sign) {
+		hints.push(__("Column default sign: {0}", [col.default_reverse_sign]));
+	}
+	return hints.join(" · ");
 }
 
 function set_up_column_settings_editor(frm, cdt, cdn) {
@@ -620,9 +631,18 @@ function set_up_column_settings_editor(frm, cdt, cdn) {
 		const code = (col.column_code || "").trim();
 		const stored = settings[code] || {};
 		const use_default = !settings[code];
+		const inherited_reverse_sign =
+			col.default_reverse_sign === "Reverse Sign"
+				? 1
+				: col.default_reverse_sign === "Keep Sign"
+				? 0
+				: cint(row.reverse_sign);
 		const state = {
 			use_default,
 			balance_type: stored.balance_type || "",
+			reverse_sign: Object.prototype.hasOwnProperty.call(stored, "reverse_sign")
+				? cint(stored.reverse_sign)
+				: inherited_reverse_sign,
 			is_formula: is_calculated ? 1 : cint(stored.is_formula),
 			calculation_formula: stored.calculation_formula || "",
 		};
@@ -664,7 +684,7 @@ function render_column_setting_card(col, code, state, is_account, is_calculated)
 				<strong>${label}</strong>
 				<label class="mb-0">
 					<input type="checkbox" class="cs-use-default" ${state.use_default ? "checked" : ""}>
-					${__("Use row default")}
+					${__("Use defaults")}
 				</label>
 			</div>
 			${
@@ -684,9 +704,23 @@ function render_column_setting_card(col, code, state, is_account, is_calculated)
 							<select class="form-control cs-balance-type">${balance_options}</select>
 						</div>
 						<div class="checkbox">
-							<label>
-								<input type="checkbox" class="cs-is-formula" ${state.is_formula ? "checked" : ""}>
-								${__("Evaluate as Formula")}
+							<label class="mb-0" style="display: inline-flex; align-items: center; gap: 6px; padding-left: 0;">
+								<input type="checkbox" class="cs-is-formula" style="position: static; margin: 0;" ${
+									state.is_formula ? "checked" : ""
+								}>
+								<span>${__("Evaluate as Formula")}</span>
+							</label>
+						</div>`
+						: ""
+				}
+				${
+					is_account
+						? `<div class="checkbox">
+							<label class="mb-0" style="display: inline-flex; align-items: center; gap: 6px; padding-left: 0;">
+								<input type="checkbox" class="cs-reverse-sign" style="position: static; margin: 0;" ${
+									state.reverse_sign ? "checked" : ""
+								}>
+								<span>${__("Reverse Sign")}</span>
 							</label>
 						</div>`
 						: ""
@@ -762,6 +796,11 @@ function bind_column_setting_card(ctx) {
 
 	card.find(".cs-balance-type").on("change", function () {
 		state.balance_type = $(this).val();
+		persist();
+	});
+
+	card.find(".cs-reverse-sign").on("change", function () {
+		state.reverse_sign = this.checked ? 1 : 0;
 		persist();
 	});
 

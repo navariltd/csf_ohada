@@ -1,0 +1,438 @@
+[
+  {
+    "account_category_name": "Achat de marchandises",
+    "description": null
+  },
+  {
+    "account_category_name": "Achats de mati\u00e8res premi\u00e8res et fournitures li\u00e9es",
+    "description": null
+  },
+  {
+    "account_category_name": "Actif circulant H.A.O",
+    "description": null
+  },
+  {
+    "account_category_name": "Amortissements des am\u00e9nagements. agencements et installations",
+    "description": null
+  },
+  {
+    "account_category_name": "Amortissements des autres immobilisations incorporelles",
+    "description": null
+  },
+  {
+    "account_category_name": "Amortissements des brevets. licences. concessions et droits similaires",
+    "description": null
+  },
+  {
+    "account_category_name": "Amortissements des b\u00e2timents",
+    "description": null
+  },
+  {
+    "account_category_name": "Amortissements des frais de d\u00e9veloppement",
+    "description": null
+  },
+  {
+    "account_category_name": "Amortissements des terrains",
+    "description": null
+  },
+  {
+    "account_category_name": "Amortissements du fonds commercial et du droit au bail",
+    "description": null
+  },
+  {
+    "account_category_name": "Amortissements du mat\u00e9riel de transport",
+    "description": null
+  },
+  {
+    "account_category_name": "Amortissements du mat\u00e9riel. mobilier et actifs biologiques",
+    "description": null
+  },
+  {
+    "account_category_name": "Am\u00e9nagement. agencements et Installations",
+    "description": null
+  },
+  {
+    "account_category_name": "Apporteurs capital non appel\u00e9",
+    "description": null
+  },
+  {
+    "account_category_name": "Autres achats",
+    "description": null
+  },
+  {
+    "account_category_name": "Autres charges",
+    "description": null
+  },
+  {
+    "account_category_name": "Autres charges H.A.O",
+    "description": null
+  },
+  {
+    "account_category_name": "Autres cr\u00e9ances",
+    "description": null
+  },
+  {
+    "account_category_name": "Autres dettes",
+    "description": null
+  },
+  {
+    "account_category_name": "Autres immobilisations financi\u00e8res",
+    "description": null
+  },
+  {
+    "account_category_name": "Autres immobilisations incorporelles",
+    "description": null
+  },
+  {
+    "account_category_name": "Autres produits",
+    "description": null
+  },
+  {
+    "account_category_name": "Autres produits H.A.O",
+    "description": null
+  },
+  {
+    "account_category_name": "Avances et acomptes vers\u00e9s sur immob corp.",
+    "description": null
+  },
+  {
+    "account_category_name": "Avances et acomptes vers\u00e9s sur immob incorp.",
+    "description": null
+  },
+  {
+    "account_category_name": "Banques cr\u00e9dits d'escompte",
+    "description": null
+  },
+  {
+    "account_category_name": "Banques. \u00e9tablissements financiers et cr\u00e9dits de tr\u00e9sorerie",
+    "description": null
+  },
+  {
+    "account_category_name": "Banques.ch\u00e8ques postaux.caisse",
+    "description": null
+  },
+  {
+    "account_category_name": "Brevet. licences. logiciels et droits similaires",
+    "description": null
+  },
+  {
+    "account_category_name": "B\u00e2timents",
+    "description": null
+  },
+  {
+    "account_category_name": "Capital",
+    "description": null
+  },
+  {
+    "account_category_name": "Charges de personnel",
+    "description": null
+  },
+  {
+    "account_category_name": "Clients",
+    "description": null
+  },
+  {
+    "account_category_name": "Clients avances re\u00e7ues",
+    "description": null
+  },
+  {
+    "account_category_name": "Dettes circulantes H.A.O",
+    "description": null
+  },
+  {
+    "account_category_name": "Dettes de location acquisition",
+    "description": null
+  },
+  {
+    "account_category_name": "Dettes fiscales et sociales",
+    "description": null
+  },
+  {
+    "account_category_name": "Dotations amort. immob. corp.",
+    "description": null
+  },
+  {
+    "account_category_name": "Dotations amort. immob. incorp.",
+    "description": null
+  },
+  {
+    "account_category_name": "Dotations prov et d\u00e9pr d'immob financi\u00e8res",
+    "description": null
+  },
+  {
+    "account_category_name": "Dotations prov et d\u00e9pr financi\u00e8res LT",
+    "description": null
+  },
+  {
+    "account_category_name": "Dotations prov et d\u00e9pr immob corp",
+    "description": null
+  },
+  {
+    "account_category_name": "Dotations prov et d\u00e9pr immob incorp",
+    "description": null
+  },
+  {
+    "account_category_name": "Dotations prov pour risques et charges",
+    "description": null
+  },
+  {
+    "account_category_name": "D\u00e9pr\u00e9ciation des stocks et encours",
+    "description": null
+  },
+  {
+    "account_category_name": "D\u00e9pr\u00e9ciations autres instruments de tr\u00e9sorerie",
+    "description": null
+  },
+  {
+    "account_category_name": "D\u00e9pr\u00e9ciations de mat\u00e9riel. du mobilier et de l\u2019actif biologique",
+    "description": null
+  },
+  {
+    "account_category_name": "D\u00e9pr\u00e9ciations des am\u00e9nagements. agencements et installations",
+    "description": null
+  },
+  {
+    "account_category_name": "D\u00e9pr\u00e9ciations des autres cr\u00e9ances",
+    "description": null
+  },
+  {
+    "account_category_name": "D\u00e9pr\u00e9ciations des autres immobilisations financi\u00e8res",
+    "description": null
+  },
+  {
+    "account_category_name": "D\u00e9pr\u00e9ciations des autres immobilisations incorporelles",
+    "description": null
+  },
+  {
+    "account_category_name": "D\u00e9pr\u00e9ciations des avances et acomptes vers\u00e9s sur immobilisations",
+    "description": null
+  },
+  {
+    "account_category_name": "D\u00e9pr\u00e9ciations des brevets. licences. concessions et droits similaires",
+    "description": null
+  },
+  {
+    "account_category_name": "D\u00e9pr\u00e9ciations des b\u00e2timents",
+    "description": null
+  },
+  {
+    "account_category_name": "D\u00e9pr\u00e9ciations des clients",
+    "description": null
+  },
+  {
+    "account_category_name": "D\u00e9pr\u00e9ciations des cr\u00e9ances HAO",
+    "description": null
+  },
+  {
+    "account_category_name": "D\u00e9pr\u00e9ciations des frais de d\u00e9veloppement",
+    "description": null
+  },
+  {
+    "account_category_name": "D\u00e9pr\u00e9ciations des terrains",
+    "description": null
+  },
+  {
+    "account_category_name": "D\u00e9pr\u00e9ciations des titres de participation",
+    "description": null
+  },
+  {
+    "account_category_name": "D\u00e9pr\u00e9ciations du fonds commercial et droit de bail",
+    "description": null
+  },
+  {
+    "account_category_name": "D\u00e9pr\u00e9ciations du mat\u00e9riel de transport",
+    "description": null
+  },
+  {
+    "account_category_name": "D\u00e9pr\u00e9ciations titres de placement",
+    "description": null
+  },
+  {
+    "account_category_name": "D\u00e9pr\u00e9ciations valeurs \u00e0 encaisser",
+    "description": null
+  },
+  {
+    "account_category_name": "Ecart de conversion - actif",
+    "description": null
+  },
+  {
+    "account_category_name": "Ecart de conversion - passif",
+    "description": null
+  },
+  {
+    "account_category_name": "Ecarts de r\u00e9\u00e9valuation",
+    "description": null
+  },
+  {
+    "account_category_name": "Emprunts et dettes financi\u00e8res diverses",
+    "description": null
+  },
+  {
+    "account_category_name": "Fonds commercial et droit au bail",
+    "description": null
+  },
+  {
+    "account_category_name": "Fournisseurs avances vers\u00e9es",
+    "description": null
+  },
+  {
+    "account_category_name": "Fournisseurs d'exploitation",
+    "description": null
+  },
+  {
+    "account_category_name": "Frais de recherche et de prospection",
+    "description": null
+  },
+  {
+    "account_category_name": "Frais financiers et charges assimil\u00e9es",
+    "description": null
+  },
+  {
+    "account_category_name": "Imp\u00f4ts et taxes",
+    "description": null
+  },
+  {
+    "account_category_name": "Imp\u00f4ts sur le r\u00e9sultat",
+    "description": null
+  },
+  {
+    "account_category_name": "Mat\u00e9riel de transport",
+    "description": null
+  },
+  {
+    "account_category_name": "Mat\u00e9riel. mobilier et actifs biologiques",
+    "description": null
+  },
+  {
+    "account_category_name": "Participations des travailleurs",
+    "description": null
+  },
+  {
+    "account_category_name": "Primes li\u00e9es au capital social",
+    "description": null
+  },
+  {
+    "account_category_name": "Production immobilis\u00e9e",
+    "description": null
+  },
+  {
+    "account_category_name": "Production stock\u00e9es (ou d\u00e9stockage)",
+    "description": null
+  },
+  {
+    "account_category_name": "Produits accessoires",
+    "description": null
+  },
+  {
+    "account_category_name": "Produits des cessions d'immobilisations",
+    "description": null
+  },
+  {
+    "account_category_name": "Provisions pour risques et charges CT",
+    "description": null
+  },
+  {
+    "account_category_name": "Provisions pour risques et charges LT",
+    "description": null
+  },
+  {
+    "account_category_name": "Provisions r\u00e9glement\u00e9es",
+    "description": null
+  },
+  {
+    "account_category_name": "Report \u00e0 nouveau",
+    "description": null
+  },
+  {
+    "account_category_name": "Reprise d\u2019amortissements. provisions et d\u00e9pr\u00e9ciations",
+    "description": null
+  },
+  {
+    "account_category_name": "Reprises de provisions et d\u00e9pr\u00e9ciations financi\u00e8res",
+    "description": null
+  },
+  {
+    "account_category_name": "Revenus financiers et assimil\u00e9s",
+    "description": null
+  },
+  {
+    "account_category_name": "R\u00e9serves indisponibles",
+    "description": null
+  },
+  {
+    "account_category_name": "R\u00e9serves libres",
+    "description": null
+  },
+  {
+    "account_category_name": "Services ext\u00e9rieurs",
+    "description": null
+  },
+  {
+    "account_category_name": "Stocks et encours",
+    "description": null
+  },
+  {
+    "account_category_name": "Subvention d'exploitation",
+    "description": null
+  },
+  {
+    "account_category_name": "Subventions d'investissement",
+    "description": null
+  },
+  {
+    "account_category_name": "Terrains",
+    "description": null
+  },
+  {
+    "account_category_name": "Titres de participation",
+    "description": null
+  },
+  {
+    "account_category_name": "Titres de placement",
+    "description": null
+  },
+  {
+    "account_category_name": "Transferts de charges d\u2019exploitation",
+    "description": null
+  },
+  {
+    "account_category_name": "Transferts de charges financi\u00e8res",
+    "description": null
+  },
+  {
+    "account_category_name": "Transport",
+    "description": null
+  },
+  {
+    "account_category_name": "Travaux et services vendus",
+    "description": null
+  },
+  {
+    "account_category_name": "VNC d'immobilisations",
+    "description": null
+  },
+  {
+    "account_category_name": "Valeurs \u00e0 encaisser",
+    "description": null
+  },
+  {
+    "account_category_name": "Variation de stocks de marchandises",
+    "description": null
+  },
+  {
+    "account_category_name": "Variations de stocks de mati\u00e8res premi\u00e8res et fournitures li\u00e9es",
+    "description": null
+  },
+  {
+    "account_category_name": "Variations des autres approvisionnements",
+    "description": null
+  },
+  {
+    "account_category_name": "Vente de produits fabriqu\u00e9s",
+    "description": null
+  },
+  {
+    "account_category_name": "Ventes de marchandises",
+    "description": null
+  }
+]

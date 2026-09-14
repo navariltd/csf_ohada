@@ -24,6 +24,7 @@ class FinancialReportColumnEnhanced(Document):
 		]
 		default_calculation_formula: DF.Code | None
 		default_is_formula: DF.Check
+		default_reverse_sign: DF.Literal["", "Reverse Sign", "Keep Sign"]
 		empty_column: DF.Check
 		fieldtype: DF.Literal["", "Currency", "Float", "Int", "Percent"]
 		hidden: DF.Check

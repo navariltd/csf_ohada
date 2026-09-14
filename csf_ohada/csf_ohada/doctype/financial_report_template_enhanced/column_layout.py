@@ -65,8 +65,24 @@ def get_measure_columns(template) -> list[MeasureColumn]:
 	]
 
 
+def _parse_reverse_sign(value: Any) -> bool | None:
+	"""Return a reverse-sign override, or None when the value means inherit."""
+	if value in (None, ""):
+		return None
+	if isinstance(value, str):
+		if value == "Reverse Sign":
+			return True
+		if value == "Keep Sign":
+			return False
+		if value.lower() in {"1", "true"}:
+			return True
+		if value.lower() in {"0", "false"}:
+			return False
+	return bool(value)
+
+
 def build_column_defaults(template) -> dict[str, dict[str, Any]]:
-	"""Map column_code -> default balance_type / is_formula / calculation_formula."""
+	"""Map column_code to the defaults applied to every row in that value column."""
 	defaults = {}
 	for col in getattr(template, "columns", None) or []:
 		code = (col.column_code or "").strip()
@@ -74,6 +90,7 @@ def build_column_defaults(template) -> dict[str, dict[str, Any]]:
 			continue
 		defaults[code] = {
 			"balance_type": (getattr(col, "default_balance_type", None) or "").strip() or None,
+			"reverse_sign": _parse_reverse_sign(getattr(col, "default_reverse_sign", None)),
 			"is_formula": bool(getattr(col, "default_is_formula", 0)),
 			"calculation_formula": (getattr(col, "default_calculation_formula", None) or "").strip() or None,
 		}
@@ -131,6 +148,7 @@ def load_row_column_settings(row) -> tuple[dict[str, dict[str, Any]], str | None
 			return {}, f"Column setting for {code} must be an object"
 		parsed[code] = {
 			"balance_type": (value.get("balance_type") or "").strip() or None,
+			"reverse_sign": _parse_reverse_sign(value.get("reverse_sign")),
 			"is_formula": bool(value.get("is_formula")),
 			"calculation_formula": (value.get("calculation_formula") or "").strip() or None,
 		}
@@ -177,21 +195,24 @@ def resolve_row_settings(
 	column_code: str,
 	column_defaults: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-	"""Resolve balance_type, calculation_formula, and is_formula for a row x value column.
+	"""Resolve the effective settings for a row x value column.
 
 	Precedence: row.column_settings → Value Column defaults → row fields.
 	"""
 	data_source = getattr(row, "data_source", "") or ""
 	balance_type = getattr(row, "balance_type", None)
+	reverse_sign = bool(getattr(row, "reverse_sign", 0))
 	calculation_formula = getattr(row, "calculation_formula", None)
 	is_formula = data_source == "Calculated Amount"
 
 	def apply_layer(layer: dict | None):
-		nonlocal balance_type, calculation_formula, is_formula
+		nonlocal balance_type, reverse_sign, calculation_formula, is_formula
 		if not layer:
 			return
 		if layer.get("balance_type"):
 			balance_type = layer["balance_type"]
+		if layer.get("reverse_sign") is not None:
+			reverse_sign = bool(layer["reverse_sign"])
 		if layer.get("calculation_formula"):
 			calculation_formula = layer["calculation_formula"]
 		if data_source == "Calculated Amount":
@@ -210,6 +231,7 @@ def resolve_row_settings(
 
 	return {
 		"balance_type": balance_type,
+		"reverse_sign": reverse_sign,
 		"calculation_formula": calculation_formula,
 		"is_formula": is_formula,
 	}
@@ -271,6 +293,7 @@ class ColumnPlanEntry:
 	column_code: str
 	mode: str
 	balance_type: str | None = None
+	reverse_sign: bool = False
 	formula: str | None = None
 
 	@property
@@ -314,6 +337,7 @@ def _build_plan_entries(
 				column_code=measure.column_code,
 				mode=mode,
 				balance_type=settings["balance_type"],
+				reverse_sign=settings["reverse_sign"],
 				formula=settings["calculation_formula"],
 			)
 		)

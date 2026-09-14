@@ -15,6 +15,7 @@
   "empty_column",
   "section_break_defaults",
   "default_balance_type",
+  "default_reverse_sign",
   "default_is_formula",
   "default_calculation_formula"
  ],
@@ -95,6 +96,14 @@
    "fieldtype": "Select",
    "label": "Default Balance Type",
    "options": "\nOpening Balance\nClosing Balance\nPeriod Movement (Debits - Credits)\nDebits\nCredits"
+  },
+  {
+   "depends_on": "eval:!doc.empty_column",
+   "description": "Override Reverse Sign for this column on every line. Leave empty to use each row's setting.",
+   "fieldname": "default_reverse_sign",
+   "fieldtype": "Select",
+   "label": "Default Reverse Sign",
+   "options": "\nReverse Sign\nKeep Sign"
   },
   {
    "default": "0",
