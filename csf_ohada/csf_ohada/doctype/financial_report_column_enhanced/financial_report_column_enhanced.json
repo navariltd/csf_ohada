@@ -80,7 +80,6 @@
    "description": "Show only this column's label. All row cells stay empty.",
    "fieldname": "empty_column",
    "fieldtype": "Check",
-   "in_list_view": 1,
    "label": "Empty Column"
   },
   {
@@ -126,7 +125,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-09-08 14:43:58.955589",
+ "modified": "2026-09-15 09:01:48.095802",
  "modified_by": "Administrator",
  "module": "Csf Ohada",
  "name": "Financial Report Column Enhanced",

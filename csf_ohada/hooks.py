@@ -79,13 +79,13 @@ doctype_js = {"Company": "public/js/company.js"}
 # 	"filters": "csf_ohada.utils.jinja_filters"
 # }
 
-after_migrate = "csf_ohada.setup.account_category.import_account_categories"
+# after_migrate = "csf_ohada.setup.install.sync_default_records"
 
 # Installation
 # ------------
 
 # before_install = "csf_ohada.install.before_install"
-after_install = "csf_ohada.setup.account_category.import_account_categories"
+after_install = "csf_ohada.setup.install.sync_default_records"
 
 # Uninstallation
 # ------------
