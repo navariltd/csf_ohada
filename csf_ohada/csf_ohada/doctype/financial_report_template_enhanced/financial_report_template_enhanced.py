@@ -5,7 +5,9 @@ import os
 import shutil
 
 import frappe
-from erpnext.accounts.doctype.account_category.account_category import import_account_categories
+from erpnext.accounts.doctype.account_category.account_category import (
+	import_account_categories,
+)
 from frappe import _
 from frappe.model.document import Document
 
@@ -42,7 +44,11 @@ class FinancialReportTemplateEnhanced(Document):
 		disabled: DF.Check
 		module: DF.Link | None
 		report_type: DF.Literal[
-			"", "Profit and Loss Statement", "Balance Sheet", "Cash Flow", "Custom Financial Statement"
+			"",
+			"Profit and Loss Statement",
+			"Balance Sheet",
+			"Cash Flow",
+			"Custom Financial Statement",
 		]
 		rows: DF.Table[FinancialReportRowEnhanced]
 		template_name: DF.Data
@@ -225,7 +231,7 @@ class FinancialReportTemplateEnhanced(Document):
 
 
 def sync_financial_report_templates_enhanced(chart_of_accounts=None, existing_company=None):
-	from erpnext.accounts.doctype.account.chart_of_accounts.chart_of_accounts import get_chart
+	from csf_ohada.overrides.chart_of_accounts.chart_of_accounts import get_chart
 
 	if existing_company:
 		return
@@ -237,7 +243,7 @@ def sync_financial_report_templates_enhanced(chart_of_accounts=None, existing_co
 			disable_default = True
 
 	for app in frappe.get_installed_apps():
-		if disable_default and app == "erpnext":
+		if disable_default and (app == "csf_ohada" or app == "erpnext"):
 			continue
 		_sync_templates_for(app)
 
