@@ -41,7 +41,7 @@ Ce modèle d'États financiers avancés s'appuie sur la structure de base d'ERPN
 
 Des guides de configuration étape par étape, la configuration des modèles, le référentiel des formules et les règles de validation sont disponibles dans la documentation complète:
 
-**[docs.navari.co.ke](https://docs.navari.co.ke)**
+**[docs.navari.co.ke/ohada-fr](https://docs.navari.co.ke/ohada-fr)**
 
 ## Installation
 

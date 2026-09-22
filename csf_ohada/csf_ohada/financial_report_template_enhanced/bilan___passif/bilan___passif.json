@@ -2,11 +2,9 @@
  "columns": [
   {
    "column_code": "Notes",
-   "default_balance_type": "Closing Balance",
-   "default_calculation_formula": "0",
-   "default_is_formula": 1,
+   "default_is_formula": 0,
    "default_reverse_sign": "",
-   "empty_column": 0,
+   "empty_column": 1,
    "fieldtype": "Int",
    "hidden": 0,
    "label": "Notes",
@@ -35,12 +33,12 @@
    "period_scope": "Previous Periods Only"
   }
  ],
- "creation": "2026-09-14 05:29:21.823734",
+ "creation": "2026-09-14 06:59:13.719443",
  "disabled": 0,
  "docstatus": 0,
  "doctype": "Financial Report Template Enhanced",
  "idx": 0,
- "modified": "2026-09-14 05:44:57.853962",
+ "modified": "2026-09-22 09:35:14.553195",
  "modified_by": "Administrator",
  "module": "Csf Ohada",
  "name": "Bilan - Passif",
@@ -191,7 +189,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "{\"and\":[[\"account_number\",\">=\",\"601000\"],[\"account_number\",\"<=\",\"899999\"]]}",
    "data_source": "Account Data",

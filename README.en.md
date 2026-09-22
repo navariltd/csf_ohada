@@ -34,10 +34,10 @@ This app overrides ERPNext's chart-of-accounts lookup so **Company** setup loads
 
 When you create a company in an OHADA member country, the following plans are available:
 
-| Template                                  | Description                                                                                                                                                                                                 |
-| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Syscohada - Plan Comptable**            | SYSCOHADA account tree with class and account codes in the account names (for example `1011-Capital souscrit, non appelé`).                                                                                 |
-| **Syscohada - Plan Comptable avec code**  | Same SYSCOHADA tree with a dedicated account number on each account. Posting and subdivision accounts use 6-digit numbers (trailing zeros). Class accounts (1–8) and two-digit group headings stay short. |
+| Template                                 | Description                                                                                                                                                                                               |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Syscohada - Plan Comptable**           | SYSCOHADA account tree with class and account codes in the account names (for example `1011-Capital souscrit, non appelé`).                                                                               |
+| **Syscohada - Plan Comptable avec code** | Same SYSCOHADA tree with a dedicated account number on each account. Posting and subdivision accounts use 6-digit numbers (trailing zeros). Class accounts (1–8) and two-digit group headings stay short. |
 
 ERPNext **Standard** and **Standard with Numbers** charts remain available. Regional templates for non-OHADA countries are also bundled so company setup still finds a chart when this app is installed.
 
@@ -78,7 +78,7 @@ Financial Report Template Enhanced builds on ERPNext's Financial Report Template
 
 Step-by-step setup guides, template configuration, formula reference, and validation rules are available in the full documentation:
 
-**[docs.navari.co.ke](https://docs.navari.co.ke)**
+**[docs.navari.co.ke/ohada-en](https://docs.navari.co.ke/ohada-en)**
 
 ## Installation
 

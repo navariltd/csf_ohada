@@ -1,11 +1,44 @@
 {
- "columns": [],
- "creation": "2026-09-14 05:30:06.542175",
+ "columns": [
+  {
+   "column_code": "Notes",
+   "default_is_formula": 0,
+   "default_reverse_sign": "",
+   "empty_column": 1,
+   "fieldtype": "Currency",
+   "hidden": 0,
+   "label": "Notes",
+   "period_scope": "All Periods"
+  },
+  {
+   "column_code": "Net N",
+   "default_balance_type": "",
+   "default_is_formula": 0,
+   "default_reverse_sign": "",
+   "empty_column": 0,
+   "fieldtype": "Currency",
+   "hidden": 0,
+   "label": "Net N",
+   "period_scope": "Current Period Only"
+  },
+  {
+   "column_code": "Net N-1",
+   "default_balance_type": "",
+   "default_is_formula": 0,
+   "default_reverse_sign": "",
+   "empty_column": 0,
+   "fieldtype": "Currency",
+   "hidden": 0,
+   "label": "Net N-1",
+   "period_scope": "Previous Periods Only"
+  }
+ ],
+ "creation": "2026-09-14 06:59:29.212487",
  "disabled": 0,
  "docstatus": 0,
  "doctype": "Financial Report Template Enhanced",
  "idx": 0,
- "modified": "2026-09-14 05:44:57.818885",
+ "modified": "2026-09-22 09:48:15.676994",
  "modified_by": "Administrator",
  "module": "Csf Ohada",
  "name": "Compte De R\u00e9sultat",
@@ -15,7 +48,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Ventes de marchandises\"]",
    "data_source": "Account Data",
@@ -33,7 +66,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Achat de marchandises\"]",
    "data_source": "Account Data",
@@ -51,7 +84,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Variation de stocks de marchandises\"]",
    "data_source": "Account Data",
@@ -86,7 +119,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Vente de produits fabriqu\u00e9s\"]",
    "data_source": "Account Data",
@@ -104,7 +137,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Travaux et services vendus\"]",
    "data_source": "Account Data",
@@ -122,7 +155,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Produits accessoires\"]",
    "data_source": "Account Data",
@@ -157,7 +190,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Production stock\u00e9es (ou d\u00e9stockage)\"]",
    "data_source": "Account Data",
@@ -175,7 +208,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Production immobilis\u00e9e\"]",
    "data_source": "Account Data",
@@ -193,7 +226,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Subvention d'exploitation\"]",
    "data_source": "Account Data",
@@ -211,7 +244,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Autres produits\"]",
    "data_source": "Account Data",
@@ -229,7 +262,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Transferts de charges d\u2019exploitation\"]",
    "data_source": "Account Data",
@@ -247,7 +280,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Achats de mati\u00e8res premi\u00e8res et fournitures li\u00e9es\"]",
    "data_source": "Account Data",
@@ -265,7 +298,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Variations de stocks de mati\u00e8res premi\u00e8res et fournitures li\u00e9es\"]",
    "data_source": "Account Data",
@@ -283,7 +316,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Autres achats\"]",
    "data_source": "Account Data",
@@ -301,7 +334,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Variations des autres approvisionnements\"]",
    "data_source": "Account Data",
@@ -319,7 +352,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Transport\"]",
    "data_source": "Account Data",
@@ -337,7 +370,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Services ext\u00e9rieurs\"]",
    "data_source": "Account Data",
@@ -355,7 +388,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Imp\u00f4ts et taxes\"]",
    "data_source": "Account Data",
@@ -373,7 +406,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Autres charges\"]",
    "data_source": "Account Data",
@@ -408,7 +441,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Charges de personnel\"]",
    "data_source": "Account Data",
@@ -443,7 +476,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"in\",[\"Reprise d\u2019amortissements. provisions et d\u00e9pr\u00e9ciations\"]]",
    "data_source": "Account Data",
@@ -461,7 +494,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"in\",[\"Dotations prov pour risques et charges\",\"Dotations prov et d\u00e9pr immob incorp\",\"Dotations prov et d\u00e9pr immob corp\",\"Dotations amort. immob. corp.\",\"Dotations amort. immob. incorp.\"]]",
    "data_source": "Account Data",
@@ -496,7 +529,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Revenus financiers et assimil\u00e9s\"]",
    "data_source": "Account Data",
@@ -514,7 +547,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Reprises de provisions et d\u00e9pr\u00e9ciations financi\u00e8res\"]",
    "data_source": "Account Data",
@@ -532,7 +565,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Transferts de charges financi\u00e8res\"]",
    "data_source": "Account Data",
@@ -550,7 +583,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Frais financiers et charges assimil\u00e9es\"]",
    "data_source": "Account Data",
@@ -568,7 +601,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"in\",[\"Dotations prov et d\u00e9pr financi\u00e8res LT\",\"Dotations prov et d\u00e9pr d'immob financi\u00e8res\"]]",
    "data_source": "Account Data",
@@ -620,7 +653,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Produits des cessions d'immobilisations\"]",
    "data_source": "Account Data",
@@ -638,7 +671,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Autres produits H.A.O\"]",
    "data_source": "Account Data",
@@ -656,7 +689,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"VNC d'immobilisations\"]",
    "data_source": "Account Data",
@@ -674,7 +707,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Autres charges H.A.O\"]",
    "data_source": "Account Data",
@@ -709,7 +742,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Participations des travailleurs\"]",
    "data_source": "Account Data",
@@ -727,7 +760,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Imp\u00f4ts sur le r\u00e9sultat\"]",
    "data_source": "Account Data",
@@ -746,7 +779,7 @@
    "advanced_filtering": 0,
    "balance_filter": "All",
    "bold_text": 1,
-   "calculation_formula": "XH+RQ+RS",
+   "calculation_formula": "XG+XH+RQ+RS",
    "data_source": "Calculated Amount",
    "display_name": "RESULTAT NET ",
    "fieldtype": "",
