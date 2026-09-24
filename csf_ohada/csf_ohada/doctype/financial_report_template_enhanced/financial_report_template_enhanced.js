@@ -18,8 +18,9 @@ frappe.ui.form.on("Financial Report Template Enhanced", {
 		});
 
 		// add custom button to open the financial report
+		const report_type = `${frm.doc.report_type} Enhanced`;
 		frm.add_custom_button(__("View Report"), function () {
-			frappe.set_route("query-report", "Financial Statement Enhanced", {
+			frappe.set_route("query-report", report_type, {
 				report_template: frm.doc.name,
 			});
 		});
