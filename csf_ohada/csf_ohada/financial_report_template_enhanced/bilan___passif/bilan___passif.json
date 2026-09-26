@@ -11,26 +11,15 @@
    "period_scope": "Current Period Only"
   },
   {
-   "column_code": "NET N",
+   "column_code": "NET",
    "default_balance_type": "",
    "default_is_formula": 0,
    "default_reverse_sign": "",
    "empty_column": 0,
    "fieldtype": "Currency",
    "hidden": 0,
-   "label": "Exercice N",
-   "period_scope": "Current Period Only"
-  },
-  {
-   "column_code": "NET N-1",
-   "default_balance_type": "",
-   "default_is_formula": 0,
-   "default_reverse_sign": "",
-   "empty_column": 0,
-   "fieldtype": "Currency",
-   "hidden": 0,
-   "label": "Exercice N-1",
-   "period_scope": "Previous Periods Only"
+   "label": "Exercice",
+   "period_scope": "All Periods"
   }
  ],
  "creation": "2026-09-14 06:59:13.719443",
@@ -38,7 +27,7 @@
  "docstatus": 0,
  "doctype": "Financial Report Template Enhanced",
  "idx": 0,
- "modified": "2026-09-22 09:35:14.553195",
+ "modified": "2026-09-26 14:49:42.847045",
  "modified_by": "Administrator",
  "module": "Csf Ohada",
  "name": "Bilan - Passif",
@@ -529,7 +518,6 @@
    "balance_type": "Closing Balance",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Ecart de conversion - passif\"]",
-   "column_settings": "{\"NET N\":{\"balance_type\":\"\",\"is_formula\":0,\"calculation_formula\":\"\"}}",
    "data_source": "Account Data",
    "display_name": "Ecart de conversion - passif",
    "fieldtype": "",

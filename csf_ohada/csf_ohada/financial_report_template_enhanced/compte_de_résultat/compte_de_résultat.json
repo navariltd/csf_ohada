@@ -11,26 +11,15 @@
    "period_scope": "All Periods"
   },
   {
-   "column_code": "Net N",
+   "column_code": "Net",
    "default_balance_type": "",
    "default_is_formula": 0,
    "default_reverse_sign": "",
    "empty_column": 0,
    "fieldtype": "Currency",
    "hidden": 0,
-   "label": "Net N",
-   "period_scope": "Current Period Only"
-  },
-  {
-   "column_code": "Net N-1",
-   "default_balance_type": "",
-   "default_is_formula": 0,
-   "default_reverse_sign": "",
-   "empty_column": 0,
-   "fieldtype": "Currency",
-   "hidden": 0,
-   "label": "Net N-1",
-   "period_scope": "Previous Periods Only"
+   "label": "Net",
+   "period_scope": "All Periods"
   }
  ],
  "creation": "2026-09-14 06:59:29.212487",
@@ -38,7 +27,7 @@
  "docstatus": 0,
  "doctype": "Financial Report Template Enhanced",
  "idx": 0,
- "modified": "2026-09-22 09:48:15.676994",
+ "modified": "2026-09-26 14:49:24.497445",
  "modified_by": "Administrator",
  "module": "Csf Ohada",
  "name": "Compte De R\u00e9sultat",

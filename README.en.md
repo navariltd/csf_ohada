@@ -45,7 +45,7 @@ ERPNext **Standard** and **Standard with Numbers** charts remain available. Regi
 
 ### Reports powered by Financial Report Template Enhanced
 
-**Financial Report Template Enhanced** Financial Report Template Enhanced is a template builder for defining any financial report layout, not limited to a fixed set of statements. Once a template is configured, run it from **Financial Statement Enhanced**.
+**Financial Report Template Enhanced** is a template builder for defining any financial report layout, not limited to a fixed set of statements.
 
 Common reports configured using this app include:
 
@@ -59,14 +59,13 @@ You can also define custom statements beyond these examples. Templates are confi
 
 ## Financial Report Template Enhanced
 
-Financial Report Template Enhanced builds on ERPNext's Financial Report Template. It is a flexible blueprint for any financial statement you need to produce from **Financial Statement Enhanced**.
+Financial Report Template Enhanced builds on ERPNext's Financial Report Template. It is a flexible blueprint for any financial statement you need to produce based on **Profit and Loss Statement**, **Balance Sheet**, **Cash Flow** or **Custom Financial Statement**.
 
 **What it achieves**
 
 - **Configurable value columns** - define named value columns (for example Gross Value, Net Value, Depreciation) that expand across each report period. Leave value columns empty to keep ERPNext-style behaviour with one value column per period.
 - **Per-column rules** - override balance type, account filters, or formulas for individual value columns without duplicating rows.
 - **Professional layout** - bold headings, indentation, colour, hide-if-zero, debit/credit side filtering, and chart support.
-- **Single run point** - all enhanced templates are executed from Financial Statement Enhanced, keeping report generation in one place.
 
 ## Other reports
 
