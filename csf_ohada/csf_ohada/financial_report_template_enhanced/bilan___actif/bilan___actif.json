@@ -19,7 +19,7 @@
    "empty_column": 0,
    "fieldtype": "Currency",
    "hidden": 0,
-   "label": "Valeurs brutes N",
+   "label": "Valeurs brutes",
    "period_scope": "Current Period Only"
   },
   {
@@ -30,7 +30,7 @@
    "empty_column": 0,
    "fieldtype": "Currency",
    "hidden": 0,
-   "label": "Amort & D\u00e9pr N",
+   "label": "Amort & D\u00e9pr",
    "period_scope": "Current Period Only"
   },
   {
@@ -42,19 +42,8 @@
    "empty_column": 0,
    "fieldtype": "Currency",
    "hidden": 0,
-   "label": "Valeurs nettes N",
-   "period_scope": "Current Period Only"
-  },
-  {
-   "column_code": "NET N-1",
-   "default_balance_type": "Period Movement (Debits - Credits)",
-   "default_is_formula": 0,
-   "default_reverse_sign": "",
-   "empty_column": 0,
-   "fieldtype": "Currency",
-   "hidden": 0,
-   "label": "Valeurs nettes N-1",
-   "period_scope": "Previous Periods Only"
+   "label": "Valeurs nettes",
+   "period_scope": "All Periods"
   }
  ],
  "creation": "2026-09-14 06:58:50.814442",
@@ -62,7 +51,7 @@
  "docstatus": 0,
  "doctype": "Financial Report Template Enhanced",
  "idx": 0,
- "modified": "2026-09-22 09:38:43.764736",
+ "modified": "2026-09-26 14:46:49.134707",
  "modified_by": "Administrator",
  "module": "Csf Ohada",
  "name": "Bilan - Actif",

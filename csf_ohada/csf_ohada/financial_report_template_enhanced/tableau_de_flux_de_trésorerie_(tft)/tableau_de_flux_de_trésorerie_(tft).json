@@ -1,11 +1,23 @@
 {
- "columns": [],
- "creation": "2026-09-14 06:59:49.431676",
+ "columns": [
+  {
+   "column_code": "Exercice",
+   "default_balance_type": "",
+   "default_is_formula": 0,
+   "default_reverse_sign": "",
+   "empty_column": 0,
+   "fieldtype": "Currency",
+   "hidden": 0,
+   "label": "Exercice",
+   "period_scope": "All Periods"
+  }
+ ],
+ "creation": "2026-09-26 08:57:40.332809",
  "disabled": 0,
  "docstatus": 0,
  "doctype": "Financial Report Template Enhanced",
  "idx": 0,
- "modified": "2026-09-22 09:48:25.523317",
+ "modified": "2026-09-26 14:51:48.058003",
  "modified_by": "Administrator",
  "module": "Csf Ohada",
  "name": "Tableau De Flux De Tr\u00e9sorerie (TFT)",
@@ -76,7 +88,7 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FB",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {
@@ -94,7 +106,7 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FC",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {
@@ -111,7 +123,7 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FD",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {
@@ -128,7 +140,7 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FE",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {
@@ -193,7 +205,7 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FF",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {
@@ -210,7 +222,7 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FG",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {
@@ -227,7 +239,7 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FH",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {
@@ -244,7 +256,7 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FI",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {
@@ -261,7 +273,7 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FJ",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {
@@ -310,7 +322,7 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FK",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {
@@ -327,7 +339,7 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FL",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {
@@ -344,7 +356,7 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FM",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {
@@ -362,7 +374,7 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FN",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {
@@ -412,7 +424,7 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FO",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {
@@ -430,7 +442,7 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FP",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {
@@ -448,7 +460,7 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FQ",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {
@@ -542,7 +554,7 @@
    "data_source": "Account Data",
    "display_name": "Tr\u00e9sorerie Nette",
    "fieldtype": "",
-   "hidden_calculation": 0,
+   "hidden_calculation": 1,
    "hide_when_empty": 0,
    "include_in_charts": 0,
    "indentation_level": 0,
@@ -559,7 +571,7 @@
    "data_source": "Calculated Amount",
    "display_name": "Controle tr\u00e9sorerie",
    "fieldtype": "",
-   "hidden_calculation": 0,
+   "hidden_calculation": 1,
    "hide_when_empty": 0,
    "include_in_charts": 0,
    "indentation_level": 0,
@@ -585,25 +597,25 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "{\"and\":[[\"account_number\",\">=\",\"600000\"],[\"account_number\",\"<\",\"899999\"]]}",
    "data_source": "Account Data",
    "display_name": "R\u00e9sultat Net",
    "fieldtype": "",
-   "hidden_calculation": 0,
+   "hidden_calculation": 1,
    "hide_when_empty": 0,
    "include_in_charts": 0,
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FA1",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"in\",[\"Dotations prov pour risques et charges\",\"Dotations prov et d\u00e9pr immob incorp\",\"Dotations prov et d\u00e9pr immob corp\",\"Dotations amort. immob. corp.\",\"Dotations amort. immob. incorp.\"]]",
    "data_source": "Account Data",
@@ -621,7 +633,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Reprise d\u2019amortissements. provisions et d\u00e9pr\u00e9ciations\"]",
    "data_source": "Account Data",
@@ -633,13 +645,13 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FA3",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"VNC d'immobilisations\"]",
    "data_source": "Account Data",
@@ -657,7 +669,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Produits des cessions d'immobilisations\"]",
    "data_source": "Account Data",
@@ -669,7 +681,7 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FA5",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {
@@ -801,7 +813,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"in\",[\"Dotations amort. immob. incorp.\",\"Dotations prov et d\u00e9pr immob incorp\"]]",
    "data_source": "Account Data",
@@ -819,9 +831,9 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
-   "calculation_formula": "[\"account_number\",\">=\",\"654100\"]",
+   "calculation_formula": "[\"account_number\",\"=\",\"654100\"]",
    "data_source": "Account Data",
    "display_name": "VNC AO",
    "fieldtype": "",
@@ -837,7 +849,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_number\",\"=\",\"811000\"]",
    "data_source": "Account Data",
@@ -891,7 +903,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"in\",[\"Dotations amort. immob. corp.\",\"Dotations prov et d\u00e9pr immob corp\"]]",
    "data_source": "Account Data",
@@ -909,7 +921,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_number\",\"=\",\"654200\"]",
    "data_source": "Account Data",
@@ -927,7 +939,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_number\",\"=\",\"812000\"]",
    "data_source": "Account Data",
@@ -1035,7 +1047,7 @@
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_category\",\"=\",\"Produits des cessions d'immobilisations\"]",
    "data_source": "Account Data",
@@ -1047,13 +1059,13 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FI1",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_number\",\"=\",\"826000\"]",
    "data_source": "Account Data",
@@ -1065,13 +1077,13 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FI2",
-   "reverse_sign": 1,
+   "reverse_sign": 0,
    "show_line_reference": 1
   },
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_number\",\"=\",\"754100\"]",
    "data_source": "Account Data",
@@ -1083,13 +1095,13 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FI3",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {
    "advanced_filtering": 0,
    "balance_filter": "All",
-   "balance_type": "Closing Balance",
+   "balance_type": "Period Movement (Debits - Credits)",
    "bold_text": 0,
    "calculation_formula": "[\"account_number\",\"=\",\"752000\"]",
    "data_source": "Account Data",
@@ -1101,7 +1113,7 @@
    "indentation_level": 0,
    "italic_text": 0,
    "reference_code": "FI4",
-   "reverse_sign": 0,
+   "reverse_sign": 1,
    "show_line_reference": 1
   },
   {

@@ -2,34 +2,69 @@
 
 [![en](https://img.shields.io/badge/lang-en-red.svg)](./README.en.md)
 
-ERPNext personnalise et adapte ses fonctionnalités pour les entités de l’espace comptable OHADA. Cette implémentation enrichit les rapports standards fournis par ERPNext en y ajoutant les états financiers de l’OHADA.
+ERPNext personnalise et adapte ses fonctionnalités pour les entités de l’espace comptable OHADA (Organisation pour l’Harmonisation en Afrique du Droit des Affaires). Cette implémentation fournit le plan comptable du SYSCOHADA (Système Comptable OHADA) et enrichit les rapports standards fournis par ERPNext en y ajoutant les états financiers de l’OHADA.
 
-## Etats financiers
+## Etats membres de l’OHADA
 
-### Rapports générés à l'aide du modèle des états financiers avancés
+OHADA compte 17 États membres parmi lesquels :
 
-**Le modèle des États financiers avancés** (Financial Report Template Enhanced) est un générateur de modèles permettant de personnaliser la mise en page de n'importe quel rapport financier, sans aucune restriction. Une fois configuré, visualisez-le depuis **États financiers avancés** (Financial Statement Enhanced).
+| Pays                             | Code |
+| -------------------------------- | ---- |
+| Benin                            | BJ   |
+| Burkina Faso                     | BF   |
+| Cameroon                         | CM   |
+| Central African Republic         | CF   |
+| Chad                             | TD   |
+| Comoros                          | KM   |
+| Côte d'Ivoire                    | CI   |
+| Democratic Republic of the Congo | CD   |
+| Equatorial Guinea                | GQ   |
+| Gabon                            | GA   |
+| Guinea                           | GN   |
+| Guinea-Bissau                    | GW   |
+| Mali                             | ML   |
+| Niger                            | NE   |
+| Republic of the Congo            | CG   |
+| Senegal                          | SN   |
+| Togo                             | TG   |
 
-Voici quelques exemples de rapports configurés:
+## Plan comptable
 
-| Etats financiers                  | Description                                                                                                                                              |
+La configuration du plan comptable des entités des Etats membres susmentionnés est celui du SYSCOHADA, par préférence, en plus des plans standards d’ERPNext.
+Les plans suivants sont disponibles :
+
+| Plan                                     | Description                                                                                                                                    |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Syscohada - Plan Comptable**           | La longueur de base des comptes de 1 à 4 chiffres dans la nomenclature officielle du SYSCOHADA (par exemple 1011-Capital souscrit, non appelé) |
+| **Syscohada - Plan Comptable avec code** | Le même plan avec des comptes de 6 chiffres pour les besoins de comptabilité analytique ou auxiliaire des entités.                             |
+
+Les plans ERPNext **Standard** et **Standard avec Numéros** restent disponibles. Les modèles régionaux pour les pays hors de l’espace OHADA sont également inclus. La configuration trouve toujours ce plan lorsque cette application est installée.
+
+## Rapports
+
+### Rapports optimisés par le modèle de rapport financier
+
+**Financial Report Template Enhanced** est un générateur de modèles permettant de définir n'importe quelle présentation de rapport financier, sans se limiter à un ensemble fixe d'états.
+
+Les rapports courants configurés en utilisant cette application comprennent :
+
+| Rapport                           | Description                                                                                                                                              |
 | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Compte de résultat**            | Il récapitule les produits et les charges qui font apparaitre les résultats intermédiaires et, in fine, le bénéfice net ou la perte nette de l’exercice. |
+| **Compte De Résultat**            | Il récapitule les produits et les charges qui font apparaitre les résultats intermédiaires et, in fine, le bénéfice net ou la perte nette de l’exercice. |
 | **Bilan**                         | Il décrit les éléments d’actif, les éléments du passif et les capitaux propres distinctement.                                                            |
 | **Tableau de Flux de Trésorerie** | Il retrace les mouvements d’entrée et de sortie de liquidités de la période.                                                                             |
 
-Vous pouvez également définir des instructions personnalisées au-delà de ces exemples. Les modèles sont configurés une fois et réutilisés, pas besoin de reconstruire les rapports dans Excel à chaque période.
+Vous pouvez adapter ces modèles ou définir d’autres instructions personnalisées. Les modèles sont configurés une fois et réutilisés. Il n’est pas nécessaire de reconstruire des rapports dans Excel à chaque période.
 
-## Modèle des Etats financiers avancés
+## Etats Financiers avancés
 
-Ce modèle d'États financiers avancés s'appuie sur la structure de base d'ERPNext. Sa flexibilité permet de générer n'importe quel rapport financier directement depuis le module **Financial Statement Enhanced**.
+Le modèle de rapport financier amélioré s'appuie sur le modèle de rapport financier d'ERPNext. Il s'agit d'un plan flexible pour tout état financier que vous devez produire en fonction du **Profit and Loss Statement**, du **Balance Sheet**, des **Cash Flow** ou **Custom Financial Statement**.
 
-**Fonctionnalités**
+**Objectifs**
 
-- **Colonnes de valeur configurables** - nommez des colonnes de valeur (par exemple Valeur brute, Valeur nette, Amortissement) qui s'étendent sur chaque période comptable. Laissez les colonnes de valeur vides pour conserver le style d’ERPNext avec une seule colonne de valeur par période.
-- **Règles par colonne** - reclassez la nature du solde par type de compte, appliquez des filtres de compte ou les formules pour des colonnes de valeur individuelles sans dupliquer les lignes.
-- **Mise en page professionnelle** - en-têtes en gras, indentation, couleurs, masquage des valeurs nulles, filtrage par côté débit/crédit et prise en charge des graphiques..
-- **Point d’exécution unique** - a génération des rapports est centralisée au sein du module Financial Statement Enhanced, d'où sont exécutés tous les modèles améliorés.
+- **Colonnes de valeur configurables** - définir des colonnes de valeurs nommées (par exemple, Valeur brute, Valeur nette, Amortissement) qui s’étendent sur chaque période de rapport. Laissez les colonnes de valeurs vides pour conserver le comportement de style ERPNext avec une seule colonne de valeur par période.
+- **Règles par colonne** - définir le type de solde, les filtres de compte ou les formules pour des colonnes de valeurs individuelles sans dupliquer les lignes.
+- **Présentation professionnelle** - titres en gras, indentation, couleur, masquer-zéro, filtrage débit/crédit et prise en charge des comptes.
 
 ## Autres rapports
 
