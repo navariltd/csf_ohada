@@ -2,6 +2,7 @@
 # For license information, please see license.txt
 
 import frappe
+from frappe import _
 
 from csf_ohada.csf_ohada.doctype.ohada_financial_report_template.financial_report_engine import (
 	FinancialReportEngine,
@@ -11,6 +12,6 @@ from csf_ohada.csf_ohada.doctype.ohada_financial_report_template.financial_repor
 
 def execute(filters: dict | None = None):
 	if not filters.get("report_template"):
-		frappe.throw("Report template is required")
+		frappe.throw(_("Report template is required"))
 
 	return FinancialReportEngine().execute(filters)
