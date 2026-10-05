@@ -43,9 +43,9 @@ ERPNext **Standard** and **Standard with Numbers** charts remain available. Regi
 
 ## Reports
 
-### Reports powered by Financial Report Template Enhanced
+### Reports powered by OHADA Financial Report Template
 
-**Financial Report Template Enhanced** is a template builder for defining any financial report layout, not limited to a fixed set of statements.
+**OHADA Financial Report Template** is a template builder for defining any financial report layout, not limited to a fixed set of statements.
 
 Common reports configured using this app include:
 
@@ -57,9 +57,9 @@ Common reports configured using this app include:
 
 You can also define custom statements beyond these examples. Templates are configured once and reused, no need to rebuild reports in Excel each period.
 
-## Financial Report Template Enhanced
+## OHADA Financial Report Template
 
-Financial Report Template Enhanced builds on ERPNext's Financial Report Template. It is a flexible blueprint for any financial statement you need to produce based on **Profit and Loss Statement**, **Balance Sheet**, **Cash Flow** or **Custom Financial Statement**.
+OHADA Financial Report Template builds on ERPNext's Financial Report Template. It is a flexible blueprint for any financial statement you need to produce based on **Profit and Loss Statement**, **Balance Sheet**, **Cash Flow** or **Custom Financial Statement**.
 
 **What it achieves**
 
