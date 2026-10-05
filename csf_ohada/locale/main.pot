@@ -1,0 +1,1235 @@
+# Translations template for OHADA ERPNext Localization.
+# Copyright (C) 2026 Navari Ltd
+# This file is distributed under the same license as the OHADA ERPNext Localization project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OHADA ERPNext Localization VERSION\n"
+"Report-Msgid-Bugs-To: solutions@navari.co.ke\n"
+"POT-Creation-Date: 2026-10-05 14:56+0227\n"
+"PO-Revision-Date: 2026-10-05 14:56+0227\n"
+"Last-Translator: solutions@navari.co.ke\n"
+"Language-Team: solutions@navari.co.ke\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_validation.py:48
+msgid "API Method Path"
+msgstr ""
+
+#. Option for the 'Data Source' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Account Data"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.js:20
+#: csf_ohada/csf_ohada/report/ohada_cash_flow/ohada_cash_flow.js:29
+#: csf_ohada/csf_ohada/report/ohada_custom_financial_statement/ohada_custom_financial_statement.js:21
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.js:20
+msgid "Account Detail Level"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_validation.py:47
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:768
+msgid "Account Filter"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:605
+msgid "Account Number"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:205
+msgid "Accounts Included in Report"
+msgstr ""
+
+#. Name of a role
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.json
+msgid "Accounts Manager"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:178
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:204
+msgid "Accounts Missing from Report"
+msgstr ""
+
+#. Name of a role
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.json
+msgid "Accounts User"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.js:39
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.js:40
+msgid "Accumulated Values"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:608
+msgid "Add Value Columns to set a different filter or formula per column on this line."
+msgstr ""
+
+#. Label of the advanced_filtering (Check) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Advanced Filtering"
+msgstr ""
+
+#. Option for the 'Balance Filter' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "All"
+msgstr ""
+
+#. Option for the 'Period Scope' (Select) field in DocType 'OHADA Financial
+#. Report Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "All Periods"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.js:23
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:693
+msgid "Asset Category"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:680
+msgid "Asset ID"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:687
+msgid "Asset Name"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:220
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:661
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:720
+msgid "Asset Value"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.py:284
+msgid "Assets"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:32
+msgid "At least one row is required for a OHADA financial report template"
+msgstr ""
+
+#. Name of a role
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.json
+msgid "Auditor"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:707
+msgid "Available For Use Date"
+msgstr ""
+
+#. Label of the balance_filter (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Balance Filter"
+msgstr ""
+
+#. Option for the 'Report Type' (Select) field in DocType 'OHADA Financial
+#. Report Template'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.json
+msgid "Balance Sheet"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.py:308
+msgid "Balance Sheet requires {0} to be synced to DuckDB"
+msgstr ""
+
+#. Label of the balance_type (Select) field in DocType 'OHADA Financial Report
+#. Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:704
+msgid "Balance Type"
+msgstr ""
+
+#. Description of the 'Label' (Data) field in DocType 'OHADA Financial Report
+#. Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Base column title (e.g. Gross Value, Net Value)"
+msgstr ""
+
+#. Option for the 'Data Source' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Blank Line"
+msgstr ""
+
+#. Label of the bold_text (Check) field in DocType 'OHADA Financial Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Bold Text"
+msgstr ""
+
+#. Description of the 'Bold Text' (Check) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Bold text for emphasis (totals, major headings)"
+msgstr ""
+
+#. Description of the 'Hidden Line (Internal Use Only)' (Check) field in
+#. DocType 'OHADA Financial Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Calculate but don't show on final report"
+msgstr ""
+
+#. Option for the 'Data Source' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Calculated Amount"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_validation.py:50
+msgid "Calculation Formula"
+msgstr ""
+
+#. Option for the 'Report Type' (Select) field in DocType 'OHADA Financial
+#. Report Template'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.json
+msgid "Cash Flow"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_cash_flow/ohada_cash_flow.py:194
+msgid "Cash Flow from Financing"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_cash_flow/ohada_cash_flow.py:187
+msgid "Cash Flow from Investing"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_cash_flow/ohada_cash_flow.py:172
+msgid "Cash Flow from Operations"
+msgstr ""
+
+#. Option for the 'Default Balance Type' (Select) field in DocType 'OHADA
+#. Financial Report Column'
+#. Option for the 'Balance Type' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Closing Balance"
+msgstr ""
+
+#. Description of the 'Line Reference' (Data) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Code to reference this line in formulas (e.g., REV100, EXP200, ASSET100)"
+msgstr ""
+
+#. Description of the 'Column Code' (Data) field in DocType 'OHADA Financial
+#. Report Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Code used in column settings and formulas (e.g. GROSS, NET)"
+msgstr ""
+
+#. Label of the color (Color) field in DocType 'OHADA Financial Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Color"
+msgstr ""
+
+#. Description of the 'Color' (Color) field in DocType 'OHADA Financial Report
+#. Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Color to highlight values (e.g., red for exceptions)"
+msgstr ""
+
+#. Option for the 'Data Source' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Column Break"
+msgstr ""
+
+#. Label of the column_code (Data) field in DocType 'OHADA Financial Report
+#. Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Column Code"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.py:114
+msgid "Column Code is required for all Value Columns"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.py:125
+msgid "Column Code {0} is also used as a Line Reference. Use distinct codes."
+msgstr ""
+
+#. Label of the column_settings (JSON) field in DocType 'OHADA Financial Report
+#. Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Column Settings"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:583
+msgid "Column default balance: {0}"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:580
+msgid "Column default filter is set"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:586
+msgid "Column default sign: {0}"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:578
+msgid "Column default: {0}"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.py:81
+msgid "Column settings updated"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.js:8
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:668
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:768
+msgid "Company"
+msgstr ""
+
+#. Description of the 'Hidden' (Check) field in DocType 'OHADA Financial Report
+#. Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Compute values but do not show this measure as a report column"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.js:29
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:741
+msgid "Cost Center"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:1828
+msgid "Could not evaluate {0} ({1})"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_validation.py:815
+msgid "Could not validate {0}: {1}"
+msgstr ""
+
+#. Option for the 'Balance Filter' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Credit Accounts"
+msgstr ""
+
+#. Option for the 'Default Balance Type' (Select) field in DocType 'OHADA
+#. Financial Report Column'
+#. Option for the 'Balance Type' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Credits"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:654
+msgid "Cumulative Depreciation"
+msgstr ""
+
+#. Option for the 'Value Type' (Select) field in DocType 'OHADA Financial
+#. Report Column'
+#. Option for the 'Value Type' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Currency"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:374
+msgid "Currency filters are currently unsupported in Custom Financial Report."
+msgstr ""
+
+#. Option for the 'Period Scope' (Select) field in DocType 'OHADA Financial
+#. Report Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Current Period Only"
+msgstr ""
+
+#. Option for the 'Data Source' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Custom API"
+msgstr ""
+
+#. Option for the 'Report Type' (Select) field in DocType 'OHADA Financial
+#. Report Template'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.json
+msgid "Custom Financial Statement"
+msgstr ""
+
+#. Label of the data_source (Select) field in DocType 'OHADA Financial Report
+#. Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Data Source"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.js:103
+msgid "Date Based On"
+msgstr ""
+
+#. Option for the 'Balance Filter' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Debit Accounts"
+msgstr ""
+
+#. Option for the 'Default Balance Type' (Select) field in DocType 'OHADA
+#. Financial Report Column'
+#. Option for the 'Balance Type' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Debits"
+msgstr ""
+
+#. Label of the default_balance_type (Select) field in DocType 'OHADA Financial
+#. Report Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Default Balance Type"
+msgstr ""
+
+#. Label of the default_calculation_formula (Code) field in DocType 'OHADA
+#. Financial Report Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Default Formula / Account Filter"
+msgstr ""
+
+#. Label of the default_reverse_sign (Select) field in DocType 'OHADA Financial
+#. Report Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Default Reverse Sign"
+msgstr ""
+
+#. Description of the 'Balance Type' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Default for all value columns unless a column setting or Value Column default replaces it"
+msgstr ""
+
+#. Description of the 'Default Formula / Account Filter' (Code) field in
+#. DocType 'OHADA Financial Report Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Default formula or account filter for this column. Leave empty to use each row's Formula / Account Filter. A line-level column setting still wins."
+msgstr ""
+
+#. Label of the default_is_formula (Check) field in DocType 'OHADA Financial
+#. Report Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Default is Formula"
+msgstr ""
+
+#. Label of the section_break_defaults (Section Break) field in DocType 'OHADA
+#. Financial Report Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Defaults for all rows"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:748
+msgid "Department"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:224
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:647
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:734
+msgid "Depreciated Amount"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_cash_flow/ohada_cash_flow.py:174
+msgid "Depreciation"
+msgstr ""
+
+#. Description of the 'Template Name' (Data) field in DocType 'OHADA Financial
+#. Report Template'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.json
+msgid "Descriptive name for your template (e.g., 'OHADA Balance Sheet')"
+msgstr ""
+
+#. Description of the 'Disabled' (Check) field in DocType 'OHADA Financial
+#. Report Template'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.json
+msgid "Disable template to prevent use in reports"
+msgstr ""
+
+#. Label of the disabled (Check) field in DocType 'OHADA Financial Report
+#. Template'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.json
+msgid "Disabled"
+msgstr ""
+
+#. Label of the display_name (Data) field in DocType 'OHADA Financial Report
+#. Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Display Name"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:1825
+msgid "Division by zero in formula: {0}"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:230
+msgid "Done"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.py:116
+msgid "Duplicate Column Code: {0}"
+msgstr ""
+
+#. Label of the empty_column (Check) field in DocType 'OHADA Financial Report
+#. Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Empty Column"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:349
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.js:80
+msgid "End Date"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:351
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.js:95
+msgid "End Year"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.py:288
+msgid "Equity"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_validation.py:115
+msgid "Errors"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:712
+msgid "Evaluate as Formula"
+msgstr ""
+
+#. Description of the 'Default is Formula' (Check) field in DocType 'OHADA
+#. Financial Report Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Evaluate the default as a calculation formula instead of an account filter (e.g. GROSS - DEPR on every row)"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.py:214
+msgid "Expense"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:347
+msgid "Filter Based On"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.js:54
+msgid "Finance Book"
+msgstr ""
+
+#. Label of a Workspace Sidebar Item
+#: csf_ohada/workspace_sidebar/ohada.json
+msgid "Financial Reports"
+msgstr ""
+
+#. Name of a report
+#. Label of a Workspace Sidebar Item
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.json
+#: csf_ohada/workspace_sidebar/ohada.json
+msgid "Fixed Asset Register Enhanced"
+msgstr ""
+
+#. Option for the 'Value Type' (Select) field in DocType 'OHADA Financial
+#. Report Column'
+#. Option for the 'Value Type' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Float"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:752
+msgid "Formula"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:459
+msgid "Formula Errors"
+msgstr ""
+
+#. Label of the calculation_formula (Code) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Formula or Account Filter"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.js:35
+msgid "Group By"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.js:32
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.js:32
+msgid "Growth View"
+msgstr ""
+
+#. Label of the hidden (Check) field in DocType 'OHADA Financial Report Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Hidden"
+msgstr ""
+
+#. Label of the hidden_calculation (Check) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Hidden Line (Internal Use Only)"
+msgstr ""
+
+#. Label of the hide_when_empty (Check) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Hide If Zero"
+msgstr ""
+
+#. Description of the 'Hide If Zero' (Check) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Hide this line if amount is zero"
+msgstr ""
+
+#. Description of the 'Data Source' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "How this line gets its data"
+msgstr ""
+
+#. Description of the 'Value Type' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "How to format and present values in the financial report (only if different from column fieldtype)"
+msgstr ""
+
+#. Description of the 'Include in Charts' (Check) field in DocType 'OHADA
+#. Financial Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "If enabled, this row's values will be displayed on financial charts"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.js:60
+msgid "Include Default FB Assets"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.js:45
+#: csf_ohada/csf_ohada/report/ohada_cash_flow/ohada_cash_flow.js:37
+#: csf_ohada/csf_ohada/report/ohada_custom_financial_statement/ohada_custom_financial_statement.js:29
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.js:46
+msgid "Include Default FB Entries"
+msgstr ""
+
+#. Label of the include_in_charts (Check) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Include in Charts"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.py:212
+msgid "Income"
+msgstr ""
+
+#. Label of the indentation_level (Int) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Indent Level"
+msgstr ""
+
+#. Description of the 'Indent Level' (Int) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Indentation level: 0 = Main heading, 1 = Sub-category, 2 = Individual accounts, etc."
+msgstr ""
+
+#. Option for the 'Value Type' (Select) field in DocType 'OHADA Financial
+#. Report Column'
+#. Option for the 'Value Type' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Int"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:105
+msgid "Invalid filter formula. Please check the syntax."
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:842
+msgid "Invalid filter. Please check the syntax."
+msgstr ""
+
+#. Label of the italic_text (Check) field in DocType 'OHADA Financial Report
+#. Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Italic Text"
+msgstr ""
+
+#. Description of the 'Italic Text' (Check) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Italic text for subtotals or notes"
+msgstr ""
+
+#. Option for the 'Default Reverse Sign' (Select) field in DocType 'OHADA
+#. Financial Report Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Keep Sign"
+msgstr ""
+
+#. Label of the label (Data) field in DocType 'OHADA Financial Report Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Label"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.py:286
+msgid "Liabilities"
+msgstr ""
+
+#. Label of the reference_code (Data) field in DocType 'OHADA Financial Report
+#. Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:1936
+msgid "Line Reference"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:761
+msgid "Location"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.js:33
+msgid "Margin View"
+msgstr ""
+
+#. Description of the 'Value Columns' (Section Break) field in DocType 'OHADA
+#. Financial Report Template'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.json
+msgid "Measure columns expanded for each report period. Leave empty for one value column per period (ERPNext default)."
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_validation.py:38
+msgid "Method Not Allowed"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_validation.py:36
+msgid "Method {0} must permit GET requests"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:365
+msgid "Missing Required Filter"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:366
+msgid "Missing required filter: {0}"
+msgstr ""
+
+#. Label of the module (Link) field in DocType 'OHADA Financial Report
+#. Template'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.json
+msgid "Module (for Export)"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_cash_flow/ohada_cash_flow.py:193
+msgid "Net Cash from Financing"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_cash_flow/ohada_cash_flow.py:186
+msgid "Net Cash from Investing"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_cash_flow/ohada_cash_flow.py:171
+msgid "Net Cash from Operations"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_cash_flow/ohada_cash_flow.py:179
+msgid "Net Change in Accounts Payable"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_cash_flow/ohada_cash_flow.py:177
+msgid "Net Change in Accounts Receivable"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_cash_flow/ohada_cash_flow.py:142
+msgid "Net Change in Cash"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_cash_flow/ohada_cash_flow.py:195
+msgid "Net Change in Equity"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_cash_flow/ohada_cash_flow.py:188
+msgid "Net Change in Fixed Asset"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_cash_flow/ohada_cash_flow.py:180
+msgid "Net Change in Inventory"
+msgstr ""
+
+#. Option for the 'Balance Filter' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Net Credit"
+msgstr ""
+
+#. Option for the 'Balance Filter' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Net Debit"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.py:141
+msgid "Net Profit"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.py:216
+msgid "Net Profit/Loss"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:633
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:713
+msgid "Net Purchase Amount"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:173
+msgid "No <strong>Account Data</strong> row found"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_cash_flow/ohada_cash_flow.py:435
+msgid "Not able to find the earliest Fiscal Year for the given company."
+msgstr ""
+
+#. Name of a report
+#. Label of a Workspace Sidebar Item
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.json
+#: csf_ohada/workspace_sidebar/ohada.json
+msgid "OHADA Balance Sheet"
+msgstr ""
+
+#. Name of a report
+#. Label of a Workspace Sidebar Item
+#: csf_ohada/csf_ohada/report/ohada_cash_flow/ohada_cash_flow.json
+#: csf_ohada/workspace_sidebar/ohada.json
+msgid "OHADA Cash Flow"
+msgstr ""
+
+#. Name of a report
+#. Label of a Workspace Sidebar Item
+#: csf_ohada/csf_ohada/report/ohada_custom_financial_statement/ohada_custom_financial_statement.json
+#: csf_ohada/workspace_sidebar/ohada.json
+msgid "OHADA Custom Financial Statement"
+msgstr ""
+
+#. Name of a DocType
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "OHADA Financial Report Column"
+msgstr ""
+
+#. Name of a DocType
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "OHADA Financial Report Row"
+msgstr ""
+
+#. Name of a DocType
+#. Label of a Workspace Sidebar Item
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.json
+#: csf_ohada/workspace_sidebar/ohada.json
+msgid "OHADA Financial Report Template"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:392
+msgid "OHADA Financial Report Template {0} is disabled"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:389
+msgid "OHADA Financial Report Template {0} not found"
+msgstr ""
+
+#. Name of a report
+#. Label of a Workspace Sidebar Item
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.json
+#: csf_ohada/workspace_sidebar/ohada.json
+msgid "OHADA Profit and Loss Statement"
+msgstr ""
+
+#. Label of a Desktop Icon
+#. Title of a Workspace Sidebar
+#: csf_ohada/desktop_icon/ohada.json csf_ohada/workspace_sidebar/ohada.json
+msgid "Ohada"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.js:49
+msgid "Only existing assets"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:640
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:727
+msgid "Opening Accumulated Depreciation"
+msgstr ""
+
+#. Option for the 'Default Balance Type' (Select) field in DocType 'OHADA
+#. Financial Report Column'
+#. Option for the 'Balance Type' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Opening Balance"
+msgstr ""
+
+#. Description of the 'Title Template' (Data) field in DocType 'OHADA Financial
+#. Report Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Optional. Placeholders: {label}, {period}. Default: {label} ({period})"
+msgstr ""
+
+#. Label of a Workspace Sidebar Item
+#: csf_ohada/workspace_sidebar/ohada.json
+msgid "Other Reports"
+msgstr ""
+
+#. Description of the 'Default Reverse Sign' (Select) field in DocType 'OHADA
+#. Financial Report Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Override Reverse Sign for this column on every line. Leave empty to use each row's setting."
+msgstr ""
+
+#. Description of the 'Default Balance Type' (Select) field in DocType 'OHADA
+#. Financial Report Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Override row Balance Type for this column on every line. Leave empty to use each row's Balance Type."
+msgstr ""
+
+#. Description of the 'Column Settings' (JSON) field in DocType 'OHADA
+#. Financial Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Per value column Balance Type and Formula / Account Filter. Keys omitted use the Value Column default, then this row's fields."
+msgstr ""
+
+#. Option for the 'Value Type' (Select) field in DocType 'OHADA Financial
+#. Report Column'
+#. Option for the 'Value Type' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Percent"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.js:66
+msgid "Period Based On"
+msgstr ""
+
+#. Option for the 'Default Balance Type' (Select) field in DocType 'OHADA
+#. Financial Report Column'
+#. Option for the 'Balance Type' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Period Movement (Debits - Credits)"
+msgstr ""
+
+#. Label of the period_scope (Select) field in DocType 'OHADA Financial Report
+#. Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Period Scope"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.py:200
+msgid "Previous Financial Year is not closed"
+msgstr ""
+
+#. Option for the 'Period Scope' (Select) field in DocType 'OHADA Financial
+#. Report Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Previous Periods Only"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.py:137
+msgid "Profit This Year"
+msgstr ""
+
+#. Option for the 'Report Type' (Select) field in DocType 'OHADA Financial
+#. Report Template'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.json
+msgid "Profit and Loss Statement"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.py:237
+msgid "Profit and Loss Statement requires {0} to be synced to DuckDB"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.py:171
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.py:172
+msgid "Profit for the year"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.py:177
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.py:178
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.py:260
+msgid "Provisional Profit / Loss (Credit)"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:701
+msgid "Purchase Date"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:623
+msgid "Rate of Depreciation"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.py:78
+msgid "Removed column settings from {0} report line(s) that referenced deleted Value Columns."
+msgstr ""
+
+#. Label of the section_break_fvlw (Section Break) field in DocType 'OHADA
+#. Financial Report Template'
+#. Label of the rows (Table) field in DocType 'OHADA Financial Report Template'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.json
+msgid "Report Line Items"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:346
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.js:13
+#: csf_ohada/csf_ohada/report/ohada_cash_flow/ohada_cash_flow.js:22
+#: csf_ohada/csf_ohada/report/ohada_custom_financial_statement/ohada_custom_financial_statement.js:13
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.js:13
+msgid "Report Template"
+msgstr ""
+
+#. Label of the report_type (Select) field in DocType 'OHADA Financial Report
+#. Template'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.json
+msgid "Report Type"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.js:31
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.js:31
+msgid "Report View"
+msgstr ""
+
+#. Option for the 'Default Reverse Sign' (Select) field in DocType 'OHADA
+#. Financial Report Column'
+#. Label of the reverse_sign (Check) field in DocType 'OHADA Financial Report
+#. Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:724
+msgid "Reverse Sign"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:1795
+msgid "Row"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:678
+msgid "Row default"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:622
+msgid "Row fields apply to every value column. Customise a column here only when it should differ. Keys left on row default use the Value Column default, then this line's Balance Type and Formula."
+msgstr ""
+
+#. Option for the 'Data Source' (Select) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Section Break"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.js:28
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.js:28
+msgid "Select View"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.js:43
+msgid "Show Account Number"
+msgstr ""
+
+#. Label of the show_line_reference (Check) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Show Line Reference"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_cash_flow/ohada_cash_flow.js:43
+msgid "Show Opening and Closing Balance"
+msgstr ""
+
+#. Description of the 'Reverse Sign' (Check) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Show negative values as positive (for expenses in P&L)"
+msgstr ""
+
+#. Description of the 'Empty Column' (Check) field in DocType 'OHADA Financial
+#. Report Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Show only this column's label. All row cells stay empty."
+msgstr ""
+
+#. Description of the 'Show Line Reference' (Check) field in DocType 'OHADA
+#. Financial Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Show this line's reference code in the report. Uncheck to output None."
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.js:51
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.js:52
+msgid "Show zero values"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:348
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.js:73
+msgid "Start Date"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:350
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.js:87
+msgid "Start Year"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.js:16
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:699
+msgid "Status"
+msgstr ""
+
+#. Label of the template_name (Data) field in DocType 'OHADA Financial Report
+#. Template'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.json
+msgid "Template Name"
+msgstr ""
+
+#. Description of the 'Display Name' (Data) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Text displayed on the financial statement (e.g., 'Total Revenue', 'Cash and Cash Equivalents')"
+msgstr ""
+
+#. Label of the title_template (Data) field in DocType 'OHADA Financial Report
+#. Column'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+msgid "Title Template"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:245
+msgid "To use a different finance book, please uncheck 'Include Default FB Assets'"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:972
+msgid "To use a different finance book, please uncheck 'Include Default FB Entries'"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.py:145
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.py:146
+msgid "Total (Credit)"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.py:242
+msgid "Total Asset"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.py:254
+msgid "Total Equity"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.py:143
+msgid "Total Expense"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.py:139
+msgid "Total Expense This Year"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.py:142
+msgid "Total Income"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.py:138
+msgid "Total Income This Year"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.py:248
+msgid "Total Liability"
+msgstr ""
+
+#. Description of the 'Report Type' (Select) field in DocType 'OHADA Financial
+#. Report Template'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.json
+msgid "Type of financial statement this template generates"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.py:93
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.py:94
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.py:340
+#: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.py:341
+msgid "Unclosed Fiscal Years Profit / Loss (Credit)"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:373
+msgid "Unsupported Feature"
+msgstr ""
+
+#. Description of the 'Advanced Filtering' (Check) field in DocType 'OHADA
+#. Financial Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Use <strong>Python</strong> filters to get Accounts"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:688
+msgid "Use defaults"
+msgstr ""
+
+#. Label of the column_settings_editor (HTML) field in DocType 'OHADA Financial
+#. Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Value Column Settings"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.py:135
+msgid "Value Column {0} is marked as a formula default but no formula is set"
+msgstr ""
+
+#. Label of the section_break_columns (Section Break) field in DocType 'OHADA
+#. Financial Report Template'
+#. Label of the columns (Table) field in DocType 'OHADA Financial Report
+#. Template'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.json
+msgid "Value Columns"
+msgstr ""
+
+#. Label of the fieldtype (Select) field in DocType 'OHADA Financial Report
+#. Column'
+#. Label of the fieldtype (Select) field in DocType 'OHADA Financial Report
+#. Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Value Type"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.py:153
+msgid "Value columns of row {0} reference each other in a loop: {1}"
+msgstr ""
+
+#: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:755
+msgid "Vendor Name"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:12
+msgid "View Account Coverage"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:22
+msgid "View Report"
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_validation.py:112
+msgid "Warnings"
+msgstr ""
+
+#. Description of the 'Balance Filter' (Select) field in DocType 'OHADA
+#. Financial Report Row'
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+msgid "Which GL balances to include. Debit/Credit Accounts: keep only accounts with that sign in each period. Net Debit/Net Credit: keep the whole line when the overall balance (last visible column) has that sign, otherwise zero. Pair with a counterpart row and Hide If Zero. Sign is always debit minus credit, before Reverse Sign."
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:382
+msgid "{0} view is currently unsupported in Custom Financial Report."
+msgstr ""
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_validation.py:810
+msgid "{0}: Method '{1}' must be whitelisted and permit GET requests"
+msgstr ""
+
