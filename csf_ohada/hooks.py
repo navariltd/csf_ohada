@@ -131,7 +131,8 @@ after_install = "csf_ohada.setup.install.sync_default_records"
 # ---------------
 # Override standard doctype classes
 
-override_doctype_class = {"Company": "csf_ohada.overrides.company.company.CustomCompany"}
+# override_doctype_class = {"Company": "csf_ohada.overrides.company.company.CustomCompany"}
+extend_doctype_class = {"Company": ["csf_ohada.overrides.company.company.CustomCompany"]}
 
 # Document Events
 # ---------------
