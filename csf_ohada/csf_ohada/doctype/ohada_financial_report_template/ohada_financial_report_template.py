@@ -245,7 +245,7 @@ def sync_ohada_financial_report_templates(chart_of_accounts=None, existing_compa
 			disable_default = True
 
 	for app in frappe.get_installed_apps():
-		if disable_default and (app == "csf_ohada" or app == "erpnext"):
+		if disable_default and (app == "csf_ohada"):
 			continue
 		_sync_templates_for(app)
 

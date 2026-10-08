@@ -79,7 +79,7 @@ doctype_js = {"Company": "public/js/company.js"}
 # 	"filters": "csf_ohada.utils.jinja_filters"
 # }
 
-# after_migrate = "csf_ohada.setup.install.sync_default_records"
+after_migrate = "csf_ohada.setup.install.sync_default_records"
 
 # Installation
 # ------------
