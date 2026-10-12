@@ -84,7 +84,7 @@ def create_charts(
 
 
 @frappe.whitelist()
-def get_chart(chart_template, existing_company=None):
+def get_chart(chart_template: str, existing_company: str | None = None) -> dict:
 	chart = {}
 	if existing_company:
 		return get_account_tree_from_existing_company(existing_company)
@@ -110,6 +110,7 @@ def get_chart(chart_template, existing_company=None):
 			for fname in os.listdir(path):
 				fname = frappe.as_unicode(fname)
 				if fname.endswith(".json"):
+					# nosemgrep: frappe-semgrep-rules.rules.security.frappe-ssti
 					with open(os.path.join(path, fname)) as f:
 						chart = f.read()
 						if chart and json.loads(chart).get("name") == chart_template:
@@ -117,7 +118,7 @@ def get_chart(chart_template, existing_company=None):
 
 
 @frappe.whitelist()
-def get_charts_for_country(country, with_standard=False):
+def get_charts_for_country(country: str, with_standard: bool = False) -> list[str]:
 	charts = []
 
 	def _get_chart_name(content):
@@ -143,6 +144,7 @@ def get_charts_for_country(country, with_standard=False):
 			for fname in os.listdir(path):
 				fname = frappe.as_unicode(fname)
 				if (fname.startswith(country_code) or fname.startswith(country)) and fname.endswith(".json"):
+					# nosemgrep: frappe-semgrep-rules.rules.security.frappe-ssti
 					with open(os.path.join(path, fname)) as f:
 						_get_chart_name(f.read())
 

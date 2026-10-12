@@ -1,8 +1,8 @@
 import frappe
-from erpnext.setup.doctype.company.company import Company
+from frappe.model.document import Document
 
 
-class CustomCompany(Company):
+class CustomCompany(Document):
 	def create_default_accounts(self):
 		from csf_ohada.csf_ohada.doctype.ohada_financial_report_template.ohada_financial_report_template import (
 			sync_ohada_financial_report_templates,

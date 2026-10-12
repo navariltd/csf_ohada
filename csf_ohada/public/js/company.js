@@ -20,7 +20,6 @@ erpnext.company.set_chart_of_accounts_options = function (doc) {
 				with_standard: true,
 			},
 			callback: function (r) {
-				console.log("RESPONSE", r);
 				if (!r.exc) {
 					set_field_options("chart_of_accounts", [""].concat(r.message).join("\n"));
 					if (r.message.includes(selected_value))

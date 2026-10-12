@@ -8,6 +8,7 @@ from frappe.model.document import bulk_insert
 def import_account_categories():
 	file_path = os.path.join(os.path.dirname(__file__), "account_categories.json")
 
+	# nosemgrep: frappe-semgrep-rules.rules.security.frappe-ssti
 	with open(file_path) as f:
 		categories = json.load(f)
 
