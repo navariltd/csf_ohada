@@ -2,7 +2,7 @@
 # For license information, please see license.txt
 
 import frappe
-from frappe import _
+from frappe.utils import _
 
 from csf_ohada.csf_ohada.doctype.ohada_financial_report_template.financial_report_engine import (
 	FinancialReportEngine,
