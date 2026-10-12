@@ -325,140 +325,6 @@ function update_formula_label(frm, data_source) {
 
 // FORMULA DESCRIPTION
 
-// function update_formula_description(frm, data_source) {
-// 	if (!data_source) return;
-
-// 	let grid = frm.fields_dict.rows.grid;
-// 	let field = grid.fields_map.formula_description;
-// 	if (!field) return;
-
-// 	// Common CSS styles and elements
-// 	const container_style = `style="padding: var(--padding-md); border: 1px solid var(--border-color); border-radius: var(--border-radius); margin-top: var(--margin-sm);"`;
-// 	const title_style = `style="margin-top: 0; color: var(--text-color);"`;
-// 	const subtitle_style = `style="color: var(--text-color); margin-bottom: var(--margin-xs);"`;
-// 	const text_style = `style="margin-bottom: var(--margin-sm); color: var(--text-muted);"`;
-// 	const list_style = `style="margin-bottom: var(--margin-sm); color: var(--text-muted); font-size: 0.9em;"`;
-// 	const note_style = `style="margin-bottom: 0; color: var(--text-muted); font-size: 0.9em;"`;
-// 	const tip_style = `style="margin-bottom: 0; color: var(--text-color); font-size: 0.85em;"`;
-// 	const code_style = `style="background: var(--bg-light-gray); padding: var(--padding-xs); border-radius: var(--border-radius); font-size: 0.85em; width: max-content; margin-bottom: var(--margin-sm);"`;
-// 	const pre_style = `style="margin: 0; border-radius: var(--border-radius)"`;
-
-// 	let description_html = "";
-
-// 	if (data_source === "Account Data") {
-// 		description_html = `
-// 			<div ${container_style}>
-// 				<h5 ${title_style}>Account Filter Guide</h5>
-// 				<p ${text_style}>Specify which accounts to include in this line.</p>
-
-// 				<h6 ${subtitle_style}>Basic Examples:</h6>
-// 				<ul ${list_style}>
-// 					<li><code>["account_type", "=", "Cash"]</code> - All Cash accounts</li>
-// 					<li><code>["root_type", "in", ["Asset", "Liability"]]</code> - All Asset and Liability accounts</li>
-// 					<li><code>["account_category", "like", "Revenue"]</code> - Revenue accounts</li>
-// 				</ul>
-
-// 				<h6 ${subtitle_style}>Multiple Conditions (AND/OR):</h6>
-// 				<ul ${list_style}>
-// 					<li><code>{"and": [["root_type", "=", "Asset"], ["account_type", "=", "Cash"]]}</code></li>
-// 					<li><code>{"or": [["account_category", "like", "Revenue"], ["account_category", "like", "Income"]]}</code></li>
-// 				</ul>
-
-// 				<p ${note_style}><strong>Available operators:</strong> <code>=, !=, in, not in, like, not like, is</code></p>
-// 				<p ${tip_style}><strong>Balance Filter:</strong> Use <code>Debit Accounts</code> / <code>Credit Accounts</code> to place only those accounts on this line (the counterpart row keeps the other sign). Use <code>Net Debit</code> / <code>Net Credit</code> to move the whole line when the overall balance (last visible column) has that sign. Pair with Hide If Zero. Sign is debit minus credit, before Reverse Sign.</p>
-// 				<p ${tip_style}><strong>Multi-Company Tip:</strong> Use fields like <code>account_type</code>, <code>root_type</code>, and <code>account_category</code> for templates that work across multiple companies.</p>
-// 			</div>`;
-// 	} else if (data_source === "Calculated Amount") {
-// 		description_html = `
-// 			<div ${container_style}>
-// 				<h5 ${title_style}>Formula Guide</h5>
-// 				<p ${text_style}>Create calculations using reference codes from other lines.</p>
-
-// 				<h6 ${subtitle_style}>Basic Examples:</h6>
-// 				<ul ${list_style}>
-// 					<li><code>REV100 + REV200</code> - Add two revenue lines</li>
-// 					<li><code>ASSETS - LIABILITIES</code> - Calculate equity</li>
-// 					<li><code>REVENUE * 0.1</code> - 10% of revenue</li>
-// 				</ul>
-
-// 				<h6 ${subtitle_style}>Common Functions:</h6>
-// 				<ul ${list_style}>
-// 					<li><code>abs(value)</code> - Remove negative sign</li>
-// 					<li><code>round(value)</code> - Round to whole number</li>
-// 					<li><code>max(val1, val2)</code> - Larger of two values</li>
-// 					<li><code>min(val1, val2)</code> - Smaller of two values</li>
-// 				</ul>
-
-// 				<p ${note_style}><strong>Required:</strong> Use "Reference Code" from other rows in your formulas.</p>
-// 			</div>`;
-// 	} else if (data_source === "Custom API") {
-// 		description_html = `
-// 			<div ${container_style}>
-// 				<h5 ${title_style}>Custom API Setup</h5>
-// 				<p ${text_style}>Path to your custom whitelisted method that returns financial data. It must permit GET requests..</p>
-
-// 				<h6 ${subtitle_style}>Format:</h6>
-// 				<ul ${list_style}>
-// 					<li><code>erpnext.custom.financial_apis.get_custom_revenue</code></li>
-// 					<li><code>my_app.financial_reports.get_kpi_data</code></li>
-// 				</ul>
-
-// 				<h6 ${subtitle_style}>Method Signature:</h6>
-// 				<div ${code_style}>
-// 					<!-- &#10; is used for line breaks since frappe.render replaces newlines with spaces -->
-// 					<pre ${pre_style} class="language-python">@frappe.whitelist(methods=["GET"])&#10;def get_custom_data(filters, periods, row):&#10;    # filters: dict — report filters (company, period, etc.)&#10;    # periods: list[dict] — period definitions&#10;    # row: dict — the current report row&#10;&#10;    return [1000.0, 1200.0, 1150.0]  # one value per period</pre>
-// 				</div>
-
-// 				<h6 ${subtitle_style}>Return Format:</h6>
-// 				<p ${text_style}>A list of numbers, one for each period: <code>[1000.0, 1200.0, 1150.0]</code></p>
-// 			</div>`;
-// 	} else if (data_source === "Blank Line") {
-// 		description_html = `
-// 			<div ${container_style}>
-// 				<h5 ${title_style}>Blank Line</h5>
-// 				<p ${text_style}>Adds empty space for better visual separation.</p>
-
-// 				<h6 ${subtitle_style}>Use For:</h6>
-// 				<ul ${list_style}>
-// 					<li>Separating major sections</li>
-// 					<li>Adding space before totals</li>
-// 				</ul>
-
-// 				<p ${note_style}><strong>Note:</strong> No formula needed - creates visual spacing only.</p>
-// 			</div>`;
-// 	} else if (data_source === "Column Break") {
-// 		description_html = `
-// 			<div ${container_style}>
-// 				<h5 ${title_style}>Column Break</h5>
-// 				<p ${text_style}>Creates a visual break for side-by-side layout.</p>
-
-// 				<h6 ${subtitle_style}>Use For:</h6>
-// 				<ul ${list_style}>
-// 					<li>Horizontal P&L statements</li>
-// 					<li>Side-by-side Balance Sheet sections</li>
-// 				</ul>
-
-// 				<p ${note_style}><strong>Note:</strong> No formula needed - this is for formatting only.</p>
-// 			</div>`;
-// 	} else if (data_source === "Section Break") {
-// 		description_html = `
-// 			<div ${container_style}>
-// 				<h5 ${title_style}>Section Break</h5>
-// 				<p ${text_style}>Creates a visual break for separating different sections.</p>
-
-// 				<h6 ${subtitle_style}>Use For:</h6>
-// 				<ul ${list_style}>
-// 					<li>Separating major sections in a report - say trading & profit and loss</li>
-// 					<li>Improving readability by adding space</li>
-// 				</ul>
-
-// 				<p ${note_style}><strong>Note:</strong> No formula needed - this is for formatting only.</p>
-// 			</div>`;
-// 	}
-
-// 	grid.update_docfield_property("formula_description", "options", description_html);
-// }
-
 function update_formula_description(frm, data_source) {
 	if (!data_source) return;
 
@@ -526,6 +392,8 @@ function update_formula_description(frm, data_source) {
 		)}</p>
 			</div>`;
 	} else if (data_source === "Calculated Amount") {
+		// Outside the __() call below so the string extractor picks it up
+		const reference_code = __("Reference Code");
 		description_html = `
 			<div ${container_style}>
 				<h5 ${title_style}>${__("Formula Guide")}</h5>
@@ -547,8 +415,8 @@ function update_formula_description(frm, data_source) {
 				</ul>
 
 				<p ${note_style}><strong>${__("Required:")}</strong> ${__(
-			"Use {0} from other rows in your formulas.",
-			[`"${__("Reference Code")}"`]
+			'Use "{0}" from other rows in your formulas.',
+			[reference_code]
 		)}</p>
 			</div>`;
 	} else if (data_source === "Custom API") {

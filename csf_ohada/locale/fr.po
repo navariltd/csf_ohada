@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OHADA ERPNext Localization VERSION\n"
 "Report-Msgid-Bugs-To: solutions@navari.co.ke\n"
-"POT-Creation-Date: 2026-10-05 14:56+0227\n"
+"POT-Creation-Date: 2026-10-12 07:10+0227\n"
 "PO-Revision-Date: 2026-10-05 14:56+0227\n"
 "Last-Translator: solutions@navari.co.ke\n"
 "Language: fr\n"
@@ -18,9 +18,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:406
+#, python-format
+msgid "10% of revenue"
+msgstr "10 % du chiffre d’affaires"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:444
+msgid "A list of numbers, one for each period: {0}"
+msgstr "Une liste de nombres, un par période : {0}"
+
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_validation.py:48
 msgid "API Method Path"
-msgstr ""
+msgstr "Chemin de la méthode API"
 
 #. Option for the 'Data Source' (Select) field in DocType 'OHADA Financial
 #. Report Row'
@@ -36,9 +45,13 @@ msgid "Account Detail Level"
 msgstr "Niveau de détail du compte"
 
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_validation.py:47
-#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:768
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:806
 msgid "Account Filter"
 msgstr "Filtre de compte"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:355
+msgid "Account Filter Guide"
+msgstr "Guide du filtre de comptes"
 
 #: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:605
 msgid "Account Number"
@@ -68,9 +81,21 @@ msgstr "Compte utilisateur"
 msgid "Accumulated Values"
 msgstr "Valeurs cumulées"
 
-#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:608
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:646
 msgid "Add Value Columns to set a different filter or formula per column on this line."
 msgstr "Ajouter des colonnes de valeur pour définir un filtre ou une formule différent par colonne sur cette ligne."
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:404
+msgid "Add two revenue lines"
+msgstr "Additionner deux lignes de produits"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:456
+msgid "Adding space before totals"
+msgstr "Ajouter un espace avant les totaux"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:451
+msgid "Adds empty space for better visual separation."
+msgstr "Ajoute un espace vide pour une meilleure séparation visuelle."
 
 #. Label of the advanced_filtering (Check) field in DocType 'OHADA Financial
 #. Report Row'
@@ -83,6 +108,14 @@ msgstr "Filtre avancé"
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
 msgid "All"
 msgstr "Tout"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:361
+msgid "All Asset and Liability accounts"
+msgstr "Tous les comptes d’actif et de passif"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:360
+msgid "All Cash accounts"
+msgstr "Tous les comptes de trésorerie"
 
 #. Option for the 'Period Scope' (Select) field in DocType 'OHADA Financial
 #. Report Column'
@@ -126,11 +159,19 @@ msgstr "Auditeur"
 msgid "Available For Use Date"
 msgstr "Date de mise en service"
 
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:375
+msgid "Available operators:"
+msgstr "Opérateurs disponibles :"
+
 #. Label of the balance_filter (Select) field in DocType 'OHADA Financial
 #. Report Row'
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
 msgid "Balance Filter"
 msgstr "Filtre de solde"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:378
+msgid "Balance Filter:"
+msgstr "Filtre de solde :"
 
 #. Option for the 'Report Type' (Select) field in DocType 'OHADA Financial
 #. Report Template'
@@ -145,7 +186,7 @@ msgstr "Le bilan nécessite la synchronisation de {0} avec DuckDB"
 #. Label of the balance_type (Select) field in DocType 'OHADA Financial Report
 #. Row'
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
-#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:704
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:742
 msgid "Balance Type"
 msgstr "Type de solde"
 
@@ -155,9 +196,15 @@ msgstr "Type de solde"
 msgid "Base column title (e.g. Gross Value, Net Value)"
 msgstr "Titre de colonne (ex. Valeur Brute, Valeur Nette)"
 
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:358
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:402
+msgid "Basic Examples:"
+msgstr "Exemples de base :"
+
 #. Option for the 'Data Source' (Select) field in DocType 'OHADA Financial
 #. Report Row'
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:450
 msgid "Blank Line"
 msgstr "Ligne vierge"
 
@@ -178,11 +225,15 @@ msgstr "Texte en gras pour mettre en évidence (totaux, rubriques principales) "
 msgid "Calculate but don't show on final report"
 msgstr "Calcul masqué (ne pas afficher dans le rapport final) "
 
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:405
+msgid "Calculate equity"
+msgstr "Calculer les capitaux propres"
+
 #. Option for the 'Data Source' (Select) field in DocType 'OHADA Financial
 #. Report Row'
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
 msgid "Calculated Amount"
-msgstr "Valeur calculé"
+msgstr "Valeur calculée"
 
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_validation.py:50
 msgid "Calculation Formula"
@@ -241,6 +292,7 @@ msgstr "Couleur de surbrillance de valeur (ex: rouge pour des exceptions)"
 #. Option for the 'Data Source' (Select) field in DocType 'OHADA Financial
 #. Report Row'
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:466
 msgid "Column Break"
 msgstr "Saut de colonne"
 
@@ -256,7 +308,7 @@ msgstr "La référence de colonne est obligatoire pour toutes les colonnes de va
 
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.py:125
 msgid "Column Code {0} is also used as a Line Reference. Use distinct codes."
-msgstr "La référence de colonne {0} peut également utilisée comme référence de ligne. Utilisez des références distinctes."
+msgstr "La référence de colonne {0} peut également être utilisée comme référence de ligne. Utilisez des références distinctes."
 
 #. Label of the column_settings (JSON) field in DocType 'OHADA Financial Report
 #. Row'
@@ -264,25 +316,29 @@ msgstr "La référence de colonne {0} peut également utilisée comme référenc
 msgid "Column Settings"
 msgstr "Paramètres de colonne"
 
-#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:583
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:621
 msgid "Column default balance: {0}"
 msgstr "Solde de colonne par défaut : {0}"
 
-#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:580
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:618
 msgid "Column default filter is set"
 msgstr "Filtre de colonne par défaut est défini"
 
-#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:586
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:624
 msgid "Column default sign: {0}"
 msgstr "Signe de colonne par défaut : {0}"
 
-#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:578
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:616
 msgid "Column default: {0}"
 msgstr "Colonne par défaut : {0}"
 
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.py:81
 msgid "Column settings updated"
 msgstr "Mise à jour des paramètres de colonnes"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:409
+msgid "Common Functions:"
+msgstr "Fonctions courantes :"
 
 #: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.js:8
 #: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.py:668
@@ -308,6 +364,18 @@ msgstr " Impossible d’évaluer {0} ({1})"
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_validation.py:815
 msgid "Could not validate {0}: {1}"
 msgstr " Impossible de valider {0} : {1}"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:400
+msgid "Create calculations using reference codes from other lines."
+msgstr "Créez des calculs à l’aide des références des autres lignes."
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:483
+msgid "Creates a visual break for separating different sections."
+msgstr "Crée une séparation visuelle entre les différentes sections."
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:467
+msgid "Creates a visual break for side-by-side layout."
+msgstr "Crée une séparation visuelle pour une mise en page côte à côte."
 
 #. Option for the 'Balance Filter' (Select) field in DocType 'OHADA Financial
 #. Report Row'
@@ -351,6 +419,10 @@ msgstr "Uniquement la période actuelle"
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
 msgid "Custom API"
 msgstr "API personnalisé"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:425
+msgid "Custom API Setup"
+msgstr "Configuration de l’API personnalisée"
 
 #. Option for the 'Report Type' (Select) field in DocType 'OHADA Financial
 #. Report Template'
@@ -499,7 +571,7 @@ msgstr "Capitaux propres"
 msgid "Errors"
 msgstr "Erreurs"
 
-#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:712
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:750
 msgid "Evaluate as Formula"
 msgstr "Evaluer en tant que formules"
 
@@ -541,13 +613,21 @@ msgstr "Registre des immobilisations avancé "
 msgid "Float"
 msgstr "Flottante"
 
-#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:752
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:430
+msgid "Format:"
+msgstr "Format :"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:790
 msgid "Formula"
 msgstr "Formule"
 
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:459
 msgid "Formula Errors"
 msgstr "Erreurs de Formule"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:399
+msgid "Formula Guide"
+msgstr "Guide des formules"
 
 #. Label of the calculation_formula (Code) field in DocType 'OHADA Financial
 #. Report Row'
@@ -587,6 +667,10 @@ msgstr "Masquer si zéro"
 msgid "Hide this line if amount is zero"
 msgstr "Masquer cette ligne si la valeur est zéro "
 
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:471
+msgid "Horizontal P&L statements"
+msgstr "Comptes de résultat horizontaux"
+
 #. Description of the 'Data Source' (Select) field in DocType 'OHADA Financial
 #. Report Row'
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
@@ -604,6 +688,10 @@ msgstr "Comment mettre en forme et présenter des valeurs dans l’état financi
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
 msgid "If enabled, this row's values will be displayed on financial charts"
 msgstr "Si activé, les valeurs de cette ligne seront affichées dans les graphiques financiers "
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:488
+msgid "Improving readability by adding space"
+msgstr "Améliorer la lisibilité en ajoutant de l’espace"
 
 #: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.js:60
 msgid "Include Default FB Assets"
@@ -650,7 +738,7 @@ msgstr "Int"
 msgid "Invalid filter formula. Please check the syntax."
 msgstr "Formule de filtrage non valide. Veuillez vérifier la syntaxe."
 
-#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:842
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:880
 msgid "Invalid filter. Please check the syntax."
 msgstr "Filtre non valide. Veuillez vérifier la syntaxe."
 
@@ -676,6 +764,10 @@ msgstr "Conserver le signe"
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
 msgid "Label"
 msgstr "Libellé"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:413
+msgid "Larger of two values"
+msgstr "La plus grande de deux valeurs"
 
 #: csf_ohada/csf_ohada/report/ohada_balance_sheet/ohada_balance_sheet.py:286
 msgid "Liabilities"
@@ -706,6 +798,10 @@ msgstr "Les colonnes de mesure sont développées pour chaque période de rappor
 msgid "Method Not Allowed"
 msgstr "Méthode non autorisée"
 
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:436
+msgid "Method Signature:"
+msgstr "Signature de la méthode :"
+
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_validation.py:36
 msgid "Method {0} must permit GET requests"
 msgstr "Méthode {0} doit autoriser les requêtes GET "
@@ -723,6 +819,14 @@ msgstr " Filtre requis manquant : {0}"
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.json
 msgid "Module (for Export)"
 msgstr "Module (pour exportation)"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:389
+msgid "Multi-Company Tip:"
+msgstr "Astuce multi-sociétés :"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:367
+msgid "Multiple Conditions (AND/OR):"
+msgstr "Conditions multiples (ET/OU) :"
 
 #: csf_ohada/csf_ohada/report/ohada_cash_flow/ohada_cash_flow.py:193
 msgid "Net Cash from Financing"
@@ -789,9 +893,24 @@ msgstr "Valeur net des acquisitions"
 msgid "No <strong>Account Data</strong> row found"
 msgstr "Aucune ligne <strong>Données de compte</strong> trouvée"
 
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:459
+msgid "No formula needed - creates visual spacing only."
+msgstr "Aucune formule requise - crée uniquement un espacement visuel."
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:475
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:491
+msgid "No formula needed - this is for formatting only."
+msgstr "Aucune formule requise - sert uniquement à la mise en forme."
+
 #: csf_ohada/csf_ohada/report/ohada_cash_flow/ohada_cash_flow.py:435
 msgid "Not able to find the earliest Fiscal Year for the given company."
 msgstr "Impossible de trouver l’exercice fiscal le plus récent pour l’entité donnée."
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:459
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:475
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:491
+msgid "Note:"
+msgstr "Remarque :"
 
 #. Name of a report
 #. Label of a Workspace Sidebar Item
@@ -849,8 +968,8 @@ msgstr "Compte de résultat OHADA"
 #. Label of a Desktop Icon
 #. Title of a Workspace Sidebar
 #: csf_ohada/desktop_icon/ohada.json csf_ohada/workspace_sidebar/ohada.json
-msgid "OHADA"
-msgstr "OHADA"
+msgid "Ohada"
+msgstr ""
 
 #: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.js:49
 msgid "Only existing assets"
@@ -892,6 +1011,10 @@ msgstr "Remplacer par le signe inverse pour cette colonne à chaque ligne. Laiss
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
 msgid "Override row Balance Type for this column on every line. Leave empty to use each row's Balance Type."
 msgstr "Remplacer le type de solde de ligne pour cette colonne sur chaque ligne. Laisser le vide pour utiliser le type de solde de chaque ligne."
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:426
+msgid "Path to your custom whitelisted method that returns financial data. It must permit GET requests."
+msgstr "Chemin de votre méthode personnalisée autorisée (whitelisted) qui renvoie les données financières. Elle doit accepter les requêtes GET."
 
 #. Description of the 'Column Settings' (JSON) field in DocType 'OHADA
 #. Financial Report Row'
@@ -969,6 +1092,14 @@ msgstr "Date d’acquisition"
 msgid "Rate of Depreciation"
 msgstr "Taux d’amortissement"
 
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:396
+msgid "Reference Code"
+msgstr "Code de référence"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:411
+msgid "Remove negative sign"
+msgstr "Supprimer le signe négatif"
+
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.py:78
 msgid "Removed column settings from {0} report line(s) that referenced deleted Value Columns."
 msgstr "Suppression des paramètres de colonne {0} des lignes du rapport dont les colonnes de valeurs sont supprimées."
@@ -999,31 +1130,52 @@ msgstr "Type de rapport"
 msgid "Report View"
 msgstr "Affichage du rapport"
 
+#: csf_ohada/csf_ohada/report/ohada_custom_financial_statement/ohada_custom_financial_statement.py:15
+msgid "Report template is required"
+msgstr "Le modèle de rapport est obligatoire"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:417
+msgid "Required:"
+msgstr "Obligatoire :"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:442
+msgid "Return Format:"
+msgstr "Format de retour :"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:364
+msgid "Revenue accounts"
+msgstr "Comptes de produits"
+
 #. Option for the 'Default Reverse Sign' (Select) field in DocType 'OHADA
 #. Financial Report Column'
 #. Label of the reverse_sign (Check) field in DocType 'OHADA Financial Report
 #. Row'
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_column/ohada_financial_report_column.json
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
-#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:724
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:762
 msgid "Reverse Sign"
 msgstr "Inverser le signe"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:412
+msgid "Round to whole number"
+msgstr "Arrondir à l’entier"
 
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:1795
 msgid "Row"
 msgstr "Ligne"
 
-#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:678
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:716
 msgid "Row default"
 msgstr "Ligne par défaut"
 
-#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:622
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:660
 msgid "Row fields apply to every value column. Customise a column here only when it should differ. Keys left on row default use the Value Column default, then this line's Balance Type and Formula."
 msgstr "Les champs de ligne s'appliquent à toutes les colonnes de valeurs. Ne personnalisez une colonne ici que si elle doit présenter une valeur différente. Les clés laissées par défaut dans la ligne utilisent la colonne de valeur par défaut, puis le type de solde et la formule de cette ligne."
 
 #. Option for the 'Data Source' (Select) field in DocType 'OHADA Financial
 #. Report Row'
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:482
 msgid "Section Break"
 msgstr "Saut de section"
 
@@ -1031,6 +1183,14 @@ msgstr "Saut de section"
 #: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.js:28
 msgid "Select View"
 msgstr "Sélectionner la vue"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:455
+msgid "Separating major sections"
+msgstr "Séparer les sections principales"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:487
+msgid "Separating major sections in a report - say trading & profit and loss"
+msgstr "Séparer les sections principales d’un rapport - par exemple compte d’exploitation et compte de résultat"
 
 #: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.js:43
 msgid "Show Account Number"
@@ -1068,6 +1228,18 @@ msgstr "Afficher la référence de cette ligne dans le rapport. Décochez cette 
 #: csf_ohada/csf_ohada/report/ohada_profit_and_loss_statement/ohada_profit_and_loss_statement.js:52
 msgid "Show zero values"
 msgstr "Afficher les valeurs zéro"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:472
+msgid "Side-by-side Balance Sheet sections"
+msgstr "Sections du bilan côte à côte"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:414
+msgid "Smaller of two values"
+msgstr "La plus petite de deux valeurs"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:356
+msgid "Specify which accounts to include in this line."
+msgstr "Indiquez les comptes à inclure dans cette ligne."
 
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/financial_report_engine.py:348
 #: csf_ohada/csf_ohada/report/fixed_asset_register_enhanced/fixed_asset_register_enhanced.js:73
@@ -1160,15 +1332,33 @@ msgstr "Bénéfice / Perte (crédit) des exercices non clôturés"
 msgid "Unsupported Feature"
 msgstr "Fonctionnalité non prise en charge"
 
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:417
+msgid "Use \"{0}\" from other rows in your formulas."
+msgstr "Utilisez la « {0} » des autres lignes dans vos formules."
+
 #. Description of the 'Advanced Filtering' (Check) field in DocType 'OHADA
 #. Financial Report Row'
 #: csf_ohada/csf_ohada/doctype/ohada_financial_report_row/ohada_financial_report_row.json
 msgid "Use <strong>Python</strong> filters to get Accounts"
 msgstr "Utilisez les filtres <strong>Python</strong> pour obtenir les comptes"
 
-#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:688
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:453
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:469
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:485
+msgid "Use For:"
+msgstr "Utilisation :"
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:726
 msgid "Use defaults"
 msgstr "Utiliser les paramètres par défaut "
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:391
+msgid "Use fields like {0}, {1}, and {2} for templates that work across multiple companies."
+msgstr "Utilisez des champs comme {0}, {1} et {2} pour des modèles valables pour plusieurs sociétés."
+
+#: csf_ohada/csf_ohada/doctype/ohada_financial_report_template/ohada_financial_report_template.js:386
+msgid "Use {0} / {1} to place only those accounts on this line (the counterpart row keeps the other sign). Use {2} / {3} to move the whole line when the overall balance (last visible column) has that sign. Pair with {4}. Sign is debit minus credit, before {5}."
+msgstr "Utilisez {0} / {1} pour ne placer que ces comptes sur cette ligne (la ligne de contrepartie conserve l’autre signe). Utilisez {2} / {3} pour déplacer toute la ligne lorsque le solde global (dernière colonne visible) a ce signe. À combiner avec {4}. Le signe correspond au débit moins le crédit, avant {5}."
 
 #. Label of the column_settings_editor (HTML) field in DocType 'OHADA Financial
 #. Report Row'
