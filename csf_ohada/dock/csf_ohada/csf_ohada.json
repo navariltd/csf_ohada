@@ -1,0 +1,23 @@
+{
+ "app": "csf_ohada",
+ "creation": "2026-10-12 06:29:07.043718",
+ "docstatus": 0,
+ "doctype": "Dock",
+ "idx": 0,
+ "items": [
+  {
+   "added": 0,
+   "hidden": 0,
+   "icon": "hand-coins",
+   "link_to": "Ohada",
+   "link_type": "Sidebar",
+   "title": "Ohada"
+  }
+ ],
+ "modified": "2026-10-12 06:29:07.043718",
+ "modified_by": "Administrator",
+ "name": "csf_ohada",
+ "owner": "Administrator",
+ "standard": 1,
+ "user": ""
+}
