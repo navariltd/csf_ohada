@@ -4,6 +4,8 @@ app_publisher = "Navari Ltd"
 app_description = "A collection of ERPNext customizations, regional settings, and compliance features designed for OHADA (Organisation pour l'Harmonisation en Afrique du Droit des Affaires)"
 app_email = "solutions@navari.co.ke"
 app_license = "agpl-3.0"
+app_logo_url = "/assets/csf_ohada/images/ohada_logo.png"
+app_home = "/desk/ohada/ohada-financial-report-template"
 
 # Apps
 # ------------------
@@ -11,15 +13,17 @@ app_license = "agpl-3.0"
 required_apps = ["erpnext"]
 
 # Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
-# 	{
-# 		"name": "csf_ohada",
-# 		"logo": "/assets/csf_ohada/logo.png",
-# 		"title": "Csf Ohada",
-# 		"route": "/csf_ohada",
-# 		"has_permission": "csf_ohada.api.permission.has_app_permission"
-# 	}
-# ]
+add_to_apps_screen = [
+	{
+		"name": app_name,
+		"logo": app_logo_url,
+		"title": "Ohada",
+		"route": app_home,
+		"has_permission": "csf_ohada.check_app_permission",
+		"sequence_id": 1,
+	}
+]
+
 
 # Includes in <head>
 # ------------------
@@ -79,7 +83,7 @@ doctype_js = {"Company": "public/js/company.js"}
 # 	"filters": "csf_ohada.utils.jinja_filters"
 # }
 
-# after_migrate = "csf_ohada.setup.install.sync_default_records"
+after_migrate = "csf_ohada.setup.install.sync_default_records"
 
 # Installation
 # ------------
@@ -131,7 +135,8 @@ after_install = "csf_ohada.setup.install.sync_default_records"
 # ---------------
 # Override standard doctype classes
 
-override_doctype_class = {"Company": "csf_ohada.overrides.company.company.CustomCompany"}
+# override_doctype_class = {"Company": "csf_ohada.overrides.company.company.CustomCompany"}
+extend_doctype_class = {"Company": ["csf_ohada.overrides.company.company.CustomCompany"]}
 
 # Document Events
 # ---------------

@@ -13,7 +13,7 @@
    "indent": 1,
    "keep_closed": 0,
    "label": "Financial Reports",
-   "link_to": "Financial Report Template Enhanced",
+   "link_to": "OHADA Financial Report Template",
    "link_type": "DocType",
    "show_arrow": 0,
    "type": "Section Break"
@@ -23,9 +23,9 @@
    "collapsible": 1,
    "indent": 0,
    "keep_closed": 0,
-   "label": "Financial Report Template Enhanced",
-   "link_to": "Financial Report Template Enhanced",
-   "link_type": "DocType",
+   "label": "OHADA Balance Sheet",
+   "link_to": "OHADA Balance Sheet",
+   "link_type": "Report",
    "show_arrow": 0,
    "type": "Link"
   },
@@ -34,9 +34,42 @@
    "collapsible": 1,
    "indent": 0,
    "keep_closed": 0,
-   "label": "Financial Statement Enhanced",
-   "link_to": "Financial Statement Enhanced",
+   "label": "OHADA Profit and Loss Statement",
+   "link_to": "OHADA Profit and Loss Statement",
    "link_type": "Report",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 1,
+   "collapsible": 1,
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "OHADA Cash Flow",
+   "link_to": "OHADA Cash Flow",
+   "link_type": "Report",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 1,
+   "collapsible": 1,
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "OHADA Custom Financial Statement",
+   "link_to": "OHADA Custom Financial Statement",
+   "link_type": "Report",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 1,
+   "collapsible": 1,
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "OHADA Financial Report Template",
+   "link_to": "OHADA Financial Report Template",
+   "link_type": "DocType",
    "show_arrow": 0,
    "type": "Link"
   },
@@ -63,7 +96,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-09-02 10:25:25.295402",
+ "modified": "2026-10-05 09:04:17.646846",
  "modified_by": "Administrator",
  "module": "Csf Ohada",
  "name": "Ohada",
