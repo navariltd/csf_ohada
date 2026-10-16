@@ -1581,6 +1581,7 @@ class RowProcessor:
 		method = get_valid_api_method(api_path)
 
 		try:
+			# nosemgrep: frappe-semgrep-rules.rules.security.frappe-codeinjection-eval
 			values = frappe.call(
 				method,
 				filters=self.context.filters,
