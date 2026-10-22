@@ -48,6 +48,9 @@ add_to_apps_screen = [
 
 # include js in doctype views
 doctype_js = {"Company": "public/js/company.js"}
+
+# include js in setup wizard
+setup_wizard_requires = "assets/csf_ohada/js/setup_wizard.js"
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -179,10 +182,9 @@ extend_doctype_class = {"Company": ["csf_ohada.overrides.company.company.CustomC
 # Overriding Methods
 # ------------------------------
 #
-override_whitelisted_methods = {
-	"erpnext.accounts.doctype.account.chart_of_accounts.chart_of_accounts.get_chart": "csf_ohada.overrides.chart_of_accounts.chart_of_accounts.get_chart",
-	"erpnext.accounts.doctype.account.chart_of_accounts.chart_of_accounts.get_charts_for_country": "csf_ohada.overrides.chart_of_accounts.chart_of_accounts.get_charts_for_country",
-}
+# override_whitelisted_methods = {
+# 	"frappe.desk.doctype.event.event.get_events": "csf_ohada.event.get_events"
+# }
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
