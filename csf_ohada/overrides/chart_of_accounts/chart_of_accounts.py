@@ -1,4 +1,3 @@
-import json
 import os
 
 import frappe
@@ -92,9 +91,7 @@ def get_ohada_charts():
 	charts = []
 	for fname in sorted(os.listdir(path)):
 		if fname.endswith(".json"):
-			# nosemgrep: frappe-semgrep-rules.rules.security.frappe-security-file-traversal
-			with open(os.path.join(path, fname)) as f:
-				charts.append((fname, json.load(f)))
+			charts.append((fname, frappe.get_file_json(os.path.join(path, fname))))
 	return charts
 
 

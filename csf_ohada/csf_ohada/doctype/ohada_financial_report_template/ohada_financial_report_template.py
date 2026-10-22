@@ -3,6 +3,7 @@
 
 import os
 import shutil
+from pathlib import Path
 
 import frappe
 from erpnext.accounts.doctype.account_category.account_category import (
@@ -207,10 +208,8 @@ class OHADAFinancialReportTemplate(Document):
 		existing_categories = {}
 		if os.path.exists(categories_file):
 			try:
-				# nosemgrep: frappe-semgrep-rules.rules.security.frappe-security-file-traversal
-				with open(categories_file) as f:
-					existing_data = json.load(f)
-					existing_categories = {cat["account_category_name"]: cat for cat in existing_data}
+				existing_data = frappe.get_file_json(categories_file)
+				existing_categories = {cat["account_category_name"]: cat for cat in existing_data}
 			except (json.JSONDecodeError, KeyError):
 				pass
 
@@ -227,9 +226,7 @@ class OHADAFinancialReportTemplate(Document):
 		sorted_categories = sorted(existing_categories.values(), key=lambda x: x["account_category_name"])
 
 		os.makedirs(os.path.dirname(categories_file), exist_ok=True)
-		# nosemgrep: frappe-semgrep-rules.rules.security.frappe-security-file-traversal
-		with open(categories_file, "w") as f:
-			json.dump(sorted_categories, f, indent=2)
+		Path(categories_file).write_text(json.dumps(sorted_categories, indent=2))
 
 
 def sync_ohada_financial_report_templates(chart_of_accounts=None, existing_company=None):
@@ -273,9 +270,7 @@ def _sync_templates_for(app_name):
 	frappe.flags.in_import = True
 
 	for template_path in templates:
-		# nosemgrep: frappe-semgrep-rules.rules.security.frappe-security-file-traversal
-		with open(template_path) as f:
-			template_data = frappe._dict(frappe.parse_json(f.read()))
+		template_data = frappe._dict(frappe.get_file_json(template_path))
 
 		template_name = template_data.get("name")
 
