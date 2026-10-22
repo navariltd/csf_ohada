@@ -1,4 +1,3 @@
-import json
 import os
 
 import frappe
@@ -8,9 +7,7 @@ from frappe.model.document import bulk_insert
 def import_account_categories():
 	file_path = os.path.join(os.path.dirname(__file__), "account_categories.json")
 
-	# nosemgrep: frappe-semgrep-rules.rules.security.frappe-security-file-traversal
-	with open(file_path) as f:
-		categories = json.load(f)
+	categories = frappe.get_file_json(file_path)
 
 	create_account_categories(categories)
 

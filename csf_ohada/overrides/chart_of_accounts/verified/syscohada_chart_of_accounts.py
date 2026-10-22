@@ -25,12 +25,8 @@ folder = Path(__file__).parent
 generic_charts = Path(folder).glob("syscohada*.json")
 
 for file in generic_charts:
-	# nosemgrep: frappe-semgrep-rules.rules.security.frappe-security-file-traversal
-	with open(file) as f:
-		chart = json.load(f)
+	chart = json.loads(file.read_text())
 	for country in syscohada_countries:
 		chart["country_code"] = country
 		json_object = json.dumps(chart, indent=4)
-		# nosemgrep: frappe-semgrep-rules.rules.security.frappe-security-file-traversal
-		with open(Path(folder, file.name.replace("syscohada", country)), "w") as outfile:
-			outfile.write(json_object)
+		Path(folder, file.name.replace("syscohada", country)).write_text(json_object)
